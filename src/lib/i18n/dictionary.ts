@@ -23,6 +23,8 @@ export type Dict = {
   };
   hero: {
     eyebrow: string;
+    locationCountry: string;
+    locationWater: string;
     titlePre: string;
     titleHighlight: string;
     titlePost: string;
@@ -162,6 +164,8 @@ const nl: Dict = {
   },
   hero: {
     eyebrow: "Curaçao · Cas Grandi · Spaanse Water",
+    locationCountry: "Curaçao",
+    locationWater: "Spaanse Water",
     titlePre: "Bon Bini na",
     titleHighlight: "Villa Sandemarie",
     titlePost: "",
@@ -301,7 +305,9 @@ const en: Dict = {
     email: "Email",
   },
   hero: {
-    eyebrow: "Curaçao · Cas Grandi · Spaanse Water",
+    eyebrow: "Curaçao · Cas Grandi · Spanish Water",
+    locationCountry: "Curaçao",
+    locationWater: "Spanish Water",
     titlePre: "Bon Bini to",
     titleHighlight: "Villa Sandemarie",
     titlePost: "",
@@ -441,7 +447,9 @@ const de: Dict = {
     email: "E-Mail",
   },
   hero: {
-    eyebrow: "Curaçao · Cas Grandi · Spaanse Water",
+    eyebrow: "Curaçao · Cas Grandi · Spanisches Wasser",
+    locationCountry: "Curaçao",
+    locationWater: "Spanisches Wasser",
     titlePre: "Bon Bini in der",
     titleHighlight: "Villa Sandemarie",
     titlePost: "",
@@ -581,7 +589,9 @@ const es: Dict = {
     email: "Email",
   },
   hero: {
-    eyebrow: "Curaçao · Cas Grandi · Spaanse Water",
+    eyebrow: "Curazao · Cas Grandi · Aguas Españolas",
+    locationCountry: "Curazao",
+    locationWater: "Aguas Españolas",
     titlePre: "Bon Bini a",
     titleHighlight: "Villa Sandemarie",
     titlePost: "",

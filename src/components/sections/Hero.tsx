@@ -109,8 +109,8 @@ export function Hero() {
           <p className="eyebrow flex items-center gap-2 text-white/85">
             <MapPin size={14} className="shrink-0 text-[#fee7a9]" />
             <span>
-              {site.address.country} · {site.address.street},{" "}
-              {site.address.neighborhood} · Spaanse Water
+              {t.hero.locationCountry} · {site.address.street},{" "}
+              {site.address.neighborhood} · {t.hero.locationWater}
             </span>
           </p>
           <h1 className="font-display mt-5 text-[1.8rem] font-medium leading-[1.08] tracking-tight text-white [text-wrap:balance] sm:text-5xl md:text-6xl lg:text-[4.8rem]">
