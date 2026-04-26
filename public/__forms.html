@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <title>Netlify Forms detection</title>
+  </head>
+  <body>
+    <!--
+      Static form definition for the @netlify/plugin-nextjs runtime.
+      The actual UI lives in src/components/sections/InquiryForm.tsx.
+      Field names here MUST match the React form for submissions to be routed.
+    -->
+    <form
+      name="inquiry"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      hidden
+    >
+      <input type="hidden" name="form-name" value="inquiry" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="number" name="guests" />
+      <input type="text" name="checkin" />
+      <input type="text" name="checkout" />
+      <input type="number" name="nights" />
+      <textarea name="message"></textarea>
+    </form>
+  </body>
+</html>

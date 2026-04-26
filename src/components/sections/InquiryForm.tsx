@@ -145,6 +145,7 @@ export function InquiryForm({ blockedDates }: Props) {
     <form
       name="inquiry"
       method="POST"
+      action="/?bedankt=1#beschikbaarheid"
       data-netlify="true"
       netlify-honeypot="bot-field"
       className="rounded-3xl border border-[#faf8f3]/14 bg-[#faf8f3]/8 p-5 backdrop-blur-md sm:p-7"
