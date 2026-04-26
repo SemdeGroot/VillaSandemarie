@@ -4,7 +4,7 @@ import { villa } from "@/lib/villa";
 const faqs = [
   {
     q: "Voor hoeveel personen is Villa Sandemarie geschikt?",
-    a: "Villa Sandemarie biedt plek aan maximaal 11 gasten, verdeeld over 5 slaapkamers met airco, een gezellige woonkamer, een volledig uitgeruste keuken en een balkon op de wind.",
+    a: "Villa Sandemarie biedt plek aan maximaal 11 gasten, verdeeld over 5 slaapkamers met airco, 3 badkamers, een gezellige woonkamer, een volledig uitgeruste keuken en een balkon op de wind.",
   },
   {
     q: "Waar ligt de villa op Curaçao?",

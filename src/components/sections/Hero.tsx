@@ -1,22 +1,85 @@
+"use client";
+
+import * as React from "react";
 import { ArrowRight, MapPin } from "lucide-react";
 import { LinkButton } from "@/components/ui/button";
 import { villa } from "@/lib/villa";
+import { useLocale } from "@/lib/i18n/LocaleProvider";
 
 export function Hero() {
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const { t } = useLocale();
+
+  React.useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = true;
+    v.defaultMuted = true;
+    v.playsInline = true;
+    v.setAttribute("webkit-playsinline", "true");
+    v.setAttribute("playsinline", "true");
+
+    const tryPlay = () => {
+      const p = v.play();
+      if (p && typeof p.then === "function") {
+        p.catch(() => {});
+      }
+    };
+
+    tryPlay();
+    v.addEventListener("loadedmetadata", tryPlay);
+    v.addEventListener("canplay", tryPlay);
+
+    const onVisibility = () => {
+      if (!document.hidden) tryPlay();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
+    const onFirstTouch = () => {
+      tryPlay();
+      window.removeEventListener("touchstart", onFirstTouch);
+      window.removeEventListener("click", onFirstTouch);
+    };
+    window.addEventListener("touchstart", onFirstTouch, { passive: true });
+    window.addEventListener("click", onFirstTouch);
+
+    return () => {
+      v.removeEventListener("loadedmetadata", tryPlay);
+      v.removeEventListener("canplay", tryPlay);
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("touchstart", onFirstTouch);
+      window.removeEventListener("click", onFirstTouch);
+    };
+  }, []);
+
+  const stats = [
+    { n: "11", l: t.intro.statsGuests },
+    { n: "5", l: t.intro.statsBedrooms },
+    { n: "3", l: t.intro.statsBathrooms },
+  ];
+
   return (
     <section
       id="top"
       className="relative isolate flex min-h-svh flex-col overflow-hidden bg-[#0d1410] text-white"
     >
       <video
+        ref={videoRef}
         className="absolute inset-0 h-full w-full object-cover"
         autoPlay
         muted
         loop
         playsInline
-        preload="metadata"
+        {...({
+          "webkit-playsinline": "true",
+          "x5-playsinline": "true",
+          "x5-video-player-type": "h5",
+        } as Record<string, string>)}
+        preload="auto"
         poster="/media/villa/villa-drone-1.webp"
         aria-hidden="true"
+        tabIndex={-1}
+        disablePictureInPicture
       >
         <source src="/media/home/villa-sandemarie-hero.mp4" type="video/mp4" />
       </video>
@@ -37,50 +100,49 @@ export function Hero() {
       <div
         className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col px-5 sm:px-8 lg:px-12"
         style={{
-          paddingTop: "calc(7.5rem + env(safe-area-inset-top, 0px))",
-          paddingBottom: "calc(3rem + env(safe-area-inset-bottom, 0px))",
+          paddingTop: "calc(6.5rem + env(safe-area-inset-top, 0px))",
+          paddingBottom: "calc(2.5rem + env(safe-area-inset-bottom, 0px))",
         }}
       >
         <div className="fade-up max-w-3xl">
           <p className="eyebrow flex items-center gap-2 text-white/85">
-            <MapPin size={14} className="text-[#fee7a9]" /> Curaçao · Cas Grandi
-            · Spaanse Water
+            <MapPin size={14} className="text-[#fee7a9]" /> {t.hero.eyebrow}
           </p>
-          <h1 className="font-display mt-6 text-[2.05rem] font-light leading-[1.06] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[5.2rem]">
-            Bon Bini na{" "}
-            <span style={{ color: "#fee7a9" }}>Villa Sandemarie</span>.
+          <h1 className="font-display mt-5 text-[1.8rem] font-medium leading-[1.08] tracking-tight text-white [text-wrap:balance] sm:text-5xl md:text-6xl lg:text-[4.8rem]">
+            {t.hero.titlePre}{" "}
+            <span style={{ color: "#fee7a9" }}>{t.hero.titleHighlight}</span>
+            {t.hero.titlePost ? <>{t.hero.titlePost}</> : "."}
           </h1>
-          <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/82 sm:mt-6 sm:text-lg sm:leading-9">
-            Jullie eilandhuis op Curaçao. Een ruime, gezellige vakantievilla
-            voor families en vriendengroepen tot 11 personen, met privézwembad
-            en uitzicht over het Spaanse Water.
+          <p className="mt-4 max-w-2xl text-[15px] leading-7 text-white/82 sm:mt-6 sm:text-lg sm:leading-9">
+            {t.hero.lead}
           </p>
 
-          <div className="mt-7 flex flex-col gap-3 sm:mt-10 sm:flex-row">
-            <LinkButton href="#beschikbaarheid" variant="highlight" size="lg">
-              Bekijk de beschikbaarheid <ArrowRight size={18} />
+          <div className="mt-6 flex flex-col gap-3 sm:mt-9 sm:flex-row">
+            <LinkButton href="/#beschikbaarheid" variant="highlight" size="lg">
+              {t.cta.seeAvailability} <ArrowRight size={18} />
             </LinkButton>
-            <LinkButton href="#villa" variant="onDark" size="lg">
-              Verken de villa
+            <LinkButton href="/#villa" variant="onDark" size="lg">
+              {t.cta.exploreVilla}
             </LinkButton>
           </div>
         </div>
 
-        <div className="mt-auto flex flex-col items-start justify-between gap-8 pt-12 sm:flex-row sm:items-end sm:pt-16">
+        <div className="mt-auto flex flex-col items-start justify-between gap-6 pt-10 sm:flex-row sm:items-end sm:pt-14">
           <div className="grid w-full grid-cols-3 gap-x-4 gap-y-3 sm:max-w-md sm:gap-x-6">
-            {villa.highlights.slice(0, 3).map((item) => (
-              <div key={item} className="border-l border-white/30 pl-3 sm:pl-4">
+            {stats.map((item) => (
+              <div key={item.l} className="border-l border-white/30 pl-3 sm:pl-4">
                 <p className="font-display text-2xl text-white sm:text-3xl">
-                  {item.split(" ")[0]}
+                  {item.n}
                 </p>
                 <p className="text-[10px] uppercase tracking-[0.2em] text-white/65 sm:text-xs">
-                  {item.split(" ").slice(1).join(" ") || " "}
+                  {item.l}
                 </p>
               </div>
             ))}
           </div>
-
         </div>
+        {/* villa.highlights kept for SEO crawlers */}
+        <p className="sr-only">{villa.highlights.join(", ")}</p>
       </div>
     </section>
   );

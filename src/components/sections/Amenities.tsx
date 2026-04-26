@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Bath,
   BedDouble,
@@ -18,6 +20,7 @@ import {
 import { Display, Eyebrow, Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/Reveal";
 import { villa } from "@/lib/villa";
+import { useLocale } from "@/lib/i18n/LocaleProvider";
 
 const iconMap: Record<string, LucideIcon> = {
   Users,
@@ -37,22 +40,20 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 export function Amenities() {
+  const { t } = useLocale();
   return (
     <Section
       id="voorzieningen"
-      className="border-y border-line bg-background py-20 sm:py-24 lg:py-28"
+      className="border-y border-line bg-background py-16 sm:py-24 lg:py-28"
     >
-      <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+      <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <Reveal className="max-w-md lg:sticky lg:top-32 lg:self-start">
-          <Eyebrow>Voorzieningen</Eyebrow>
-          <Display as="h2" className="mt-5">
-            Alles wat je nodig hebt, niets wat je niet wilt.
+          <Eyebrow>{t.amenities.eyebrow}</Eyebrow>
+          <Display as="h2" className="mt-4">
+            {t.amenities.title}
           </Display>
-          <p className="mt-6 text-base leading-8 text-primary/72">
-            We hebben de villa ingericht zoals we zelf graag op vakantie zijn:
-            comfortabel, ontspannen en praktisch. Een goede keuken, airco in
-            elke slaapkamer, snelle wifi, en een ligstoel waar je niet meer
-            vanaf wilt komen.
+          <p className="mt-5 text-base leading-7 text-primary/72">
+            {t.amenities.body}
           </p>
         </Reveal>
 
@@ -66,12 +67,12 @@ export function Amenities() {
             return (
               <li
                 key={label}
-                className="group flex items-center gap-4 border-b border-line/70 py-4 text-primary"
+                className="group flex items-center gap-4 border-b border-line/70 py-3.5 text-primary"
               >
-                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-paper text-warm transition group-hover:bg-highlight group-hover:text-primary">
-                  <Icon size={18} strokeWidth={1.6} />
+                <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line bg-paper text-warm transition group-hover:bg-highlight group-hover:text-primary">
+                  <Icon size={17} strokeWidth={1.6} />
                 </span>
-                <span className="text-[15px] leading-6">{label}</span>
+                <span className="text-[14.5px] leading-6">{label}</span>
               </li>
             );
           })}

@@ -61,12 +61,12 @@ export function Display({
   return (
     <Tag
       className={cn(
-        "font-display font-medium text-primary",
+        "font-display font-medium text-primary [text-wrap:balance] [overflow-wrap:break-word]",
         Tag === "h1"
-          ? "text-5xl leading-[1.04] sm:text-6xl lg:text-7xl"
+          ? "text-[1.75rem] leading-[1.1] sm:text-5xl lg:text-7xl"
           : Tag === "h2"
-            ? "text-[2.4rem] leading-[1.08] sm:text-5xl lg:text-[3.5rem]"
-            : "text-3xl leading-[1.15] sm:text-4xl",
+            ? "text-[1.65rem] leading-[1.15] sm:text-[2.4rem] lg:text-[3.2rem] lg:leading-[1.08]"
+            : "text-xl leading-[1.18] sm:text-3xl lg:text-4xl",
         className,
       )}
       {...props}

@@ -1,9 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import { Display, Eyebrow, Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/Reveal";
 import { villa } from "@/lib/villa";
+import { useLocale } from "@/lib/i18n/LocaleProvider";
 
 export function Outdoor() {
+  const { t } = useLocale();
   return (
     <Section bleed className="relative overflow-hidden bg-[#0e1f15] text-white">
       <div className="absolute inset-0">
@@ -20,18 +24,20 @@ export function Outdoor() {
         />
       </div>
 
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20 lg:px-12 lg:py-32">
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20 lg:px-12 lg:py-32">
         <Reveal className="max-w-xl">
           <Eyebrow tone="warm" className="text-[#fee7a9]">
-            Buitenleven in de tropen
+            {t.outdoor.eyebrow}
           </Eyebrow>
-          <Display as="h2" className="mt-5 text-white">
-            Het{" "}
-            <span className="text-[#fee7a9] font-medium">balkon op de wind</span>,
-            het zwembad, de zonsondergang.
+          <Display as="h2" className="mt-4 text-white">
+            {t.outdoor.titlePre}{" "}
+            <span className="font-medium italic text-[#fee7a9]">
+              {t.outdoor.titleHighlight}
+            </span>
+            {t.outdoor.titlePost}
           </Display>
-          <p className="mt-7 text-base leading-8 text-white/82 sm:text-lg sm:leading-9">
-            {villa.outdoor.intro}
+          <p className="mt-6 text-base leading-7 text-white/82 sm:text-lg sm:leading-9">
+            {t.outdoor.body}
           </p>
         </Reveal>
 
@@ -39,12 +45,12 @@ export function Outdoor() {
           {villa.outdoor.points.map((point, i) => (
             <div
               key={point}
-              className="flex items-start gap-5 rounded-2xl border border-white/12 bg-white/5 p-5 backdrop-blur-md"
+              className="flex items-start gap-5 rounded-2xl border border-white/12 bg-white/5 p-4 backdrop-blur-md sm:p-5"
             >
-              <span className="font-display text-3xl text-[#fee7a9]">
+              <span className="font-display text-2xl text-[#fee7a9] sm:text-3xl">
                 0{i + 1}
               </span>
-              <span className="text-[15px] leading-7 text-white/90">
+              <span className="text-[14.5px] leading-6 text-white/90 sm:text-[15px] sm:leading-7">
                 {point}
               </span>
             </div>

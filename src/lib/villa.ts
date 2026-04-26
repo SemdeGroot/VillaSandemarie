@@ -2,15 +2,14 @@ export const villa = {
   facts: {
     maxGuests: 11,
     bedrooms: 5,
-    bathrooms: 2,
-    extraToilet: true,
+    bathrooms: 3,
     privatePool: true,
     view: "Spaanse Water & Tafelberg",
   },
   highlights: [
     "Tot 11 gasten",
     "5 slaapkamers",
-    "2 badkamers + extra toilet",
+    "3 badkamers",
     "Privézwembad",
     "180° uitzicht over het Spaanse Water",
     "Cas Grandi, vlak bij Jan Thiel",
@@ -18,11 +17,11 @@ export const villa = {
   amenities: [
     { icon: "Users", label: "Tot 11 personen" },
     { icon: "BedDouble", label: "5 slaapkamers" },
-    { icon: "Bath", label: "2 badkamers + extra toilet" },
+    { icon: "Bath", label: "3 badkamers" },
     { icon: "Waves", label: "Privézwembad" },
     { icon: "Mountain", label: "180° uitzicht" },
     { icon: "Wind", label: "Balkon op de wind" },
-    { icon: "MapPin", label: "Cas Grandi · Jan Thiel" },
+    { icon: "MapPin", label: "Cas Grandi, vlak bij Jan Thiel" },
     { icon: "Car", label: "Eigen parkeerplek" },
     { icon: "Wifi", label: "Snelle wifi" },
     { icon: "ChefHat", label: "Volledig uitgeruste keuken" },
@@ -36,61 +35,61 @@ export const villa = {
       title: "Slaapkamers",
       points: [
         "5 slaapkamers, samen plek voor maximaal 11 personen",
-        "4 slaapkamers met twee losse 1-persoonsbedden, los of als 2-persoonsbed",
-        "5e slaapkamer met stapelbed en extra 1-persoonsbed, ideaal voor kinderen",
+        "4 slaapkamers met twee losse 1-persoonsbedden, los of tegen elkaar als 2-persoonsbed",
+        "5e slaapkamer met stapelbed en extra 1-persoonsbed, leuk voor de kids",
         "Airco in elke slaapkamer",
       ],
     },
     {
       title: "Badkamers",
       points: [
-        "2 badkamers, beide met douche, toilet en twee wastafels",
-        "Extra apart toilet boven, handig voor grotere groepen",
+        "3 badkamers in totaal: 2 met douche, toilet en twee wastafels",
+        "Plus een apart toilet boven, fijn met een grote groep",
       ],
     },
     {
       title: "Woonkamer",
       points: [
-        "Gezellige woonkamer met comfortabele bank",
-        "Smart-tv waarop je makkelijk je eigen series en films streamt",
+        "Gezellige woonkamer met een lekkere bank waar iedereen op past",
+        "Smart-tv om je eigen series en films te streamen",
       ],
     },
     {
       title: "Keuken",
       points: [
         "Volledig uitgeruste keuken voor de hele groep",
-        "Koelkast met ijsblokjesmachine, vaatwasser, oven & magnetron",
+        "Koelkast met ijsblokjesmachine, vaatwasser, oven en magnetron",
         "Nespresso én filterkoffie, blender, tosti-apparaat, broodrooster",
       ],
     },
   ],
   outdoor: {
     intro:
-      "Villa Sandemarie draait om buiten leven. Op het balkon zit je op de wind met uitzicht over het Spaanse Water en de Tafelberg. Bij het privézwembad kun je de hele dag zwemmen, lezen, borrelen en hangen, precies zoals een eilandvakantie hoort te voelen.",
+      "Bij Villa Sandemarie speelt het meeste leven zich buiten af. Op het balkon zit je heerlijk op de wind, met uitzicht over het Spaanse Water en de Tafelberg. Beneden bij het zwembad zwem je, lees je, borrel je of doe je gewoon helemaal niets, precies wat een eilandvakantie hoort te zijn.",
     points: [
       "Privézwembad met ligbedden en zitjes",
-      "180° uitzicht over Spaanse Water & Tafelberg",
-      "Ruim balkon op de wind",
+      "180° uitzicht over Spaanse Water en Tafelberg",
+      "Ruim balkon op de wind, fijn voor ontbijt of borrel",
       "BBQ voor avonden thuis",
-      "Buitenverlichting voor lange avonden",
+      "Buitenverlichting voor lange avonden buiten",
     ],
   },
   audiences: [
     {
       title: "Families",
-      text: "Meerdere slaapkamers, eigen zwembad en een huis dat voelt als gezamenlijke thuisbasis.",
+      text: "Genoeg slaapkamers, een eigen zwembad en een huis dat aanvoelt als gezamenlijke thuisbasis. Ook met opa en oma erbij blijft het ruim.",
     },
     {
       title: "Vriendengroepen",
-      text: "Samen koken, borrelen en zwemmen zonder hotelgedoe of gedeelde ruimtes met vreemden.",
+      text: "Samen koken, borrelen en zwemmen, zonder hotelgedoe en zonder gedeelde ruimtes met onbekenden.",
     },
     {
-      title: "Duik- & snorkelgroepen",
-      text: "Een fijne uitvalsbasis met ruimte voor spullen. 10% korting bij Scuba Do Curaçao voor gasten.",
+      title: "Duik- en snorkelgroepen",
+      text: "Goede uitvalsbasis met ruimte voor je spullen. Voor onze gasten regelen we 10% korting bij Scuba Do Curaçao.",
     },
     {
-      title: "Bijzondere momenten",
-      text: "Jubileum, verjaardag of een rustige werkretraite met een klein team. Iedereen onder één dak, met het eiland naast de deur.",
+      title: "Iets te vieren",
+      text: "Verjaardag, jubileum of een bijzondere trip met de hele familie. Iedereen onder één dak, zonder dat het hokkerig wordt.",
     },
   ],
   pricing: {
@@ -101,10 +100,10 @@ export const villa = {
     deposit: 500,
     baseGuests: 4,
     notes:
-      "De €500 borg is een voorschot voor water en elektra en wordt aan het einde van het verblijf verrekend.",
+      "De €500 borg is een voorschot voor water en elektra en wordt aan het einde van het verblijf met je verrekend.",
     bullets: [
       "Vanaf €275 per nacht (4 personen)",
-      "€25 per extra persoon",
+      "€25 per extra persoon per nacht",
       "7% belasting",
       "€195 schoonmaak",
       "€500 borg/voorschot voor water en elektra",

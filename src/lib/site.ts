@@ -36,11 +36,11 @@ export const site = {
     },
   },
   nav: [
-    { href: "#villa", label: "De villa" },
-    { href: "#voorzieningen", label: "Voorzieningen" },
-    { href: "#over-ons", label: "Over ons" },
-    { href: "#curacao", label: "Curaçao" },
-    { href: "#beschikbaarheid", label: "Beschikbaarheid" },
+    { href: "/#villa", label: "De villa" },
+    { href: "/#voorzieningen", label: "Voorzieningen" },
+    { href: "/over-ons", label: "Over ons" },
+    { href: "/curacao", label: "Curaçao" },
+    { href: "/#beschikbaarheid", label: "Beschikbaarheid" },
   ],
 } as const;
 

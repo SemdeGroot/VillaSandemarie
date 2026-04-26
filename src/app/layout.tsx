@@ -2,8 +2,15 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { site } from "@/lib/site";
+import { LocaleProvider } from "@/lib/i18n/LocaleProvider";
+import { getServerLocale } from "@/lib/i18n/server";
 
 export const metadata: Metadata = {
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
   metadataBase: new URL(site.url),
   title: {
     default: `${site.name} | Vakantievilla op Curaçao voor groepen tot 11`,
@@ -24,6 +31,9 @@ export const metadata: Metadata = {
     canonical: "/",
     languages: {
       "nl-NL": "/",
+      "en-US": "/",
+      "de-DE": "/",
+      "es-ES": "/",
     },
   },
   openGraph: {
@@ -60,16 +70,14 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [
-      { url: "/favicon-96x96.png", type: "image/png", sizes: "96x96" },
-    ],
+    icon: [{ url: "/favicon-96x96.png", type: "image/png", sizes: "96x96" }],
     apple: [{ url: "/favicon-96x96.png", sizes: "96x96" }],
   },
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f2f0eb" },
+    { media: "(prefers-color-scheme: light)", color: "#0d1410" },
     { media: "(prefers-color-scheme: dark)", color: "#0d1410" },
   ],
   colorScheme: "light",
@@ -78,18 +86,37 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getServerLocale();
   return (
     <html
-      lang="nl"
+      lang={locale}
       className={`${fontDisplay.variable} ${fontSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-background font-sans text-primary">
-        {children}
+      <body className="min-h-full bg-paper font-sans text-primary">
+        <LocaleProvider initialLocale={locale}>{children}</LocaleProvider>
+        <form
+          name="inquiry"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          hidden
+          aria-hidden="true"
+        >
+          <input type="text" name="name" />
+          <input type="email" name="email" />
+          <input type="tel" name="phone" />
+          <input type="number" name="guests" />
+          <input type="text" name="checkin" />
+          <input type="text" name="checkout" />
+          <input type="number" name="nights" />
+          <input type="text" name="locale" />
+          <textarea name="message" />
+          <input type="text" name="bot-field" />
+        </form>
       </body>
     </html>
   );

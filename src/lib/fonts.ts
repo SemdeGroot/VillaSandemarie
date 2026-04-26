@@ -1,15 +1,14 @@
-import { Baloo_2, Nunito } from "next/font/google";
+import { Lora, Manrope } from "next/font/google";
 
-export const fontDisplay = Baloo_2({
+export const fontDisplay = Lora({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
+  style: ["normal", "italic"],
 });
 
-export const fontSans = Nunito({
+export const fontSans = Manrope({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
 });

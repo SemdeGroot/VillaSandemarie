@@ -27,16 +27,19 @@
   --color-line: var(--line);
   --color-muted: var(--muted);
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-display: var(--font-display), "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  --font-display: var(--font-display), "Lora", "Cormorant Garamond", Georgia, serif;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-html,
+html {
+  background: var(--paper);
+  color: var(--foreground);
+}
 body {
-  background: var(--background);
+  background: var(--paper);
   color: var(--foreground);
 }
 
@@ -59,7 +62,7 @@ a {
 
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.014em;
+  letter-spacing: -0.012em;
 }
 
 .eyebrow {
@@ -152,3 +155,21 @@ a {
     min-height: 100vh;
   }
 }
+
+/* Date input native styling */
+.date-input::-webkit-calendar-picker-indicator {
+  filter: invert(0.85);
+  opacity: 0.6;
+}
+.date-input::-webkit-date-and-time-value {
+  text-align: left;
+}
+
+/* iOS auto-zoom prevention: any focusable input must be ≥ 16px on small screens */
+@media (max-width: 640px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+

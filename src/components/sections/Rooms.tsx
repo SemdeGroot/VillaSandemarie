@@ -1,8 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import { Check } from "lucide-react";
 import { Display, Eyebrow, Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/Reveal";
 import { villa } from "@/lib/villa";
+import { useLocale } from "@/lib/i18n/LocaleProvider";
 
 const roomMedia: Record<string, { src: string; alt: string }> = {
   Slaapkamers: {
@@ -24,17 +27,21 @@ const roomMedia: Record<string, { src: string; alt: string }> = {
 };
 
 export function Rooms() {
+  const { t } = useLocale();
   return (
-    <Section className="bg-paper py-20 sm:py-24 lg:py-28">
+    <Section className="bg-paper py-16 sm:py-24 lg:py-28">
       <Reveal className="max-w-2xl">
-        <Eyebrow>Indeling & kamers</Eyebrow>
-        <Display as="h2" className="mt-5">
-          Helder ingedeeld,{" "}
-          <span className="text-warm font-medium">gemaakt om met velen te zijn</span>.
+        <Eyebrow>{t.rooms.eyebrow}</Eyebrow>
+        <Display as="h2" className="mt-4">
+          {t.rooms.titlePre}{" "}
+          <span className="text-warm font-medium italic">
+            {t.rooms.titleHighlight}
+          </span>
+          .
         </Display>
       </Reveal>
 
-      <div className="mt-12 grid gap-6 sm:gap-8 lg:grid-cols-2 lg:gap-x-10 lg:gap-y-12">
+      <div className="mt-10 grid gap-5 sm:gap-7 lg:grid-cols-2 lg:gap-x-10 lg:gap-y-12">
         {villa.rooms.map((room, i) => {
           const media = roomMedia[room.title];
           return (
@@ -55,11 +62,11 @@ export function Rooms() {
                   />
                 </div>
               )}
-              <div className="flex flex-1 flex-col justify-center space-y-3 px-6 py-6 sm:px-7 sm:py-8">
+              <div className="flex flex-1 flex-col justify-start space-y-3 px-5 py-5 sm:px-7 sm:py-8">
                 <h3 className="font-display text-2xl text-primary sm:text-3xl">
                   {room.title}
                 </h3>
-                <ul className="space-y-2.5 text-[14.5px] leading-7 text-primary/78">
+                <ul className="space-y-2 text-[14px] leading-6 text-primary/78">
                   {room.points.map((point) => (
                     <li key={point} className="flex gap-3">
                       <Check

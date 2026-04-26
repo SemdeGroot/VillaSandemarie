@@ -5,8 +5,6 @@ import { Rooms } from "@/components/sections/Rooms";
 import { Outdoor } from "@/components/sections/Outdoor";
 import { Gallery } from "@/components/sections/Gallery";
 import { Audiences } from "@/components/sections/Audiences";
-import { About } from "@/components/sections/About";
-import { Curacao } from "@/components/sections/Curacao";
 import { Booking } from "@/components/sections/Booking";
 import { Footer } from "@/components/sections/Footer";
 import { Header } from "@/components/site/Header";
@@ -26,8 +24,6 @@ export default function Home() {
         <Outdoor />
         <Gallery />
         <Audiences />
-        <About />
-        <Curacao />
         <Booking />
       </main>
       <Footer />

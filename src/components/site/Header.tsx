@@ -2,18 +2,55 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { ArrowRight, Mail, Menu, MessageCircle, X } from "lucide-react";
 import { site } from "@/lib/site";
 import { LinkButton } from "@/components/ui/button";
+import { useLocale } from "@/lib/i18n/LocaleProvider";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { cn } from "@/lib/utils";
 
 type Props = {
   variant?: "transparent" | "solid";
 };
 
+const SOLID_BG = "#faf8f3";
+const HERO_DARK = "#0d1410";
+const PRIMARY = "#2d4829";
+const PAPER = "#faf8f3";
+
+const DESKTOP_MQ = "(min-width: 1024px)";
+
+function setThemeColor(color: string) {
+  if (typeof document === "undefined") return;
+  const all = document.head.querySelectorAll<HTMLMetaElement>(
+    "meta[name='theme-color']",
+  );
+  let canonical: HTMLMetaElement | null = null;
+  all.forEach((m) => {
+    if (m.dataset.dynamic === "true") {
+      canonical = m;
+    } else {
+      m.remove();
+    }
+  });
+  if (!canonical) {
+    canonical = document.createElement("meta");
+    canonical.name = "theme-color";
+    canonical.dataset.dynamic = "true";
+    document.head.appendChild(canonical);
+  }
+  if (canonical.getAttribute("content") !== color) {
+    canonical.setAttribute("content", color);
+  }
+}
+
 export function Header({ variant = "transparent" }: Props) {
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  // Desktop is the only viewport where transparency is allowed.
+  // Default to true so SSR matches a desktop-first user; the effect corrects on mount.
+  const [isDesktop, setIsDesktop] = React.useState(true);
+  const { t } = useLocale();
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
@@ -22,101 +59,219 @@ export function Header({ variant = "transparent" }: Props) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const solid = variant === "solid" || scrolled;
+  React.useEffect(() => {
+    const mq = window.matchMedia(DESKTOP_MQ);
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  React.useEffect(() => {
+    if (!open) return;
+    const original = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = original;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  // Mobile: always solid. Desktop: transparent unless scrolled / forced / menu open.
+  const desktopSolid = variant === "solid" || scrolled || open;
+  const solid = !isDesktop || desktopSolid;
+
+  React.useEffect(() => {
+    setThemeColor(solid ? SOLID_BG : HERO_DARK);
+  }, [solid]);
+
+  const nav = [
+    { href: "/#villa", label: t.nav.villa },
+    { href: "/#voorzieningen", label: t.nav.amenities },
+    { href: "/over-ons", label: t.nav.about },
+    { href: "/curacao", label: t.nav.curacao },
+    { href: "/#beschikbaarheid", label: t.nav.booking },
+  ];
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-40 transition-all duration-500",
-        solid
-          ? "border-b border-[#2d4829]/12 bg-[#faf8f3]/90 backdrop-blur-xl"
-          : "bg-gradient-to-b from-black/45 via-black/15 to-transparent",
-      )}
-      style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3.5 sm:px-8 sm:py-4 lg:px-12">
-        <Link
-          href="/"
-          className="font-display text-[1.35rem] font-semibold tracking-tight transition-colors sm:text-xl"
-          style={{ color: solid ? "#2d4829" : "#ffffff" }}
-          aria-label={`${site.name} home`}
-        >
-          {site.name}
-        </Link>
+    <>
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-[80] transition-colors duration-300",
+          solid && "border-b border-[#2d4829]/10",
+        )}
+        style={{
+          backgroundColor: solid ? SOLID_BG : "transparent",
+          paddingTop: "env(safe-area-inset-top, 0px)",
+        }}
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-8 sm:py-3.5 lg:px-12">
+          <Link
+            href="/"
+            className="font-display text-[1.2rem] font-semibold tracking-tight transition-colors sm:text-xl"
+            style={{ color: solid ? PRIMARY : "#ffffff" }}
+            aria-label={`${site.name} home`}
+            onClick={() => setOpen(false)}
+          >
+            {site.name}
+          </Link>
 
-        <nav
-          className="hidden items-center gap-7 text-sm transition-colors lg:flex"
-          style={{ color: solid ? "rgba(45,72,41,0.85)" : "rgba(255,255,255,0.9)" }}
-        >
-          {site.nav.map((item) => (
-            <a
+          <nav
+            className="hidden items-center gap-7 text-sm transition-colors lg:flex"
+            style={{
+              color: solid
+                ? "rgba(45,72,41,0.85)"
+                : "rgba(255,255,255,0.92)",
+            }}
+          >
+            {nav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="transition hover:opacity-100"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher variant={solid ? "light" : "dark"} />
+            <div className="hidden lg:block">
+              <LinkButton
+                href="/#beschikbaarheid"
+                variant="primary"
+                size="sm"
+                style={{
+                  backgroundColor: solid ? PRIMARY : "#ffffff",
+                  color: solid ? PAPER : PRIMARY,
+                }}
+              >
+                {t.cta.book}
+              </LinkButton>
+            </div>
+
+            <button
+              type="button"
+              aria-label={open ? "Close menu" : "Menu"}
+              aria-expanded={open}
+              onClick={() => setOpen((v) => !v)}
+              className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#2d4829]/16 text-[#2d4829] transition hover:bg-[#2d4829]/8 lg:hidden"
+            >
+              {open ? <X size={18} /> : <Menu size={18} />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile drawer overlay */}
+      <div
+        className={cn(
+          "fixed inset-0 z-[60] bg-[#0d1410]/55 transition-opacity duration-300 ease-out lg:hidden",
+          open ? "opacity-100" : "pointer-events-none opacity-0",
+        )}
+        onClick={() => setOpen(false)}
+        aria-hidden="true"
+      />
+
+      {/* Mobile drawer panel */}
+      <aside
+        className={cn(
+          "fixed inset-x-0 top-0 z-[70] origin-top bg-[#faf8f3] transition-[transform,opacity] duration-[320ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] lg:hidden",
+          open
+            ? "translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-4 opacity-0",
+        )}
+        style={{
+          paddingTop: "calc(env(safe-area-inset-top, 0px) + 4rem)",
+          paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1.5rem)",
+          boxShadow: open
+            ? "0 24px 60px -28px rgba(45,72,41,0.35)"
+            : "none",
+        }}
+        aria-hidden={!open}
+      >
+        <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-5 pt-3 sm:px-8">
+          {nav.map((item, i) => (
+            <Link
               key={item.href}
               href={item.href}
-              className="transition hover:opacity-100"
+              onClick={() => setOpen(false)}
+              className={cn(
+                "group flex items-center justify-between border-b border-[#2d4829]/10 py-4 text-[1.4rem] font-display text-[#2d4829] transition-[opacity,transform] duration-300 ease-out hover:text-[#59392e]",
+                open ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0",
+              )}
+              style={{ transitionDelay: open ? `${100 + i * 45}ms` : "0ms" }}
             >
-              {item.label}
-            </a>
+              <span>{item.label}</span>
+              <ArrowRight
+                size={18}
+                strokeWidth={1.7}
+                className="opacity-30 transition group-hover:translate-x-1 group-hover:opacity-100"
+              />
+            </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <LinkButton
-            href="#beschikbaarheid"
-            variant="primary"
-            size="sm"
-            style={{
-              backgroundColor: solid ? "#2d4829" : "#ffffff",
-              color: solid ? "#ffffff" : "#2d4829",
-            }}
-          >
-            Boekingsaanvraag
-          </LinkButton>
-        </div>
-
-        <button
-          type="button"
-          aria-label="Menu"
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
+        <div
           className={cn(
-            "inline-flex h-10 w-10 items-center justify-center rounded-full border transition lg:hidden",
-            solid
-              ? "border-[#2d4829]/16 text-[#2d4829] hover:bg-[#2d4829]/8"
-              : "border-white/55 bg-black/15 text-white backdrop-blur-md hover:bg-black/25",
+            "mx-auto mt-6 flex max-w-7xl flex-col gap-3 px-5 transition-[opacity,transform] duration-300 ease-out sm:px-8",
+            open ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0",
           )}
+          style={{ transitionDelay: open ? "320ms" : "0ms" }}
         >
-          {open ? <X size={18} /> : <Menu size={18} />}
-        </button>
-      </div>
-
-      {open && (
-        <div className="border-t border-[#2d4829]/12 bg-[#faf8f3]/97 backdrop-blur-xl lg:hidden">
-          <nav
-            className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4 text-base text-[#2d4829] sm:px-8"
-            style={{
-              paddingBottom: "calc(1rem + env(safe-area-inset-bottom, 0px))",
-            }}
+          <LinkButton
+            href="/#beschikbaarheid"
+            variant="primary"
+            size="lg"
+            onClick={() => setOpen(false)}
+            className="w-full"
           >
-            {site.nav.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-3 transition hover:bg-[#2d4829]/8"
-              >
-                {item.label}
-              </a>
-            ))}
+            {t.cta.book} <ArrowRight size={16} />
+          </LinkButton>
+          <div className="grid grid-cols-2 gap-3">
             <a
-              href="#beschikbaarheid"
+              href={site.whatsapp.nl}
+              target="_blank"
+              rel="noreferrer"
               onClick={() => setOpen(false)}
-              className="mt-2 inline-flex h-12 items-center justify-center rounded-full bg-[#2d4829] px-5 text-sm font-semibold text-[#faf8f3]"
+              className="inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full border border-[#2d4829]/16 bg-paper text-sm font-semibold text-[#2d4829] transition hover:bg-[#2d4829]/6"
             >
-              Boekingsaanvraag
+              <MessageCircle size={15} /> WhatsApp
             </a>
-          </nav>
+            <a
+              href={`mailto:${site.contact.email}`}
+              onClick={() => setOpen(false)}
+              className="inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full border border-[#2d4829]/16 bg-paper text-sm font-semibold text-[#2d4829] transition hover:bg-[#2d4829]/6"
+            >
+              <Mail size={15} /> {t.cta.email}
+            </a>
+          </div>
         </div>
-      )}
-    </header>
+
+        <div
+          className={cn(
+            "mx-auto mt-7 flex max-w-7xl flex-col gap-1 border-t border-[#2d4829]/10 px-5 pt-5 text-[12.5px] text-[#2d4829]/65 transition-opacity duration-300 sm:px-8",
+            open ? "opacity-100" : "opacity-0",
+          )}
+          style={{ transitionDelay: open ? "380ms" : "0ms" }}
+        >
+          <p>{site.address.full}</p>
+          <p>
+            <a href={`tel:${site.contact.phoneIntl}`} className="hover:text-[#2d4829]">
+              {site.contact.phone}
+            </a>
+            <span className="mx-2 text-[#2d4829]/30">·</span>
+            <a href={`mailto:${site.contact.email}`} className="hover:text-[#2d4829]">
+              {site.contact.email}
+            </a>
+          </p>
+        </div>
+      </aside>
+    </>
   );
 }
