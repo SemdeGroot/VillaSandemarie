@@ -244,10 +244,38 @@ export function InquiryForm({ blockedDates }: Props) {
 
     const form = e.currentTarget;
     const data = new FormData(form);
+    const get = (k: string) => String(data.get(k) ?? "").trim();
+
+    const NL_MONTHS = [
+      "januari", "februari", "maart", "april", "mei", "juni",
+      "juli", "augustus", "september", "oktober", "november", "december",
+    ];
+    const formatNL = (iso: string) => {
+      const [y, mo, d] = iso.split("-").map(Number);
+      return `${d} ${NL_MONTHS[mo - 1]} ${y}`;
+    };
+
+    const naam = get("name");
+    const email = get("email");
+    const telefoon = get("phone");
+    const gasten = get("guests");
+    const bericht = get("message");
+    const aankomst = checkin ? formatNL(checkin) : "";
+    const vertrek = checkout ? formatNL(checkout) : "";
+    const nachtenLabel = `${nights} ${nights === 1 ? "nacht" : "nachten"}`;
+
     const body = new URLSearchParams();
-    data.forEach((value, key) => {
-      body.append(key, typeof value === "string" ? value : "");
-    });
+    body.append("form-name", "inquiry");
+    body.append("bot-field", get("bot-field"));
+    body.append("Naam", naam);
+    body.append("Email", email);
+    body.append("Telefoon", telefoon || "(niet opgegeven)");
+    body.append("Gasten", gasten);
+    body.append("Aankomst", aankomst);
+    body.append("Vertrek", vertrek);
+    body.append("Nachten", nachtenLabel);
+    body.append("Bericht", bericht || "(geen bericht)");
+    body.append("Taal", locale.toUpperCase());
 
     setStatus("submitting");
     try {
@@ -380,7 +408,7 @@ export function InquiryForm({ blockedDates }: Props) {
                   ) : (
                     <>
                       <span className="hidden h-9 w-9 sm:inline-block" aria-hidden />
-                      <p className="font-display text-[14px] tracking-tight text-[#faf8f3]/95">
+                      <p className="whitespace-nowrap font-display text-[14px] tracking-tight text-[#faf8f3]/95">
                         {monthLabels[m.month]} {m.year}
                       </p>
                       <button
@@ -666,9 +694,9 @@ function MonthYearPicker({
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="dialog"
         aria-expanded={open}
-        className="inline-flex h-9 cursor-pointer items-center gap-2 rounded-full border border-[#faf8f3]/20 bg-[#faf8f3]/5 px-4 text-[14px] font-display tracking-tight text-[#faf8f3]/95 transition hover:bg-[#faf8f3]/12"
+        className="inline-flex h-9 shrink-0 cursor-pointer items-center gap-2 whitespace-nowrap rounded-full border border-[#faf8f3]/20 bg-[#faf8f3]/5 px-3 text-[13px] font-display tracking-tight text-[#faf8f3]/95 transition hover:bg-[#faf8f3]/12 sm:px-4 sm:text-[14px]"
       >
-        <span>
+        <span className="whitespace-nowrap">
           {monthLabels[view.month]} {view.year}
         </span>
         <ChevronDown
