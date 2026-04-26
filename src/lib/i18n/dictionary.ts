@@ -178,7 +178,7 @@ const nl: Dict = {
   },
   amenities: {
     eyebrow: "Voorzieningen",
-    title: "Alles wat je nodig hebt, niets wat je niet wilt.",
+    title: "Alles wat je nodig hebt, niets wat je niet wilt",
     body: "We hebben de villa ingericht zoals we zelf graag op vakantie zijn: comfortabel, ontspannen en gewoon goed voor elkaar. Een fijne keuken, airco in elke slaapkamer, snelle wifi en een ligstoel waar je niet vanaf wilt komen.",
   },
   rooms: {
@@ -190,7 +190,7 @@ const nl: Dict = {
     eyebrow: "Buitenleven in de tropen",
     titlePre: "Het",
     titleHighlight: "balkon op de wind",
-    titlePost: ", het zwembad, de zonsondergang.",
+    titlePost: ", het zwembad, de zonsondergang",
     body: "Bij Villa Sandemarie speelt het meeste leven zich buiten af. Op het balkon zit je heerlijk op de wind, met uitzicht over het Spaanse Water en de Tafelberg. Beneden bij het zwembad zwem je, lees je, borrel je of doe je gewoon helemaal niets.",
   },
   gallery: {
@@ -220,7 +220,7 @@ const nl: Dict = {
   },
   booking: {
     eyebrow: "Beschikbaarheid en boeken",
-    title: "Stuur een aanvraag, wij reageren persoonlijk.",
+    title: "Stuur een aanvraag, wij reageren persoonlijk",
     body: "Selecteer jullie data en aantal personen. We bevestigen altijd zelf, sturen je persoonlijk een reactie en zetten de boeking voor je klaar.",
     pricingHeading: "Prijsindicatie",
     formTitle: "Boekingsaanvraag",
@@ -318,7 +318,7 @@ const en: Dict = {
   },
   amenities: {
     eyebrow: "Amenities",
-    title: "Everything you need, nothing you don't.",
+    title: "Everything you need, nothing you don't",
     body: "We've set up the villa the way we like to be on holiday ourselves: comfortable, relaxed and just right. A proper kitchen, AC in every bedroom, fast wifi and loungers you won't want to leave.",
   },
   rooms: {
@@ -330,7 +330,7 @@ const en: Dict = {
     eyebrow: "Outdoor living",
     titlePre: "The",
     titleHighlight: "balcony in the breeze",
-    titlePost: ", the pool, the sunset.",
+    titlePost: ", the pool, the sunset",
     body: "Most of life at Villa Sandemarie happens outside. The balcony catches the trade winds with a view across the Spaanse Water and the Tafelberg. Down by the pool you swim, read, drink, or just do absolutely nothing.",
   },
   gallery: {
@@ -360,7 +360,7 @@ const en: Dict = {
   },
   booking: {
     eyebrow: "Availability and booking",
-    title: "Send a request, we reply personally.",
+    title: "Send a request, we reply personally",
     body: "Select your dates and group size. We always confirm ourselves, write back personally and set the booking up for you.",
     pricingHeading: "Indicative pricing",
     formTitle: "Booking request",
@@ -458,7 +458,7 @@ const de: Dict = {
   },
   amenities: {
     eyebrow: "Ausstattung",
-    title: "Alles was ihr braucht, nichts was nervt.",
+    title: "Alles was ihr braucht, nichts was nervt",
     body: "Wir haben die Villa so eingerichtet, wie wir selbst gerne Urlaub machen: bequem, entspannt und einfach gut. Eine richtige Küche, Klimaanlage in jedem Schlafzimmer, schnelles WLAN und Liegen, von denen ihr nicht mehr aufstehen wollt.",
   },
   rooms: {
@@ -470,7 +470,7 @@ const de: Dict = {
     eyebrow: "Tropisches Draußenleben",
     titlePre: "Der",
     titleHighlight: "Balkon im Wind",
-    titlePost: ", der Pool, der Sonnenuntergang.",
+    titlePost: ", der Pool, der Sonnenuntergang",
     body: "In der Villa Sandemarie spielt sich das meiste draußen ab. Auf dem Balkon sitzt ihr im Wind, mit Blick auf das Spaanse Water und den Tafelberg. Unten am Pool wird geschwommen, gelesen, ein Drink genommen oder einfach gar nichts gemacht.",
   },
   gallery: {
@@ -500,7 +500,7 @@ const de: Dict = {
   },
   booking: {
     eyebrow: "Verfügbarkeit und Buchung",
-    title: "Schickt eine Anfrage, wir antworten persönlich.",
+    title: "Schickt eine Anfrage, wir antworten persönlich",
     body: "Wählt eure Daten und die Gruppengröße. Wir bestätigen immer selbst, schreiben persönlich zurück und richten die Buchung für euch ein.",
     pricingHeading: "Preisangabe",
     formTitle: "Buchungsanfrage",
@@ -581,7 +581,7 @@ const es: Dict = {
     email: "Email",
   },
   hero: {
-    eyebrow: "Curazao · Cas Grandi · Spaanse Water",
+    eyebrow: "Curaçao · Cas Grandi · Spaanse Water",
     titlePre: "Bon Bini a",
     titleHighlight: "Villa Sandemarie",
     titlePost: "",
@@ -598,7 +598,7 @@ const es: Dict = {
   },
   amenities: {
     eyebrow: "Servicios",
-    title: "Todo lo que necesitas, nada que sobre.",
+    title: "Todo lo que necesitas, nada que sobre",
     body: "Hemos preparado la villa como nos gusta estar a nosotros de vacaciones: cómoda, relajada y bien pensada. Una buena cocina, aire acondicionado en cada habitación, wifi rápido y tumbonas que no querrás dejar.",
   },
   rooms: {
@@ -610,7 +610,7 @@ const es: Dict = {
     eyebrow: "Vida al aire libre",
     titlePre: "El",
     titleHighlight: "balcón al viento",
-    titlePost: ", la piscina, el atardecer.",
+    titlePost: ", la piscina, el atardecer",
     body: "En Villa Sandemarie casi todo pasa fuera. En el balcón sopla la brisa, con vistas al Spaanse Water y al Tafelberg. Abajo en la piscina se nada, se lee, se toma algo o no se hace absolutamente nada.",
   },
   gallery: {
@@ -640,7 +640,7 @@ const es: Dict = {
   },
   booking: {
     eyebrow: "Disponibilidad y reserva",
-    title: "Envíanos una solicitud, te responderemos en persona.",
+    title: "Envíanos una solicitud, te responderemos en persona",
     body: "Elige tus fechas y el número de personas. Siempre confirmamos nosotros, te respondemos en persona y dejamos la reserva lista.",
     pricingHeading: "Precio orientativo",
     formTitle: "Solicitud de reserva",

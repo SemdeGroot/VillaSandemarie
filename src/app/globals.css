@@ -156,6 +156,16 @@ a {
   }
 }
 
+/* Header logo + nav: mobile is always solid → force primary color regardless of inline style. */
+@media (max-width: 1023.98px) {
+  .header-logo {
+    color: #2d4829 !important;
+  }
+  .header-nav {
+    color: rgba(45, 72, 41, 0.85) !important;
+  }
+}
+
 /* Date input native styling */
 .date-input::-webkit-calendar-picker-indicator {
   filter: invert(0.85);

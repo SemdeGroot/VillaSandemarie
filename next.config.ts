@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
     },
   },
   allowedDevOrigins: ["192.168.178.33", "localhost", "127.0.0.1"],
+  async redirects() {
+    return [
+      { source: "/over-ons", destination: "/about", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

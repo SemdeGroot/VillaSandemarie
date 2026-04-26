@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MessageCircle, Phone } from "lucide-react";
 import { site } from "@/lib/site";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 
@@ -41,15 +41,15 @@ export function Footer() {
   const nav = [
     { href: "/#villa", label: t.nav.villa },
     { href: "/#voorzieningen", label: t.nav.amenities },
-    { href: "/over-ons", label: t.nav.about },
+    { href: "/about", label: t.nav.about },
     { href: "/curacao", label: t.nav.curacao },
     { href: "/#beschikbaarheid", label: t.nav.booking },
   ];
 
   return (
     <footer className="border-t border-line bg-paper text-primary">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-8 sm:gap-12 sm:py-16 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-16 lg:px-12 lg:py-20">
-        <div>
+      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-10 px-5 py-14 sm:px-8 sm:gap-x-10 sm:gap-y-12 sm:py-16 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-16 lg:px-12 lg:py-20">
+        <div className="col-span-2 lg:col-span-1">
           <Link href="/" className="font-display text-3xl text-primary">
             {site.name}
           </Link>
@@ -82,45 +82,47 @@ export function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className="min-w-0">
           <p className="eyebrow text-warm">{t.footer.contact}</p>
           <ul className="mt-3 space-y-3 text-[14px] text-primary/78">
-            <li className="flex items-start gap-2">
-              <MapPin size={14} className="mt-1 text-warm" />
-              <span>{site.address.full}</span>
+            <li className="flex items-center gap-2">
+              <Phone size={14} className="shrink-0 text-warm" />
+              <a
+                href={`tel:${site.contact.phoneIntl}`}
+                className="break-all transition hover:text-primary"
+              >
+                {site.contact.phone}
+              </a>
             </li>
             <li className="flex items-center gap-2">
-              <Phone size={14} className="text-warm" />
-              <a href={`tel:${site.contact.phoneIntl}`}>{site.contact.phone}</a>
+              <Mail size={14} className="shrink-0 text-warm" />
+              <a
+                href={`mailto:${site.contact.email}`}
+                className="break-all transition hover:text-primary"
+              >
+                {site.contact.email}
+              </a>
             </li>
             <li className="flex items-center gap-2">
-              <Mail size={14} className="text-warm" />
-              <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <p className="eyebrow text-warm">{t.footer.whatsapp}</p>
-          <ul className="mt-3 space-y-3 text-[14px] text-primary/78">
-            <li>
+              <MessageCircle size={14} className="shrink-0 text-warm" />
               <a
                 href={site.whatsapp.nl}
                 target="_blank"
                 rel="noreferrer"
                 className="transition hover:text-primary"
               >
-                {t.footer.chatNl}
+                WhatsApp <span className="text-primary/55">(NL)</span>
               </a>
             </li>
-            <li>
+            <li className="flex items-center gap-2">
+              <MessageCircle size={14} className="shrink-0 text-warm" />
               <a
                 href={site.whatsapp.en}
                 target="_blank"
                 rel="noreferrer"
                 className="transition hover:text-primary"
               >
-                {t.footer.chatEn}
+                WhatsApp <span className="text-primary/55">(EN)</span>
               </a>
             </li>
           </ul>

@@ -4,6 +4,7 @@ import * as React from "react";
 import { ArrowRight, MapPin } from "lucide-react";
 import { LinkButton } from "@/components/ui/button";
 import { villa } from "@/lib/villa";
+import { site } from "@/lib/site";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 
 export function Hero() {
@@ -106,12 +107,16 @@ export function Hero() {
       >
         <div className="fade-up max-w-3xl">
           <p className="eyebrow flex items-center gap-2 text-white/85">
-            <MapPin size={14} className="text-[#fee7a9]" /> {t.hero.eyebrow}
+            <MapPin size={14} className="shrink-0 text-[#fee7a9]" />
+            <span>
+              {site.address.country} · {site.address.street},{" "}
+              {site.address.neighborhood} · Spaanse Water
+            </span>
           </p>
           <h1 className="font-display mt-5 text-[1.8rem] font-medium leading-[1.08] tracking-tight text-white [text-wrap:balance] sm:text-5xl md:text-6xl lg:text-[4.8rem]">
             {t.hero.titlePre}{" "}
             <span style={{ color: "#fee7a9" }}>{t.hero.titleHighlight}</span>
-            {t.hero.titlePost ? <>{t.hero.titlePost}</> : "."}
+            {t.hero.titlePost ? <>{t.hero.titlePost}</> : null}
           </h1>
           <p className="mt-4 max-w-2xl text-[15px] leading-7 text-white/82 sm:mt-6 sm:text-lg sm:leading-9">
             {t.hero.lead}

@@ -7,7 +7,7 @@ import { family, familyIntro } from "@/lib/family";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 
 export function AboutPage() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   return (
     <>
       <Section
@@ -20,7 +20,6 @@ export function AboutPage() {
             <span className="text-warm font-medium italic">
               {t.about.titleHighlight}
             </span>
-            .
           </Display>
         </Reveal>
       </Section>
@@ -40,7 +39,7 @@ export function AboutPage() {
             </div>
           </Reveal>
           <Reveal delay={120} className="space-y-5 text-base leading-7 text-primary/78 sm:text-[17px] sm:leading-9">
-            {familyIntro.split("\n\n").map((p, i) => (
+            {familyIntro[locale].split("\n\n").map((p, i) => (
               <p key={i}>{p}</p>
             ))}
           </Reveal>
@@ -61,14 +60,14 @@ export function AboutPage() {
                   {person.name}
                 </h2>
                 <span className="text-xs uppercase tracking-[0.22em] text-warm">
-                  {person.role}
+                  {person.role[locale]}
                 </span>
               </div>
               <p className="mt-4 text-[15px] leading-7 text-primary/78">
-                {person.bio}
+                {person.bio[locale]}
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
-                {person.favorites.map((f) => (
+                {person.favorites[locale].map((f) => (
                   <span
                     key={f}
                     className="rounded-full border border-line bg-background px-3 py-1 text-xs text-primary/80"

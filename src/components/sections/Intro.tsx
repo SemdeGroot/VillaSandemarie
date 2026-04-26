@@ -17,7 +17,6 @@ export function Intro() {
             <span className="text-warm font-medium italic">
               {t.intro.titleHighlight}
             </span>
-            .
           </Display>
           <p className="mt-6 text-base leading-7 text-primary/78 sm:text-lg sm:leading-9">
             {t.intro.body}

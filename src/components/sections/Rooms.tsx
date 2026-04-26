@@ -37,7 +37,6 @@ export function Rooms() {
           <span className="text-warm font-medium italic">
             {t.rooms.titleHighlight}
           </span>
-          .
         </Display>
       </Reveal>
 

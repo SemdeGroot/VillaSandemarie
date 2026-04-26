@@ -13,43 +13,9 @@ type Props = {
   variant?: "transparent" | "solid";
 };
 
-const SOLID_BG = "#faf8f3";
-const HERO_DARK = "#0d1410";
-const PRIMARY = "#2d4829";
-const PAPER = "#faf8f3";
-
-const DESKTOP_MQ = "(min-width: 1024px)";
-
-function setThemeColor(color: string) {
-  if (typeof document === "undefined") return;
-  const all = document.head.querySelectorAll<HTMLMetaElement>(
-    "meta[name='theme-color']",
-  );
-  let canonical: HTMLMetaElement | null = null;
-  all.forEach((m) => {
-    if (m.dataset.dynamic === "true") {
-      canonical = m;
-    } else {
-      m.remove();
-    }
-  });
-  if (!canonical) {
-    canonical = document.createElement("meta");
-    canonical.name = "theme-color";
-    canonical.dataset.dynamic = "true";
-    document.head.appendChild(canonical);
-  }
-  if (canonical.getAttribute("content") !== color) {
-    canonical.setAttribute("content", color);
-  }
-}
-
 export function Header({ variant = "transparent" }: Props) {
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-  // Desktop is the only viewport where transparency is allowed.
-  // Default to true so SSR matches a desktop-first user; the effect corrects on mount.
-  const [isDesktop, setIsDesktop] = React.useState(true);
   const { t } = useLocale();
 
   React.useEffect(() => {
@@ -57,14 +23,6 @@ export function Header({ variant = "transparent" }: Props) {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  React.useEffect(() => {
-    const mq = window.matchMedia(DESKTOP_MQ);
-    const update = () => setIsDesktop(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
   }, []);
 
   React.useEffect(() => {
@@ -81,18 +39,14 @@ export function Header({ variant = "transparent" }: Props) {
     };
   }, [open]);
 
-  // Mobile: always solid. Desktop: transparent unless scrolled / forced / menu open.
+  // Desktop transparency only when not scrolled, not forced solid, not menu open.
+  // Mobile is always solid (handled via CSS classes — no JS-driven flash on hydrate).
   const desktopSolid = variant === "solid" || scrolled || open;
-  const solid = !isDesktop || desktopSolid;
-
-  React.useEffect(() => {
-    setThemeColor(solid ? SOLID_BG : HERO_DARK);
-  }, [solid]);
 
   const nav = [
     { href: "/#villa", label: t.nav.villa },
     { href: "/#voorzieningen", label: t.nav.amenities },
-    { href: "/over-ons", label: t.nav.about },
+    { href: "/about", label: t.nav.about },
     { href: "/curacao", label: t.nav.curacao },
     { href: "/#beschikbaarheid", label: t.nav.booking },
   ];
@@ -101,19 +55,24 @@ export function Header({ variant = "transparent" }: Props) {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-[80] transition-colors duration-300",
-          solid && "border-b border-[#2d4829]/10",
+          "fixed inset-x-0 top-0 z-[80]",
+          // Mobile: always solid + bottom border, no transition.
+          "bg-[#faf8f3] border-b border-[#2d4829]/10",
+          // Desktop: switch to dynamic behavior with transition.
+          "lg:transition-colors lg:duration-300",
+          desktopSolid
+            ? "lg:bg-[#faf8f3] lg:border-[#2d4829]/10"
+            : "lg:bg-transparent lg:border-transparent",
         )}
         style={{
-          backgroundColor: solid ? SOLID_BG : "transparent",
           paddingTop: "env(safe-area-inset-top, 0px)",
         }}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-8 sm:py-3.5 lg:px-12">
           <Link
             href="/"
-            className="font-display text-[1.2rem] font-semibold tracking-tight transition-colors sm:text-xl"
-            style={{ color: solid ? PRIMARY : "#ffffff" }}
+            className="header-logo font-display text-[1.2rem] font-semibold tracking-tight sm:text-xl lg:transition-colors"
+            style={{ color: desktopSolid ? "#2d4829" : "#ffffff" }}
             aria-label={`${site.name} home`}
             onClick={() => setOpen(false)}
           >
@@ -121,9 +80,9 @@ export function Header({ variant = "transparent" }: Props) {
           </Link>
 
           <nav
-            className="hidden items-center gap-7 text-sm transition-colors lg:flex"
+            className="header-nav hidden items-center gap-7 text-sm lg:flex lg:transition-colors"
             style={{
-              color: solid
+              color: desktopSolid
                 ? "rgba(45,72,41,0.85)"
                 : "rgba(255,255,255,0.92)",
             }}
@@ -140,15 +99,22 @@ export function Header({ variant = "transparent" }: Props) {
           </nav>
 
           <div className="flex items-center gap-2">
-            <LanguageSwitcher variant={solid ? "light" : "dark"} />
+            {/* Mobile language switcher: always light (solid header). */}
+            <span className="lg:hidden">
+              <LanguageSwitcher variant="light" />
+            </span>
+            {/* Desktop language switcher: follows transparency state. */}
+            <span className="hidden lg:inline-flex">
+              <LanguageSwitcher variant={desktopSolid ? "light" : "dark"} />
+            </span>
             <div className="hidden lg:block">
               <LinkButton
                 href="/#beschikbaarheid"
                 variant="primary"
                 size="sm"
                 style={{
-                  backgroundColor: solid ? PRIMARY : "#ffffff",
-                  color: solid ? PAPER : PRIMARY,
+                  backgroundColor: desktopSolid ? "#2d4829" : "#ffffff",
+                  color: desktopSolid ? "#faf8f3" : "#2d4829",
                 }}
               >
                 {t.cta.book}

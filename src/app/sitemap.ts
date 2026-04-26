@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${site.url}/over-ons`,
+      url: `${site.url}/about`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.7,

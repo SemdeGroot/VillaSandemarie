@@ -77,8 +77,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#0d1410" },
-    { media: "(prefers-color-scheme: dark)", color: "#0d1410" },
+    { media: "(prefers-color-scheme: light)", color: "#faf8f3" },
+    { media: "(prefers-color-scheme: dark)", color: "#faf8f3" },
   ],
   colorScheme: "light",
   width: "device-width",
@@ -95,6 +95,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
+      data-scroll-behavior="smooth"
       className={`${fontDisplay.variable} ${fontSans.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-paper font-sans text-primary">

@@ -47,7 +47,6 @@ export function CuracaoPage() {
             <span className="text-warm font-medium italic">
               {t.curacao.titleHighlight}
             </span>
-            .
           </Display>
           <p className="mt-6 max-w-2xl text-base leading-7 text-primary/78 sm:text-lg sm:leading-9">
             {t.curacao.lead}

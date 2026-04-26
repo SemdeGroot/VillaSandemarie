@@ -18,7 +18,6 @@ export function Audiences() {
             <span className="text-warm font-medium italic">
               {t.audiences.titleHighlight}
             </span>
-            .
           </Display>
           <p className="mt-5 text-base leading-7 text-primary/72">
             {t.audiences.body}
