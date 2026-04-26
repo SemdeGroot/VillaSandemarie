@@ -59,7 +59,7 @@ a {
 
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.012em;
+  letter-spacing: -0.014em;
 }
 
 .eyebrow {
@@ -120,6 +120,14 @@ a {
   .ken-burns {
     animation: none !important;
     transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media print {
+  .reveal,
+  .fade-up {
     opacity: 1 !important;
     transform: none !important;
   }

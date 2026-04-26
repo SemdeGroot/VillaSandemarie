@@ -10,7 +10,7 @@ export function Intro() {
           <Eyebrow>De Villa</Eyebrow>
           <Display as="h2" className="mt-5">
             Jullie eilandhuis op Curaçao,{" "}
-            <span className="italic text-warm">ruimte voor iedereen</span>.
+            <span className="text-warm font-medium">ruimte voor iedereen</span>.
           </Display>
           <p className="mt-7 text-base leading-8 text-primary/78 sm:text-lg sm:leading-9">
             Villa Sandemarie is een ruime, vrijstaande vakantievilla in de

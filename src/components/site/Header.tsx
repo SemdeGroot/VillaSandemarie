@@ -37,26 +37,22 @@ export function Header({ variant = "transparent" }: Props) {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3.5 sm:px-8 sm:py-4 lg:px-12">
         <Link
           href="/"
-          className={cn(
-            "font-display text-[1.35rem] font-medium tracking-tight transition-colors sm:text-xl",
-            solid ? "text-[#2d4829]" : "text-white",
-          )}
+          className="font-display text-[1.35rem] font-semibold tracking-tight transition-colors sm:text-xl"
+          style={{ color: solid ? "#2d4829" : "#ffffff" }}
           aria-label={`${site.name} home`}
         >
           {site.name}
         </Link>
 
         <nav
-          className={cn(
-            "hidden items-center gap-7 text-sm transition-colors lg:flex",
-            solid ? "text-[#2d4829]/85" : "text-white/85",
-          )}
+          className="hidden items-center gap-7 text-sm transition-colors lg:flex"
+          style={{ color: solid ? "rgba(45,72,41,0.85)" : "rgba(255,255,255,0.9)" }}
         >
           {site.nav.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="transition hover:text-current hover:opacity-100"
+              className="transition hover:opacity-100"
             >
               {item.label}
             </a>
@@ -66,8 +62,12 @@ export function Header({ variant = "transparent" }: Props) {
         <div className="hidden items-center gap-3 lg:flex">
           <LinkButton
             href="#beschikbaarheid"
-            variant={solid ? "primary" : "highlight"}
+            variant="primary"
             size="sm"
+            style={{
+              backgroundColor: solid ? "#2d4829" : "#ffffff",
+              color: solid ? "#ffffff" : "#2d4829",
+            }}
           >
             Boekingsaanvraag
           </LinkButton>

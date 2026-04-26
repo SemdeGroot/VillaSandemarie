@@ -14,7 +14,7 @@ export function About() {
           <Eyebrow>Over ons</Eyebrow>
           <Display as="h2" className="mt-5">
             Een echt{" "}
-            <span className="italic text-warm">familiebedrijf</span>.
+            <span className="text-warm font-medium">familiebedrijf</span>.
           </Display>
           <div className="mt-8 space-y-5 text-base leading-8 text-primary/78">
             {familyIntro.split("\n\n").map((p, i) => (

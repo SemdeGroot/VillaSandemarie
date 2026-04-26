@@ -27,7 +27,7 @@ export function Outdoor() {
           </Eyebrow>
           <Display as="h2" className="mt-5 text-white">
             Het{" "}
-            <span className="italic text-[#fee7a9]">balkon op de wind</span>,
+            <span className="text-[#fee7a9] font-medium">balkon op de wind</span>,
             het zwembad, de zonsondergang.
           </Display>
           <p className="mt-7 text-base leading-8 text-white/82 sm:text-lg sm:leading-9">

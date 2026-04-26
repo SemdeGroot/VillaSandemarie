@@ -46,17 +46,17 @@ export function Hero() {
             <MapPin size={14} className="text-[#fee7a9]" /> Curaçao · Cas Grandi
             · Spaanse Water
           </p>
-          <h1 className="font-display mt-6 text-[2.6rem] font-light leading-[1.04] tracking-tight text-white sm:text-6xl lg:text-[5.4rem]">
+          <h1 className="font-display mt-6 text-[2.05rem] font-light leading-[1.06] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[5.2rem]">
             Bon Bini na{" "}
-            <span className="italic text-[#fee7a9]">Villa Sandemarie</span>.
+            <span style={{ color: "#fee7a9" }}>Villa Sandemarie</span>.
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-7 text-white/82 sm:text-lg sm:leading-9">
+          <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/82 sm:mt-6 sm:text-lg sm:leading-9">
             Jullie eilandhuis op Curaçao. Een ruime, gezellige vakantievilla
             voor families en vriendengroepen tot 11 personen, met privézwembad
             en uitzicht over het Spaanse Water.
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
+          <div className="mt-7 flex flex-col gap-3 sm:mt-10 sm:flex-row">
             <LinkButton href="#beschikbaarheid" variant="highlight" size="lg">
               Bekijk de beschikbaarheid <ArrowRight size={18} />
             </LinkButton>
@@ -80,12 +80,6 @@ export function Hero() {
             ))}
           </div>
 
-          <a
-            href="#villa"
-            className="hidden items-center gap-3 text-xs uppercase tracking-[0.32em] text-white/65 transition hover:text-white sm:inline-flex"
-          >
-            <span className="h-px w-10 bg-white/45" /> scroll
-          </a>
         </div>
       </div>
     </section>

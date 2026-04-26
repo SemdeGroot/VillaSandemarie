@@ -31,7 +31,7 @@ export function Curacao() {
           <Eyebrow>Curaçao</Eyebrow>
           <Display as="h2" className="mt-5">
             Curaçao ontdekken{" "}
-            <span className="italic text-warm">vanuit de villa</span>.
+            <span className="text-warm font-medium">vanuit de villa</span>.
           </Display>
           <p className="mt-6 text-base leading-8 text-primary/78">
             Cas Grandi ligt vlak bij Jan Thiel, het Spaanse Water en de

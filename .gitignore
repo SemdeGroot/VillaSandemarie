@@ -48,3 +48,6 @@ next-env.d.ts
 
 # overig
 /content
+.codex
+CLAUDE.md
+AGENTS.md

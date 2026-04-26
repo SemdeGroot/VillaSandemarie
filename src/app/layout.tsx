@@ -59,6 +59,12 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+  icons: {
+    icon: [
+      { url: "/favicon-96x96.png", type: "image/png", sizes: "96x96" },
+    ],
+    apple: [{ url: "/favicon-96x96.png", sizes: "96x96" }],
+  },
 };
 
 export const viewport: Viewport = {

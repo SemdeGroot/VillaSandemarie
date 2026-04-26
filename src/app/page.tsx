@@ -7,7 +7,6 @@ import { Gallery } from "@/components/sections/Gallery";
 import { Audiences } from "@/components/sections/Audiences";
 import { About } from "@/components/sections/About";
 import { Curacao } from "@/components/sections/Curacao";
-import { Availability } from "@/components/sections/Availability";
 import { Booking } from "@/components/sections/Booking";
 import { Footer } from "@/components/sections/Footer";
 import { Header } from "@/components/site/Header";
@@ -29,7 +28,6 @@ export default function Home() {
         <Audiences />
         <About />
         <Curacao />
-        <Availability />
         <Booking />
       </main>
       <Footer />

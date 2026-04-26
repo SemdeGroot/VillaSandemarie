@@ -89,12 +89,8 @@ export const villa = {
       text: "Een fijne uitvalsbasis met ruimte voor spullen. 10% korting bij Scuba Do Curaçao voor gasten.",
     },
     {
-      title: "Iets te vieren",
-      text: "Een jubileum, verjaardag of speciale trip met opa en oma. Iedereen onder één dak.",
-    },
-    {
-      title: "Kleine teams",
-      text: "Een rustige plek om samen te werken en plannen te maken, met het eiland naast de deur.",
+      title: "Bijzondere momenten",
+      text: "Jubileum, verjaardag of een rustige werkretraite met een klein team. Iedereen onder één dak, met het eiland naast de deur.",
     },
   ],
   pricing: {

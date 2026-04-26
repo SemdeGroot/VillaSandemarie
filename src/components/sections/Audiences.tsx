@@ -11,7 +11,7 @@ export function Audiences() {
           <Eyebrow>Voor wie</Eyebrow>
           <Display as="h2" className="mt-5">
             Voor groepen die{" "}
-            <span className="italic text-warm">samen weg willen</span>.
+            <span className="text-warm font-medium">samen weg willen</span>.
           </Display>
           <p className="mt-6 text-base leading-8 text-primary/72">
             Genoeg ruimte voor iedereen, en de rust om je soms even terug te

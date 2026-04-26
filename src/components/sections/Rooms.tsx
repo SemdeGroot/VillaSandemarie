@@ -30,7 +30,7 @@ export function Rooms() {
         <Eyebrow>Indeling & kamers</Eyebrow>
         <Display as="h2" className="mt-5">
           Helder ingedeeld,{" "}
-          <span className="italic text-warm">gemaakt om met velen te zijn</span>.
+          <span className="text-warm font-medium">gemaakt om met velen te zijn</span>.
         </Display>
       </Reveal>
 
