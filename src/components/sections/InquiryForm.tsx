@@ -251,12 +251,15 @@ export function InquiryForm({ blockedDates }: Props) {
 
     setStatus("submitting");
     try {
-      const res = await fetch("/", {
+      const res = await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: body.toString(),
       });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      if (!res.ok) {
+        console.error("[inquiry] Netlify Forms returned", res.status, await res.text());
+        throw new Error(`HTTP ${res.status}`);
+      }
       setStatus("success");
       form.reset();
       setCheckin(null);
@@ -264,7 +267,8 @@ export function InquiryForm({ blockedDates }: Props) {
       setGuests(4);
       setCheckinInput("");
       setCheckoutInput("");
-    } catch {
+    } catch (err) {
+      console.error("[inquiry] submit failed", err);
       setStatus("error");
     }
   }
