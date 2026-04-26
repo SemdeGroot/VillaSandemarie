@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
+import { Alert } from "@/components/ui/alert";
 
 type Props = {
   blockedDates: string[];
@@ -159,6 +160,10 @@ export function InquiryForm({ blockedDates }: Props) {
   const [guests, setGuests] = React.useState<number>(4);
   const [checkinInput, setCheckinInput] = React.useState("");
   const [checkoutInput, setCheckoutInput] = React.useState("");
+  const [status, setStatus] = React.useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
+  const formRef = React.useRef<HTMLFormElement>(null);
 
   const startMin = startOfMonth(now.getFullYear(), now.getMonth());
   const startMax = startOfMonth(now.getFullYear() + 2, now.getMonth());
@@ -233,13 +238,45 @@ export function InquiryForm({ blockedDates }: Props) {
     return `${d} ${monthLabels[mo - 1]} ${y}`;
   }
 
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!checkin || !checkout || status === "submitting") return;
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const body = new URLSearchParams();
+    data.forEach((value, key) => {
+      body.append(key, typeof value === "string" ? value : "");
+    });
+
+    setStatus("submitting");
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setStatus("success");
+      form.reset();
+      setCheckin(null);
+      setCheckout(null);
+      setGuests(4);
+      setCheckinInput("");
+      setCheckoutInput("");
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <form
+      ref={formRef}
       name="inquiry"
       method="POST"
-      action="/?bedankt=1#beschikbaarheid"
       data-netlify="true"
       netlify-honeypot="bot-field"
+      onSubmit={handleSubmit}
       className="rounded-3xl border border-[#faf8f3]/14 bg-[#faf8f3]/8 p-5 backdrop-blur-md sm:p-7"
     >
       <input type="hidden" name="form-name" value="inquiry" />
@@ -412,12 +449,33 @@ export function InquiryForm({ blockedDates }: Props) {
 
       <button
         type="submit"
-        disabled={!checkin || !checkout}
+        disabled={!checkin || !checkout || status === "submitting"}
         style={{ backgroundColor: "#fee7a9", color: "#2d4829" }}
         className="mt-6 inline-flex h-13 w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-sm font-semibold transition hover:opacity-95 disabled:opacity-55"
       >
-        {checkin && checkout ? t.cta.sendInquiry : t.booking.submitDisabled}
+        {status === "submitting"
+          ? t.booking.submitting
+          : checkin && checkout
+            ? t.cta.sendInquiry
+            : t.booking.submitDisabled}
       </button>
+
+      {status === "success" && (
+        <Alert
+          className="mt-4"
+          variant="success"
+          title={t.booking.successTitle}
+          description={t.booking.successBody}
+        />
+      )}
+      {status === "error" && (
+        <Alert
+          className="mt-4"
+          variant="error"
+          title={t.booking.errorTitle}
+          description={t.booking.errorBody}
+        />
+      )}
     </form>
   );
 }

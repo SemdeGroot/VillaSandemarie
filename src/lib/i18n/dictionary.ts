@@ -106,6 +106,11 @@ export type Dict = {
     nightSingular: string;
     nightPlural: string;
     submitDisabled: string;
+    submitting: string;
+    successTitle: string;
+    successBody: string;
+    errorTitle: string;
+    errorBody: string;
   };
   footer: {
     explore: string;
@@ -248,6 +253,11 @@ const nl: Dict = {
     nightSingular: "nacht",
     nightPlural: "nachten",
     submitDisabled: "Selecteer eerst je data",
+    submitting: "Versturen...",
+    successTitle: "Aanvraag verstuurd",
+    successBody: "Bedankt! We nemen binnen 24 uur persoonlijk contact met je op.",
+    errorTitle: "Versturen mislukt",
+    errorBody: "Er ging iets mis. Probeer het opnieuw of stuur ons een bericht.",
   },
   footer: {
     explore: "Verkennen",
@@ -390,6 +400,11 @@ const en: Dict = {
     nightSingular: "night",
     nightPlural: "nights",
     submitDisabled: "Pick your dates first",
+    submitting: "Sending...",
+    successTitle: "Request sent",
+    successBody: "Thanks! We'll get back to you personally within 24 hours.",
+    errorTitle: "Could not send",
+    errorBody: "Something went wrong. Please try again or send us a message.",
   },
   footer: {
     explore: "Explore",
@@ -532,6 +547,11 @@ const de: Dict = {
     nightSingular: "Nacht",
     nightPlural: "Nächte",
     submitDisabled: "Wählt zuerst eure Daten",
+    submitting: "Wird gesendet...",
+    successTitle: "Anfrage gesendet",
+    successBody: "Danke! Wir melden uns innerhalb von 24 Stunden persönlich.",
+    errorTitle: "Senden fehlgeschlagen",
+    errorBody: "Etwas ist schiefgelaufen. Bitte versucht es erneut oder schreibt uns eine Nachricht.",
   },
   footer: {
     explore: "Entdecken",
@@ -674,6 +694,11 @@ const es: Dict = {
     nightSingular: "noche",
     nightPlural: "noches",
     submitDisabled: "Elige primero tus fechas",
+    submitting: "Enviando...",
+    successTitle: "Solicitud enviada",
+    successBody: "¡Gracias! Te responderemos en persona en 24 horas.",
+    errorTitle: "No se pudo enviar",
+    errorBody: "Algo ha fallado. Inténtalo de nuevo o envíanos un mensaje.",
   },
   footer: {
     explore: "Explorar",
