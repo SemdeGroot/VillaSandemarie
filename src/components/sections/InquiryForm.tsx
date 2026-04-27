@@ -255,39 +255,33 @@ export function InquiryForm({ blockedDates }: Props) {
       return `${d} ${NL_MONTHS[mo - 1]} ${y}`;
     };
 
-    const naam = get("name");
-    const email = get("email");
-    const telefoon = get("phone");
-    const gasten = get("guests");
-    const bericht = get("message");
     const aankomst = checkin ? formatNL(checkin) : "";
     const vertrek = checkout ? formatNL(checkout) : "";
     const nachtenLabel = `${nights} ${nights === 1 ? "nacht" : "nachten"}`;
 
+    // Build the body Netlify expects: form-name + the field names declared in
+    // public/__forms.html. Per Netlify docs we POST URL-encoded data to "/".
     const body = new URLSearchParams();
     body.append("form-name", "inquiry");
     body.append("bot-field", get("bot-field"));
-    body.append("Naam", naam);
-    body.append("Email", email);
-    body.append("Telefoon", telefoon || "(niet opgegeven)");
-    body.append("Gasten", gasten);
+    body.append("Naam", get("name"));
+    body.append("Email", get("email"));
+    body.append("Telefoon", get("phone") || "(niet opgegeven)");
+    body.append("Gasten", get("guests"));
     body.append("Aankomst", aankomst);
     body.append("Vertrek", vertrek);
     body.append("Nachten", nachtenLabel);
-    body.append("Bericht", bericht || "(geen bericht)");
+    body.append("Bericht", get("message") || "(geen bericht)");
     body.append("Taal", locale.toUpperCase());
 
     setStatus("submitting");
     try {
-      const res = await fetch("/__forms.html", {
+      const res = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: body.toString(),
       });
-      if (!res.ok) {
-        console.error("[inquiry] Netlify Forms returned", res.status, await res.text());
-        throw new Error(`HTTP ${res.status}`);
-      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setStatus("success");
       form.reset();
       setCheckin(null);

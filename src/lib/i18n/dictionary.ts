@@ -144,6 +144,25 @@ export type Dict = {
   language: {
     label: string;
   };
+  content: {
+    amenities: Record<
+      | "guests" | "bedrooms" | "bathrooms" | "pool" | "view" | "balcony"
+      | "location" | "parking" | "wifi" | "kitchen" | "bbq" | "ac"
+      | "laundry" | "groups",
+      string
+    >;
+    rooms: Record<
+      "bedrooms" | "bathrooms" | "living" | "kitchen",
+      { title: string; points: string[] }
+    >;
+    outdoor: string[];
+    audiences: Record<
+      "families" | "friends" | "divers" | "celebration",
+      { title: string; text: string }
+    >;
+    pricing: { bullets: string[]; notes: string };
+    galleryTags: Record<string, string>;
+  };
 };
 
 const nl: Dict = {
@@ -180,7 +199,7 @@ const nl: Dict = {
     eyebrow: "De villa",
     titlePre: "Jullie eilandhuis op Curaçao,",
     titleHighlight: "ruimte voor iedereen",
-    body: "Villa Sandemarie is een ruime, vrijstaande vakantievilla in Cas Grandi, dichtbij Jan Thiel. Met 5 slaapkamers, 3 badkamers, een gezellig leefgedeelte en een balkon op de wind heb je alle ruimte om met z'n allen te landen. Buiten wachten het privézwembad, de ligstoelen en het uitzicht over het Spaanse Water op je.",
+    body: "Villa Sandemarie is een ruime, vrijstaande vakantievilla in Cas Grandi, dichtbij Jan Thiel. Met 5 slaapkamers, 2 badkamers, een gezellig leefgedeelte en een balkon op de wind heb je alle ruimte om met z'n allen te landen. Buiten wachten het privézwembad, de ligstoelen en het uitzicht over het Spaanse Water op je.",
     statsGuests: "Gasten",
     statsBedrooms: "Slaapkamers",
     statsBathrooms: "Badkamers",
@@ -291,6 +310,105 @@ const nl: Dict = {
   language: {
     label: "Taal",
   },
+  content: {
+    amenities: {
+      guests: "Tot 11 personen",
+      bedrooms: "5 slaapkamers",
+      bathrooms: "2 badkamers",
+      pool: "Privézwembad",
+      view: "180° uitzicht",
+      balcony: "Balkon op de wind",
+      location: "Cas Grandi, vlak bij Jan Thiel",
+      parking: "Eigen parkeerplek",
+      wifi: "Snelle wifi",
+      kitchen: "Volledig uitgeruste keuken",
+      bbq: "BBQ",
+      ac: "Airco in alle slaapkamers",
+      laundry: "Wasmachine",
+      groups: "Voor families & groepen",
+    },
+    rooms: {
+      bedrooms: {
+        title: "Slaapkamers",
+        points: [
+          "5 slaapkamers, samen plek voor maximaal 11 personen",
+          "4 slaapkamers met twee losse 1-persoonsbedden, los of tegen elkaar als 2-persoonsbed",
+          "5e slaapkamer met stapelbed en extra 1-persoonsbed, leuk voor de kids",
+          "Airco in elke slaapkamer",
+        ],
+      },
+      bathrooms: {
+        title: "Badkamers",
+        points: [
+          "2 badkamers in totaal, beide met douche, toilet en twee wastafels",
+          "Plus een apart toilet boven, fijn met een grote groep",
+        ],
+      },
+      living: {
+        title: "Woonkamer",
+        points: [
+          "Gezellige woonkamer met een lekkere bank waar iedereen op past",
+          "Smart-tv om je eigen series en films te streamen",
+        ],
+      },
+      kitchen: {
+        title: "Keuken",
+        points: [
+          "Volledig uitgeruste keuken voor de hele groep",
+          "Koelkast met ijsblokjesmachine, vaatwasser, oven en magnetron",
+          "Nespresso én filterkoffie, blender, tosti-apparaat, broodrooster",
+        ],
+      },
+    },
+    outdoor: [
+      "Privézwembad met ligbedden en zitjes",
+      "180° uitzicht over Spaanse Water en Tafelberg",
+      "Ruim balkon op de wind, fijn voor ontbijt of borrel",
+      "BBQ voor avonden thuis",
+      "Buitenverlichting voor lange avonden buiten",
+    ],
+    audiences: {
+      families: {
+        title: "Families",
+        text: "Genoeg slaapkamers, een eigen zwembad en een huis dat aanvoelt als gezamenlijke thuisbasis. Ook met opa en oma erbij blijft het ruim.",
+      },
+      friends: {
+        title: "Vriendengroepen",
+        text: "Samen koken, borrelen en zwemmen, zonder hotelgedoe en zonder gedeelde ruimtes met onbekenden.",
+      },
+      divers: {
+        title: "Duik- en snorkelgroepen",
+        text: "Goede uitvalsbasis met ruimte voor je spullen. Voor onze gasten regelen we 10% korting bij Scuba Do Curaçao.",
+      },
+      celebration: {
+        title: "Iets te vieren",
+        text: "Verjaardag, jubileum of een bijzondere trip met de hele familie. Iedereen onder één dak, zonder dat het hokkerig wordt.",
+      },
+    },
+    pricing: {
+      bullets: [
+        "Vanaf €275 per nacht (4 personen)",
+        "€25 per extra persoon per nacht",
+        "7% belasting",
+        "€195 schoonmaak",
+        "€500 borg/voorschot voor water en elektra",
+      ],
+      notes:
+        "De €500 borg is een voorschot voor water en elektra en wordt aan het einde van het verblijf met je verrekend.",
+    },
+    galleryTags: {
+      Drone: "Drone",
+      Zwembad: "Zwembad",
+      Balkon: "Balkon",
+      Woonkamer: "Woonkamer",
+      Keuken: "Keuken",
+      Slaapkamer: "Slaapkamer",
+      Badkamer: "Badkamer",
+      Avond: "Avond",
+      Tuin: "Tuin",
+      BBQ: "BBQ",
+    },
+  },
 };
 
 const en: Dict = {
@@ -318,7 +436,7 @@ const en: Dict = {
     eyebrow: "Curaçao · Cas Grandi · Spanish Water",
     locationCountry: "Curaçao",
     locationWater: "Spanish Water",
-    titlePre: "Bon Bini to",
+    titlePre: "Bon Bini na",
     titleHighlight: "Villa Sandemarie",
     titlePost: "",
     lead: "Your home on Curaçao. A spacious, easy-going holiday villa for families and groups of friends up to 11 people, with private pool and views over the Spaanse Water.",
@@ -327,7 +445,7 @@ const en: Dict = {
     eyebrow: "The villa",
     titlePre: "Your island home on Curaçao,",
     titleHighlight: "room for everyone",
-    body: "Villa Sandemarie is a spacious detached villa in Cas Grandi, close to Jan Thiel. Five bedrooms, three bathrooms, a generous living area and a balcony catching the trade winds, plenty of space to land together. Outside, the private pool, loungers and views across the Spaanse Water are waiting.",
+    body: "Villa Sandemarie is a spacious detached villa in Cas Grandi, close to Jan Thiel. Five bedrooms, two bathrooms, a generous living area and a balcony catching the trade winds, plenty of space to land together. Outside, the private pool, loungers and views across the Spaanse Water are waiting.",
     statsGuests: "Guests",
     statsBedrooms: "Bedrooms",
     statsBathrooms: "Bathrooms",
@@ -438,6 +556,105 @@ const en: Dict = {
   language: {
     label: "Language",
   },
+  content: {
+    amenities: {
+      guests: "Up to 11 guests",
+      bedrooms: "5 bedrooms",
+      bathrooms: "2 bathrooms",
+      pool: "Private pool",
+      view: "180° view",
+      balcony: "Balcony in the breeze",
+      location: "Cas Grandi, close to Jan Thiel",
+      parking: "Private parking",
+      wifi: "Fast wifi",
+      kitchen: "Fully equipped kitchen",
+      bbq: "BBQ",
+      ac: "AC in every bedroom",
+      laundry: "Washing machine",
+      groups: "For families & groups",
+    },
+    rooms: {
+      bedrooms: {
+        title: "Bedrooms",
+        points: [
+          "5 bedrooms, sleeping up to 11 people in total",
+          "4 bedrooms with two single beds, separate or pushed together as a double",
+          "5th bedroom with bunk bed plus an extra single, great for the kids",
+          "AC in every bedroom",
+        ],
+      },
+      bathrooms: {
+        title: "Bathrooms",
+        points: [
+          "2 bathrooms in total, both with shower, toilet and two sinks",
+          "Plus a separate toilet upstairs, handy with a larger group",
+        ],
+      },
+      living: {
+        title: "Living room",
+        points: [
+          "Cosy living room with a sofa big enough for everyone",
+          "Smart TV to stream your own series and films",
+        ],
+      },
+      kitchen: {
+        title: "Kitchen",
+        points: [
+          "Fully equipped kitchen for the whole group",
+          "Fridge with ice maker, dishwasher, oven and microwave",
+          "Nespresso and filter coffee, blender, sandwich press, toaster",
+        ],
+      },
+    },
+    outdoor: [
+      "Private pool with loungers and seating",
+      "180° view across Spaanse Water and the Tafelberg",
+      "Spacious balcony in the breeze, perfect for breakfast or sundowners",
+      "BBQ for evenings in",
+      "Outdoor lighting for long evenings outside",
+    ],
+    audiences: {
+      families: {
+        title: "Families",
+        text: "Plenty of bedrooms, your own pool and a house that feels like a shared home base. Even with grandparents along, there's room for everyone.",
+      },
+      friends: {
+        title: "Groups of friends",
+        text: "Cook, drink and swim together, no hotel hassle and no shared spaces with strangers.",
+      },
+      divers: {
+        title: "Dive and snorkel groups",
+        text: "A great base with room for your gear. Our guests get 10% off diving with Scuba Do Curaçao.",
+      },
+      celebration: {
+        title: "Something to celebrate",
+        text: "Birthday, anniversary or a special trip with the whole family. Everyone under one roof, without it feeling cramped.",
+      },
+    },
+    pricing: {
+      bullets: [
+        "From €275 per night (4 guests)",
+        "€25 per extra guest per night",
+        "7% tax",
+        "€195 cleaning fee",
+        "€500 deposit / advance for water and electricity",
+      ],
+      notes:
+        "The €500 deposit is an advance for water and electricity and is settled at the end of your stay.",
+    },
+    galleryTags: {
+      Drone: "Drone",
+      Zwembad: "Pool",
+      Balkon: "Balcony",
+      Woonkamer: "Living room",
+      Keuken: "Kitchen",
+      Slaapkamer: "Bedroom",
+      Badkamer: "Bathroom",
+      Avond: "Evening",
+      Tuin: "Garden",
+      BBQ: "BBQ",
+    },
+  },
 };
 
 const de: Dict = {
@@ -465,7 +682,7 @@ const de: Dict = {
     eyebrow: "Curaçao · Cas Grandi · Spanisches Wasser",
     locationCountry: "Curaçao",
     locationWater: "Spanisches Wasser",
-    titlePre: "Bon Bini in der",
+    titlePre: "Bon Bini na",
     titleHighlight: "Villa Sandemarie",
     titlePost: "",
     lead: "Euer Inselzuhause auf Curaçao. Eine geräumige, gemütliche Ferienvilla für Familien und Freundesgruppen bis 11 Personen, mit privatem Pool und Blick über das Spaanse Water.",
@@ -474,7 +691,7 @@ const de: Dict = {
     eyebrow: "Die Villa",
     titlePre: "Euer Inselzuhause auf Curaçao,",
     titleHighlight: "Platz für alle",
-    body: "Villa Sandemarie ist eine geräumige freistehende Ferienvilla in Cas Grandi, ganz in der Nähe von Jan Thiel. 5 Schlafzimmer, 3 Badezimmer, ein gemütlicher Wohnbereich und ein Balkon im Wind, ihr habt jede Menge Platz, um zusammen anzukommen. Draußen warten der private Pool, die Liegen und der Blick auf das Spaanse Water.",
+    body: "Villa Sandemarie ist eine geräumige freistehende Ferienvilla in Cas Grandi, ganz in der Nähe von Jan Thiel. 5 Schlafzimmer, 2 Badezimmer, ein gemütlicher Wohnbereich und ein Balkon im Wind, ihr habt jede Menge Platz, um zusammen anzukommen. Draußen warten der private Pool, die Liegen und der Blick auf das Spaanse Water.",
     statsGuests: "Gäste",
     statsBedrooms: "Schlafzimmer",
     statsBathrooms: "Badezimmer",
@@ -585,6 +802,105 @@ const de: Dict = {
   language: {
     label: "Sprache",
   },
+  content: {
+    amenities: {
+      guests: "Bis zu 11 Personen",
+      bedrooms: "5 Schlafzimmer",
+      bathrooms: "2 Badezimmer",
+      pool: "Privater Pool",
+      view: "180° Blick",
+      balcony: "Balkon im Wind",
+      location: "Cas Grandi, nahe Jan Thiel",
+      parking: "Eigener Parkplatz",
+      wifi: "Schnelles WLAN",
+      kitchen: "Voll ausgestattete Küche",
+      bbq: "BBQ",
+      ac: "Klimaanlage in allen Schlafzimmern",
+      laundry: "Waschmaschine",
+      groups: "Für Familien & Gruppen",
+    },
+    rooms: {
+      bedrooms: {
+        title: "Schlafzimmer",
+        points: [
+          "5 Schlafzimmer, Platz für insgesamt bis zu 11 Personen",
+          "4 Schlafzimmer mit zwei Einzelbetten, getrennt oder zusammengeschoben als Doppelbett",
+          "5. Schlafzimmer mit Etagenbett und zusätzlichem Einzelbett, ideal für Kinder",
+          "Klimaanlage in jedem Schlafzimmer",
+        ],
+      },
+      bathrooms: {
+        title: "Badezimmer",
+        points: [
+          "2 Badezimmer insgesamt, beide mit Dusche, WC und zwei Waschbecken",
+          "Plus ein separates WC oben, praktisch für größere Gruppen",
+        ],
+      },
+      living: {
+        title: "Wohnzimmer",
+        points: [
+          "Gemütliches Wohnzimmer mit einem Sofa, das alle aufnimmt",
+          "Smart-TV, um eigene Serien und Filme zu streamen",
+        ],
+      },
+      kitchen: {
+        title: "Küche",
+        points: [
+          "Voll ausgestattete Küche für die ganze Gruppe",
+          "Kühlschrank mit Eiswürfelmaschine, Spülmaschine, Ofen und Mikrowelle",
+          "Nespresso und Filterkaffee, Mixer, Sandwichmaker, Toaster",
+        ],
+      },
+    },
+    outdoor: [
+      "Privater Pool mit Liegen und Sitzgelegenheiten",
+      "180° Blick über das Spaanse Water und den Tafelberg",
+      "Großzügiger Balkon im Wind, ideal für Frühstück oder Aperitif",
+      "BBQ für Abende zu Hause",
+      "Außenbeleuchtung für lange Abende draußen",
+    ],
+    audiences: {
+      families: {
+        title: "Familien",
+        text: "Genug Schlafzimmer, ein eigener Pool und ein Haus, das sich wie eine gemeinsame Basis anfühlt. Auch mit Oma und Opa bleibt genug Platz.",
+      },
+      friends: {
+        title: "Freundesgruppen",
+        text: "Zusammen kochen, trinken und schwimmen, ohne Hotel-Trubel und ohne geteilte Räume mit Fremden.",
+      },
+      divers: {
+        title: "Tauch- und Schnorchelgruppen",
+        text: "Gute Basis mit Platz für die Ausrüstung. Unsere Gäste bekommen 10% Rabatt auf Tauchgänge bei Scuba Do Curaçao.",
+      },
+      celebration: {
+        title: "Etwas zu feiern",
+        text: "Geburtstag, Jubiläum oder eine besondere Reise mit der ganzen Familie. Alle unter einem Dach, ohne dass es eng wird.",
+      },
+    },
+    pricing: {
+      bullets: [
+        "Ab 275 € pro Nacht (4 Personen)",
+        "25 € pro zusätzlicher Person pro Nacht",
+        "7% Steuer",
+        "195 € Endreinigung",
+        "500 € Kaution / Vorschuss für Wasser und Strom",
+      ],
+      notes:
+        "Die Kaution von 500 € ist ein Vorschuss für Wasser und Strom und wird am Ende des Aufenthalts mit euch verrechnet.",
+    },
+    galleryTags: {
+      Drone: "Drohne",
+      Zwembad: "Pool",
+      Balkon: "Balkon",
+      Woonkamer: "Wohnzimmer",
+      Keuken: "Küche",
+      Slaapkamer: "Schlafzimmer",
+      Badkamer: "Badezimmer",
+      Avond: "Abend",
+      Tuin: "Garten",
+      BBQ: "BBQ",
+    },
+  },
 };
 
 const es: Dict = {
@@ -612,7 +928,7 @@ const es: Dict = {
     eyebrow: "Curazao · Cas Grandi · Aguas Españolas",
     locationCountry: "Curazao",
     locationWater: "Aguas Españolas",
-    titlePre: "Bon Bini a",
+    titlePre: "Bon Bini na",
     titleHighlight: "Villa Sandemarie",
     titlePost: "",
     lead: "Vuestra casa en Curazao. Una villa de vacaciones amplia y acogedora para familias y grupos de amigos hasta 11 personas, con piscina privada y vistas al Spaanse Water.",
@@ -621,7 +937,7 @@ const es: Dict = {
     eyebrow: "La villa",
     titlePre: "Vuestra casa en la isla,",
     titleHighlight: "espacio para todos",
-    body: "Villa Sandemarie es una villa amplia e independiente en Cas Grandi, cerca de Jan Thiel. Cinco habitaciones, tres baños, una sala generosa y un balcón al viento, hay sitio de sobra para aterrizar todos juntos. Fuera os esperan la piscina privada, las tumbonas y las vistas al Spaanse Water.",
+    body: "Villa Sandemarie es una villa amplia e independiente en Cas Grandi, cerca de Jan Thiel. Cinco habitaciones, dos baños, una sala generosa y un balcón al viento, hay sitio de sobra para aterrizar todos juntos. Fuera os esperan la piscina privada, las tumbonas y las vistas al Spaanse Water.",
     statsGuests: "Personas",
     statsBedrooms: "Habitaciones",
     statsBathrooms: "Baños",
@@ -731,6 +1047,105 @@ const es: Dict = {
   },
   language: {
     label: "Idioma",
+  },
+  content: {
+    amenities: {
+      guests: "Hasta 11 personas",
+      bedrooms: "5 habitaciones",
+      bathrooms: "2 baños",
+      pool: "Piscina privada",
+      view: "Vista de 180°",
+      balcony: "Balcón al viento",
+      location: "Cas Grandi, cerca de Jan Thiel",
+      parking: "Aparcamiento privado",
+      wifi: "Wifi rápido",
+      kitchen: "Cocina totalmente equipada",
+      bbq: "Barbacoa",
+      ac: "Aire acondicionado en todas las habitaciones",
+      laundry: "Lavadora",
+      groups: "Para familias y grupos",
+    },
+    rooms: {
+      bedrooms: {
+        title: "Habitaciones",
+        points: [
+          "5 habitaciones, sitio para hasta 11 personas",
+          "4 habitaciones con dos camas individuales, separadas o juntas como cama doble",
+          "5ª habitación con litera y cama individual extra, ideal para los peques",
+          "Aire acondicionado en cada habitación",
+        ],
+      },
+      bathrooms: {
+        title: "Baños",
+        points: [
+          "2 baños en total, ambos con ducha, inodoro y dos lavabos",
+          "Más un aseo separado arriba, práctico con un grupo grande",
+        ],
+      },
+      living: {
+        title: "Salón",
+        points: [
+          "Salón acogedor con un sofá donde cabe todo el mundo",
+          "Smart TV para ver tus propias series y películas",
+        ],
+      },
+      kitchen: {
+        title: "Cocina",
+        points: [
+          "Cocina totalmente equipada para todo el grupo",
+          "Nevera con máquina de hielo, lavavajillas, horno y microondas",
+          "Nespresso y café de filtro, batidora, sandwichera y tostadora",
+        ],
+      },
+    },
+    outdoor: [
+      "Piscina privada con tumbonas y zona de descanso",
+      "Vista de 180° sobre el Spaanse Water y el Tafelberg",
+      "Amplio balcón al viento, perfecto para desayunar o tomar algo",
+      "Barbacoa para las noches en casa",
+      "Iluminación exterior para largas noches al aire libre",
+    ],
+    audiences: {
+      families: {
+        title: "Familias",
+        text: "Habitaciones de sobra, piscina propia y una casa que se siente como una base común. También con los abuelos sigue habiendo espacio.",
+      },
+      friends: {
+        title: "Grupos de amigos",
+        text: "Cocinar, tomar algo y nadar juntos, sin líos de hotel y sin compartir zonas con desconocidos.",
+      },
+      divers: {
+        title: "Grupos de buceo y snorkel",
+        text: "Buena base con sitio para el equipo. Nuestros huéspedes tienen 10% de descuento en buceo con Scuba Do Curaçao.",
+      },
+      celebration: {
+        title: "Algo que celebrar",
+        text: "Cumpleaños, aniversario o un viaje especial con toda la familia. Todos bajo el mismo techo, sin agobios.",
+      },
+    },
+    pricing: {
+      bullets: [
+        "Desde 275 € por noche (4 personas)",
+        "25 € por persona extra por noche",
+        "7% de impuestos",
+        "195 € de limpieza",
+        "500 € de fianza / adelanto para agua y electricidad",
+      ],
+      notes:
+        "La fianza de 500 € es un adelanto para agua y electricidad y se ajusta al final de la estancia.",
+    },
+    galleryTags: {
+      Drone: "Dron",
+      Zwembad: "Piscina",
+      Balkon: "Balcón",
+      Woonkamer: "Salón",
+      Keuken: "Cocina",
+      Slaapkamer: "Habitación",
+      Badkamer: "Baño",
+      Avond: "Noche",
+      Tuin: "Jardín",
+      BBQ: "Barbacoa",
+    },
   },
 };
 

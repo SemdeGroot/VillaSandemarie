@@ -41,24 +41,29 @@ export function Audiences() {
         </Reveal>
 
         <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
-          {villa.audiences.map((a, i) => (
-            <Reveal
-              as="article"
-              delay={80 + i * 60}
-              key={a.title}
-              className="group relative overflow-hidden rounded-2xl border border-line bg-background p-5 transition hover:bg-white sm:p-6"
-            >
-              <span className="font-display text-xs tracking-widest text-warm/70">
-                0{i + 1}
-              </span>
-              <h3 className="font-display mt-2 text-xl text-primary sm:text-2xl">
-                {a.title}
-              </h3>
-              <p className="mt-2 text-[14.5px] leading-6 text-primary/72 sm:text-[15px] sm:leading-7">
-                {a.text}
-              </p>
-            </Reveal>
-          ))}
+          {villa.audiences.map((a, i) => {
+            const localized = t.content.audiences[a.id];
+            const title = localized?.title ?? a.title;
+            const text = localized?.text ?? a.text;
+            return (
+              <Reveal
+                as="article"
+                delay={80 + i * 60}
+                key={a.id}
+                className="group relative overflow-hidden rounded-2xl border border-line bg-background p-5 transition hover:bg-white sm:p-6"
+              >
+                <span className="font-display text-xs tracking-widest text-warm/70">
+                  0{i + 1}
+                </span>
+                <h3 className="font-display mt-2 text-xl text-primary sm:text-2xl">
+                  {title}
+                </h3>
+                <p className="mt-2 text-[14.5px] leading-6 text-primary/72 sm:text-[15px] sm:leading-7">
+                  {text}
+                </p>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </Section>

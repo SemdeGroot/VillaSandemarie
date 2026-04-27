@@ -1,11 +1,16 @@
 import { Mail, MessageCircle, Phone } from "lucide-react";
-import { Display, Eyebrow, Section } from "@/components/ui/section";
+import { Section } from "@/components/ui/section";
 import { LinkButton } from "@/components/ui/button";
-import { villa } from "@/lib/villa";
 import { site } from "@/lib/site";
 import { fetchAvailability } from "@/lib/availability";
 import { InquiryForm } from "./InquiryForm";
-import { BookingHeader, ContactStrip, PricingHeading } from "./BookingClient";
+import {
+  BookingHeader,
+  ContactStrip,
+  PricingBullets,
+  PricingHeading,
+  PricingNotes,
+} from "./BookingClient";
 
 export async function Booking() {
   const data = await fetchAvailability();
@@ -39,26 +44,8 @@ export async function Booking() {
             }}
           >
             <PricingHeading />
-            <ul
-              className="mt-4 space-y-2 text-[15px] leading-7"
-              style={{ color: "rgba(250,248,243,0.88)" }}
-            >
-              {villa.pricing.bullets.map((b) => (
-                <li key={b} className="flex items-start gap-3">
-                  <span
-                    className="mt-[0.7rem] h-1.5 w-1.5 shrink-0 rounded-full"
-                    style={{ backgroundColor: "#fee7a9" }}
-                  />
-                  {b}
-                </li>
-              ))}
-            </ul>
-            <p
-              className="mt-5 text-xs leading-6"
-              style={{ color: "rgba(250,248,243,0.6)" }}
-            >
-              {villa.pricing.notes}
-            </p>
+            <PricingBullets />
+            <PricingNotes />
           </div>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">

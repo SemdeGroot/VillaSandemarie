@@ -42,19 +42,22 @@ export function Outdoor() {
         </Reveal>
 
         <Reveal delay={120} as="div" className="grid gap-3 self-end">
-          {villa.outdoor.points.map((point, i) => (
-            <div
-              key={point}
-              className="flex items-start gap-5 rounded-2xl border border-white/12 bg-white/5 p-4 backdrop-blur-md sm:p-5"
-            >
-              <span className="font-display text-2xl text-[#fee7a9] sm:text-3xl">
-                0{i + 1}
-              </span>
-              <span className="text-[14.5px] leading-6 text-white/90 sm:text-[15px] sm:leading-7">
-                {point}
-              </span>
-            </div>
-          ))}
+          {villa.outdoor.points.map((fallback, i) => {
+            const point = t.content.outdoor[i] ?? fallback;
+            return (
+              <div
+                key={point}
+                className="flex items-start gap-5 rounded-2xl border border-white/12 bg-white/5 p-4 backdrop-blur-md sm:p-5"
+              >
+                <span className="font-display text-2xl text-[#fee7a9] sm:text-3xl">
+                  0{i + 1}
+                </span>
+                <span className="text-[14.5px] leading-6 text-white/90 sm:text-[15px] sm:leading-7">
+                  {point}
+                </span>
+              </div>
+            );
+          })}
         </Reveal>
       </div>
     </Section>

@@ -5,9 +5,11 @@ import { Display, Eyebrow, Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/Reveal";
 import { villaGallery, type GalleryImage } from "@/lib/gallery";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
+import type { Dict } from "@/lib/i18n/dictionary";
 
 export function Gallery() {
   const { t } = useLocale();
+  const tagMap = t.content.galleryTags;
   const items = villaGallery;
   const featured = items[0];
   const secondary = items[1];
@@ -34,7 +36,11 @@ export function Gallery() {
             delay={0}
             className="relative col-span-12 aspect-[16/10] overflow-hidden rounded-3xl shadow-soft md:col-span-7 md:aspect-[5/4]"
           >
-            <FigureImage img={featured} sizes="(max-width: 768px) 100vw, 55vw" />
+            <FigureImage
+              img={featured}
+              sizes="(max-width: 768px) 100vw, 55vw"
+              tagMap={tagMap}
+            />
           </Reveal>
         )}
         {secondary && (
@@ -43,7 +49,11 @@ export function Gallery() {
             delay={90}
             className="relative col-span-12 aspect-[5/4] overflow-hidden rounded-3xl shadow-soft md:col-span-5 md:aspect-[5/4]"
           >
-            <FigureImage img={secondary} sizes="(max-width: 768px) 100vw, 40vw" />
+            <FigureImage
+              img={secondary}
+              sizes="(max-width: 768px) 100vw, 40vw"
+              tagMap={tagMap}
+            />
           </Reveal>
         )}
       </div>
@@ -56,7 +66,12 @@ export function Gallery() {
             delay={120 + i * 70}
             className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-soft"
           >
-            <FigureImage img={img} sizes="(max-width: 768px) 50vw, 22vw" small />
+            <FigureImage
+              img={img}
+              sizes="(max-width: 768px) 50vw, 22vw"
+              small
+              tagMap={tagMap}
+            />
           </Reveal>
         ))}
       </div>
@@ -68,11 +83,14 @@ function FigureImage({
   img,
   sizes,
   small,
+  tagMap,
 }: {
   img: GalleryImage;
   sizes: string;
   small?: boolean;
+  tagMap: Dict["content"]["galleryTags"];
 }) {
+  const tagLabel = img.tag ? tagMap[img.tag] ?? img.tag : null;
   return (
     <>
       <Image
@@ -82,7 +100,7 @@ function FigureImage({
         sizes={sizes}
         className="object-cover transition duration-700 hover:scale-[1.04]"
       />
-      {img.tag && (
+      {tagLabel && (
         <figcaption
           className={
             small
@@ -90,7 +108,7 @@ function FigureImage({
               : "absolute left-5 top-5 inline-flex items-center gap-2 rounded-full bg-paper/90 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-primary"
           }
         >
-          {img.tag}
+          {tagLabel}
         </figcaption>
       )}
     </>

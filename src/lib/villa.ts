@@ -1,37 +1,57 @@
+export type AmenityId =
+  | "guests"
+  | "bedrooms"
+  | "bathrooms"
+  | "pool"
+  | "view"
+  | "balcony"
+  | "location"
+  | "parking"
+  | "wifi"
+  | "kitchen"
+  | "bbq"
+  | "ac"
+  | "laundry"
+  | "groups";
+
+export type RoomId = "bedrooms" | "bathrooms" | "living" | "kitchen";
+export type AudienceId = "families" | "friends" | "divers" | "celebration";
+
 export const villa = {
   facts: {
     maxGuests: 11,
     bedrooms: 5,
-    bathrooms: 3,
+    bathrooms: 2,
     privatePool: true,
     view: "Spaanse Water & Tafelberg",
   },
   highlights: [
     "Tot 11 gasten",
     "5 slaapkamers",
-    "3 badkamers",
+    "2 badkamers",
     "Privézwembad",
     "180° uitzicht over het Spaanse Water",
     "Cas Grandi, vlak bij Jan Thiel",
   ],
   amenities: [
-    { icon: "Users", label: "Tot 11 personen" },
-    { icon: "BedDouble", label: "5 slaapkamers" },
-    { icon: "Bath", label: "3 badkamers" },
-    { icon: "Waves", label: "Privézwembad" },
-    { icon: "Mountain", label: "180° uitzicht" },
-    { icon: "Wind", label: "Balkon op de wind" },
-    { icon: "MapPin", label: "Cas Grandi, vlak bij Jan Thiel" },
-    { icon: "Car", label: "Eigen parkeerplek" },
-    { icon: "Wifi", label: "Snelle wifi" },
-    { icon: "ChefHat", label: "Volledig uitgeruste keuken" },
-    { icon: "Flame", label: "BBQ" },
-    { icon: "Snowflake", label: "Airco in alle slaapkamers" },
-    { icon: "WashingMachine", label: "Wasmachine" },
-    { icon: "HeartHandshake", label: "Voor families & groepen" },
+    { id: "guests" as AmenityId, icon: "Users", label: "Tot 11 personen" },
+    { id: "bedrooms" as AmenityId, icon: "BedDouble", label: "5 slaapkamers" },
+    { id: "bathrooms" as AmenityId, icon: "Bath", label: "2 badkamers" },
+    { id: "pool" as AmenityId, icon: "Waves", label: "Privézwembad" },
+    { id: "view" as AmenityId, icon: "Mountain", label: "180° uitzicht" },
+    { id: "balcony" as AmenityId, icon: "Wind", label: "Balkon op de wind" },
+    { id: "location" as AmenityId, icon: "MapPin", label: "Cas Grandi, vlak bij Jan Thiel" },
+    { id: "parking" as AmenityId, icon: "Car", label: "Eigen parkeerplek" },
+    { id: "wifi" as AmenityId, icon: "Wifi", label: "Snelle wifi" },
+    { id: "kitchen" as AmenityId, icon: "ChefHat", label: "Volledig uitgeruste keuken" },
+    { id: "bbq" as AmenityId, icon: "Flame", label: "BBQ" },
+    { id: "ac" as AmenityId, icon: "Snowflake", label: "Airco in alle slaapkamers" },
+    { id: "laundry" as AmenityId, icon: "WashingMachine", label: "Wasmachine" },
+    { id: "groups" as AmenityId, icon: "HeartHandshake", label: "Voor families & groepen" },
   ],
   rooms: [
     {
+      id: "bedrooms" as RoomId,
       title: "Slaapkamers",
       points: [
         "5 slaapkamers, samen plek voor maximaal 11 personen",
@@ -41,13 +61,15 @@ export const villa = {
       ],
     },
     {
+      id: "bathrooms" as RoomId,
       title: "Badkamers",
       points: [
-        "3 badkamers in totaal: 2 met douche, toilet en twee wastafels",
+        "2 badkamers in totaal, beide met douche, toilet en twee wastafels",
         "Plus een apart toilet boven, fijn met een grote groep",
       ],
     },
     {
+      id: "living" as RoomId,
       title: "Woonkamer",
       points: [
         "Gezellige woonkamer met een lekkere bank waar iedereen op past",
@@ -55,6 +77,7 @@ export const villa = {
       ],
     },
     {
+      id: "kitchen" as RoomId,
       title: "Keuken",
       points: [
         "Volledig uitgeruste keuken voor de hele groep",
@@ -76,18 +99,22 @@ export const villa = {
   },
   audiences: [
     {
+      id: "families" as AudienceId,
       title: "Families",
       text: "Genoeg slaapkamers, een eigen zwembad en een huis dat aanvoelt als gezamenlijke thuisbasis. Ook met opa en oma erbij blijft het ruim.",
     },
     {
+      id: "friends" as AudienceId,
       title: "Vriendengroepen",
       text: "Samen koken, borrelen en zwemmen, zonder hotelgedoe en zonder gedeelde ruimtes met onbekenden.",
     },
     {
+      id: "divers" as AudienceId,
       title: "Duik- en snorkelgroepen",
       text: "Goede uitvalsbasis met ruimte voor je spullen. Voor onze gasten regelen we 10% korting bij Scuba Do Curaçao.",
     },
     {
+      id: "celebration" as AudienceId,
       title: "Iets te vieren",
       text: "Verjaardag, jubileum of een bijzondere trip met de hele familie. Iedereen onder één dak, zonder dat het hokkerig wordt.",
     },

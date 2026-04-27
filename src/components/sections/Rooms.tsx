@@ -8,19 +8,19 @@ import { villa } from "@/lib/villa";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 
 const roomMedia: Record<string, { src: string; alt: string }> = {
-  Slaapkamers: {
+  bedrooms: {
     src: "/media/villa/bedroom-master-l.webp",
     alt: "Slaapkamer met twee bedden en airco",
   },
-  Badkamers: {
+  bathrooms: {
     src: "/media/villa/bathroom.webp",
     alt: "Badkamer met inloopdouche",
   },
-  Woonkamer: {
+  living: {
     src: "/media/villa/living-room-2.webp",
     alt: "Woonkamer met bank en smart-tv",
   },
-  Keuken: {
+  kitchen: {
     src: "/media/villa/kitchen-2.webp",
     alt: "Volledig uitgeruste keuken",
   },
@@ -42,12 +42,15 @@ export function Rooms() {
 
       <div className="mt-10 grid gap-5 sm:gap-7 lg:grid-cols-2 lg:gap-x-10 lg:gap-y-12">
         {villa.rooms.map((room, i) => {
-          const media = roomMedia[room.title];
+          const media = roomMedia[room.id];
+          const localized = t.content.rooms[room.id];
+          const title = localized?.title ?? room.title;
+          const points = localized?.points ?? room.points;
           return (
             <Reveal
               as="article"
               delay={80 + i * 60}
-              key={room.title}
+              key={room.id}
               className="group relative flex flex-col overflow-hidden rounded-3xl border border-line bg-background shadow-soft sm:flex-row"
             >
               {media && (
@@ -63,10 +66,10 @@ export function Rooms() {
               )}
               <div className="flex flex-1 flex-col justify-start space-y-3 px-5 py-5 sm:px-7 sm:py-8">
                 <h3 className="font-display text-2xl text-primary sm:text-3xl">
-                  {room.title}
+                  {title}
                 </h3>
                 <ul className="space-y-2 text-[14px] leading-6 text-primary/78">
-                  {room.points.map((point) => (
+                  {points.map((point) => (
                     <li key={point} className="flex gap-3">
                       <Check
                         size={15}

@@ -19,16 +19,38 @@ export function Hero() {
     v.playsInline = true;
     v.setAttribute("webkit-playsinline", "true");
     v.setAttribute("playsinline", "true");
+    v.setAttribute("muted", "");
+    v.setAttribute("autoplay", "");
 
     const tryPlay = () => {
+      if (!v.paused) return;
       const p = v.play();
       if (p && typeof p.then === "function") {
         p.catch(() => {});
       }
     };
 
+    // some mobile browsers need a kick after attribute changes
+    try {
+      v.load();
+    } catch {}
+
     tryPlay();
+    requestAnimationFrame(tryPlay);
+
+    // poll for ~3s, covers the case where autoplay is briefly deferred
+    let attempts = 0;
+    const interval = window.setInterval(() => {
+      if (!v.paused) {
+        window.clearInterval(interval);
+        return;
+      }
+      tryPlay();
+      if (++attempts > 12) window.clearInterval(interval);
+    }, 250);
+
     v.addEventListener("loadedmetadata", tryPlay);
+    v.addEventListener("loadeddata", tryPlay);
     v.addEventListener("canplay", tryPlay);
 
     const onVisibility = () => {
@@ -45,7 +67,9 @@ export function Hero() {
     window.addEventListener("click", onFirstTouch);
 
     return () => {
+      window.clearInterval(interval);
       v.removeEventListener("loadedmetadata", tryPlay);
+      v.removeEventListener("loadeddata", tryPlay);
       v.removeEventListener("canplay", tryPlay);
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("touchstart", onFirstTouch);
@@ -54,9 +78,9 @@ export function Hero() {
   }, []);
 
   const stats = [
-    { n: "11", l: t.intro.statsGuests },
-    { n: "5", l: t.intro.statsBedrooms },
-    { n: "3", l: t.intro.statsBathrooms },
+    { n: String(villa.facts.maxGuests), l: t.intro.statsGuests },
+    { n: String(villa.facts.bedrooms), l: t.intro.statsBedrooms },
+    { n: String(villa.facts.bathrooms), l: t.intro.statsBathrooms },
   ];
 
   return (

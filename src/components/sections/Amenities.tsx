@@ -60,19 +60,27 @@ export function Amenities() {
         <Reveal
           as="ul"
           delay={100}
-          className="grid grid-cols-1 gap-x-6 gap-y-1 sm:grid-cols-2"
+          className="grid grid-cols-2 gap-x-3 gap-y-1 sm:gap-x-6"
         >
-          {villa.amenities.map(({ icon, label }) => {
+          {villa.amenities.map(({ icon, id, label }) => {
             const Icon = iconMap[icon] ?? Users;
+            const translated = t.content.amenities[id] ?? label;
             return (
               <li
-                key={label}
-                className="group flex items-center gap-4 border-b border-line/70 py-3.5 text-primary"
+                key={id}
+                className="group flex items-center gap-2.5 border-b border-line/70 py-3 text-primary sm:gap-4 sm:py-3.5"
               >
-                <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line bg-paper text-warm transition group-hover:bg-highlight group-hover:text-primary">
-                  <Icon size={17} strokeWidth={1.6} />
+                <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line bg-paper text-warm transition group-hover:bg-highlight group-hover:text-primary sm:h-9 sm:w-9">
+                  <Icon size={15} strokeWidth={1.6} className="sm:hidden" />
+                  <Icon
+                    size={17}
+                    strokeWidth={1.6}
+                    className="hidden sm:block"
+                  />
                 </span>
-                <span className="text-[14.5px] leading-6">{label}</span>
+                <span className="min-w-0 text-[13px] leading-5 sm:text-[14.5px] sm:leading-6">
+                  {translated}
+                </span>
               </li>
             );
           })}
