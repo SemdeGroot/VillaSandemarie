@@ -276,7 +276,11 @@ export function InquiryForm({ blockedDates }: Props) {
 
     setStatus("submitting");
     try {
-      const res = await fetch("/", {
+      // For Next.js on Netlify, OpenNext docs say to POST to the static
+      // detection file (/__forms.html), not "/". Posts to "/" can be
+      // intercepted by the Next.js handler and never reach Netlify Forms.
+      // https://opennext.js.org/netlify/forms
+      const res = await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: body.toString(),
@@ -300,6 +304,7 @@ export function InquiryForm({ blockedDates }: Props) {
       ref={formRef}
       name="inquiry"
       method="POST"
+      action="/__forms.html"
       data-netlify="true"
       netlify-honeypot="bot-field"
       onSubmit={handleSubmit}
