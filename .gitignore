@@ -51,3 +51,4 @@ next-env.d.ts
 .codex
 CLAUDE.md
 AGENTS.md
+.claude/
