@@ -397,7 +397,7 @@ const nl: Dict = {
         "De €500 borg is een voorschot voor water en elektra en wordt aan het einde van het verblijf met je verrekend.",
     },
     galleryTags: {
-      Drone: "Drone",
+      Villa: "Villa",
       Zwembad: "Zwembad",
       Balkon: "Balkon",
       Woonkamer: "Woonkamer",
@@ -643,7 +643,7 @@ const en: Dict = {
         "The €500 deposit is an advance for water and electricity and is settled at the end of your stay.",
     },
     galleryTags: {
-      Drone: "Drone",
+      Villa: "Villa",
       Zwembad: "Pool",
       Balkon: "Balcony",
       Woonkamer: "Living room",
@@ -889,7 +889,7 @@ const de: Dict = {
         "Die Kaution von 500 € ist ein Vorschuss für Wasser und Strom und wird am Ende des Aufenthalts mit euch verrechnet.",
     },
     galleryTags: {
-      Drone: "Drohne",
+      Villa: "Villa",
       Zwembad: "Pool",
       Balkon: "Balkon",
       Woonkamer: "Wohnzimmer",
@@ -1135,7 +1135,7 @@ const es: Dict = {
         "La fianza de 500 € es un adelanto para agua y electricidad y se ajusta al final de la estancia.",
     },
     galleryTags: {
-      Drone: "Dron",
+      Villa: "Villa",
       Zwembad: "Piscina",
       Balkon: "Balcón",
       Woonkamer: "Salón",

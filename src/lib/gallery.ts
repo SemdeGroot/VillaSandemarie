@@ -11,8 +11,13 @@ export const villaGallery: GalleryImage[] = [
   {
     src: "/media/villa/villa-drone-1.webp",
     alt: "Luchtfoto van Villa Sandemarie met privézwembad en zicht op Spaanse Water",
-    tag: "Drone",
+    tag: "Villa",
     caption: "Cas Grandi · Spaanse Water",
+  },
+  {
+    src: "/media/villa/pool-day.webp",
+    alt: "Privézwembad van Villa Sandemarie in de volle zon",
+    tag: "Zwembad",
   },
   {
     src: "/media/villa/pool-loungers.webp",
@@ -57,7 +62,7 @@ export const villaGallery: GalleryImage[] = [
   {
     src: "/media/villa/villa-drone-2.webp",
     alt: "Tweede luchtfoto van de villa en het terrein",
-    tag: "Drone",
+    tag: "Villa",
   },
   {
     src: "/media/villa/garden.webp",
@@ -68,6 +73,36 @@ export const villaGallery: GalleryImage[] = [
     src: "/media/villa/bbq.webp",
     alt: "BBQ-plek voor avonden thuis",
     tag: "BBQ",
+  },
+  {
+    src: "/media/villa/living-room-2.webp",
+    alt: "Zicht op de eethoek en woonkamer",
+    tag: "Woonkamer",
+  },
+  {
+    src: "/media/villa/kitchen-2.webp",
+    alt: "Keuken met uitzicht naar buiten",
+    tag: "Keuken",
+  },
+  {
+    src: "/media/villa/pool-deck.webp",
+    alt: "Houten pooldeck met comfortabele zithoek",
+    tag: "Zwembad",
+  },
+  {
+    src: "/media/villa/balcony.webp",
+    alt: "Groot overdekt balkon met loungebank",
+    tag: "Balkon",
+  },
+  {
+    src: "/media/villa/villa-drone-3.webp",
+    alt: "Zijaanzicht van de villa met oprit en palmbomen",
+    tag: "Villa",
+  },
+  {
+    src: "/media/villa/bedroom-detail.webp",
+    alt: "Detail van de sfeervolle slaapkamer",
+    tag: "Slaapkamer",
   },
 ];
 
