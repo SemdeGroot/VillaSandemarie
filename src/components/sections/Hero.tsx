@@ -7,75 +7,55 @@ import { villa } from "@/lib/villa";
 import { site } from "@/lib/site";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 
-export function Hero() {
+/**
+ * A dedicated, memoized Video component to ensure the video element
+ * remains stable across parent re-renders (like locale changes).
+ */
+const HeroVideo = React.memo(function HeroVideo() {
   const videoRef = React.useRef<HTMLVideoElement>(null);
-  const { t } = useLocale();
 
   React.useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
+
     v.muted = true;
     v.defaultMuted = true;
-    v.playsInline = true;
-    v.setAttribute("webkit-playsinline", "true");
-    v.setAttribute("playsinline", "true");
-    v.setAttribute("muted", "");
-    v.setAttribute("autoplay", "");
-
-    const tryPlay = () => {
-      if (!v.paused) return;
-      const p = v.play();
-      if (p && typeof p.then === "function") {
-        p.catch(() => {});
-      }
-    };
-
-    // some mobile browsers need a kick after attribute changes
-    try {
-      v.load();
-    } catch {}
-
-    tryPlay();
-    requestAnimationFrame(tryPlay);
-
-    // poll for ~3s, covers the case where autoplay is briefly deferred
-    let attempts = 0;
-    const interval = window.setInterval(() => {
-      if (!v.paused) {
-        window.clearInterval(interval);
-        return;
-      }
-      tryPlay();
-      if (++attempts > 12) window.clearInterval(interval);
-    }, 250);
-
-    v.addEventListener("loadedmetadata", tryPlay);
-    v.addEventListener("loadeddata", tryPlay);
-    v.addEventListener("canplay", tryPlay);
-
-    const onVisibility = () => {
-      if (!document.hidden) tryPlay();
-    };
-    document.addEventListener("visibilitychange", onVisibility);
-
-    const onFirstTouch = () => {
-      tryPlay();
-      window.removeEventListener("touchstart", onFirstTouch);
-      window.removeEventListener("click", onFirstTouch);
-    };
-    window.addEventListener("touchstart", onFirstTouch, { passive: true });
-    window.addEventListener("click", onFirstTouch);
-
-    return () => {
-      window.clearInterval(interval);
-      v.removeEventListener("loadedmetadata", tryPlay);
-      v.removeEventListener("loadeddata", tryPlay);
-      v.removeEventListener("canplay", tryPlay);
-      document.removeEventListener("visibilitychange", onVisibility);
-      window.removeEventListener("touchstart", onFirstTouch);
-      window.removeEventListener("click", onFirstTouch);
-    };
+    v.play().catch(() => {
+      // Browsers handle muted autoplay well; if it fails, it stays paused.
+    });
   }, []);
+
+  return (
+    <div 
+      className="absolute inset-0 -z-10 overflow-hidden bg-[#0d1410]"
+      aria-hidden="true"
+    >
+      <video
+        ref={videoRef}
+        className="absolute inset-0 h-full w-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        poster="/media/villa/villa-drone-1.webp"
+        tabIndex={-1}
+        disablePictureInPicture
+        {...({
+          "webkit-playsinline": "true",
+          "x5-playsinline": "true",
+          "x5-video-player-type": "h5",
+        } as Record<string, string>)}
+      >
+        <source src="/media/home/hero-optimized.webm" type="video/webm" />
+        <source src="/media/home/hero-optimized.mp4" type="video/mp4" />
+      </video>
+    </div>
+  );
+});
+
+export function Hero() {
+  const { t } = useLocale();
 
   const stats = [
     { n: String(villa.facts.maxGuests), l: t.intro.statsGuests },
@@ -88,26 +68,7 @@ export function Hero() {
       id="top"
       className="relative isolate flex min-h-svh flex-col overflow-hidden bg-[#0d1410] text-white"
     >
-      <video
-        ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        {...({
-          "webkit-playsinline": "true",
-          "x5-playsinline": "true",
-          "x5-video-player-type": "h5",
-        } as Record<string, string>)}
-        preload="auto"
-        poster="/media/villa/villa-drone-1.webp"
-        aria-hidden="true"
-        tabIndex={-1}
-        disablePictureInPicture
-      >
-        <source src="/media/home/villa-sandemarie-hero.mp4" type="video/mp4" />
-      </video>
+      <HeroVideo />
 
       <div
         className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/55 to-black/85"
@@ -159,7 +120,10 @@ export function Hero() {
         <div className="mt-auto flex flex-col items-start justify-between gap-6 pt-10 sm:flex-row sm:items-end sm:pt-14">
           <div className="grid w-full grid-cols-3 gap-x-4 gap-y-3 sm:max-w-md sm:gap-x-6">
             {stats.map((item) => (
-              <div key={item.l} className="border-l border-white/30 pl-3 sm:pl-4">
+              <div
+                key={item.l}
+                className="border-l border-white/30 pl-3 sm:pl-4"
+              >
                 <p className="font-display text-2xl text-white sm:text-3xl">
                   {item.n}
                 </p>
@@ -170,7 +134,6 @@ export function Hero() {
             ))}
           </div>
         </div>
-        {/* villa.highlights kept for SEO crawlers */}
         <p className="sr-only">{villa.highlights.join(", ")}</p>
       </div>
     </section>
