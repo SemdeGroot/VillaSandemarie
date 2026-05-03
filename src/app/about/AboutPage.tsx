@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { Display, Eyebrow, Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/Reveal";
+import { RevealImage } from "@/components/ui/RevealImage";
 import { family, familyIntro } from "@/lib/family";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 
@@ -28,7 +28,7 @@ export function AboutPage() {
         <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
           <Reveal>
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl shadow-soft">
-              <Image
+              <RevealImage
                 src="/media/about/family-azier-curacao.webp"
                 alt="De familie Azier op Curaçao"
                 fill

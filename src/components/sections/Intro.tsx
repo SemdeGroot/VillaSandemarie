@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { RevealImage } from "@/components/ui/RevealImage";
 import { Display, Eyebrow, Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/Reveal";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
@@ -31,7 +31,7 @@ export function Intro() {
 
         <Reveal delay={120} className="grid grid-cols-6 gap-3 sm:gap-4">
           <div className="relative col-span-6 aspect-[5/4] overflow-hidden rounded-2xl shadow-soft sm:col-span-4">
-            <Image
+            <RevealImage
               src="/media/villa/villa-drone-1.webp"
               alt="Luchtfoto van Villa Sandemarie met privézwembad"
               fill
@@ -41,7 +41,7 @@ export function Intro() {
             />
           </div>
           <div className="relative col-span-3 aspect-[3/4] overflow-hidden rounded-2xl shadow-soft sm:col-span-2 sm:translate-y-6">
-            <Image
+            <RevealImage
               src="/media/villa/balcony-view.webp"
               alt="Uitzicht vanaf het balkon over Spaanse Water"
               fill
@@ -50,7 +50,7 @@ export function Intro() {
             />
           </div>
           <div className="relative col-span-3 aspect-[3/4] overflow-hidden rounded-2xl shadow-soft sm:col-span-2 sm:-translate-y-2">
-            <Image
+            <RevealImage
               src="/media/villa/pool-loungers.webp"
               alt="Zwembad met ligbedden"
               fill
@@ -59,7 +59,7 @@ export function Intro() {
             />
           </div>
           <div className="relative col-span-6 hidden aspect-[5/3] overflow-hidden rounded-2xl shadow-soft sm:col-span-4 sm:block">
-            <Image
+            <RevealImage
               src="/media/villa/living-room.webp"
               alt="Woonkamer van Villa Sandemarie met comfortabele bank"
               fill

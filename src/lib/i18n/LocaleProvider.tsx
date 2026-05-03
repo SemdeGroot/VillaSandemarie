@@ -42,7 +42,8 @@ export function LocaleProvider({
       }
     } catch {}
     if (chosen && chosen !== locale) {
-      setLocaleState(chosen);
+      const c = chosen;
+      setTimeout(() => setLocaleState(c), 0);
     } else {
       // make sure cookie is set so next SSR matches
       persistLocale(locale);

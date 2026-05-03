@@ -169,10 +169,12 @@ export function InquiryForm({ blockedDates }: Props) {
   const startMax = startOfMonth(now.getFullYear() + 2, now.getMonth());
 
   React.useEffect(() => {
-    setCheckinInput(isoToMasked(checkin));
+    const val = isoToMasked(checkin);
+    setTimeout(() => setCheckinInput(val), 0);
   }, [checkin]);
   React.useEffect(() => {
-    setCheckoutInput(isoToMasked(checkout));
+    const val = isoToMasked(checkout);
+    setTimeout(() => setCheckoutInput(val), 0);
   }, [checkout]);
 
   function shiftMonth(delta: number) {
@@ -655,7 +657,10 @@ function MonthYearPicker({
   const ref = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    if (open) setPickerYear(view.year);
+    if (open) {
+      const y = view.year;
+      setTimeout(() => setPickerYear(y), 0);
+    }
   }, [open, view.year]);
 
   React.useEffect(() => {

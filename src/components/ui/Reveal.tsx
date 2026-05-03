@@ -43,7 +43,7 @@ export function Reveal({
       typeof window === "undefined" ||
       typeof IntersectionObserver === "undefined"
     ) {
-      setVisible(true);
+      setTimeout(() => setVisible(true), 0);
       return;
     }
     const obs = new IntersectionObserver(

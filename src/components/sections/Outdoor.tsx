@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { RevealImage } from "@/components/ui/RevealImage";
 import { Display, Eyebrow, Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/Reveal";
 import { villa } from "@/lib/villa";
@@ -11,7 +11,7 @@ export function Outdoor() {
   return (
     <Section bleed className="relative overflow-hidden bg-[#0e1f15] text-white">
       <div className="absolute inset-0">
-        <Image
+        <RevealImage
           src="/media/villa/pool-evening.webp"
           alt="Privézwembad in de avond"
           fill

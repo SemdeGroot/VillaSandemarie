@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Mail, MessageCircle, Phone } from "lucide-react";
 import { site } from "@/lib/site";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
+import { Logo } from "@/components/site/Logo";
 
 type IconProps = React.SVGProps<SVGSVGElement>;
 
@@ -50,8 +51,12 @@ export function Footer() {
     <footer className="border-t border-line bg-paper text-primary">
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-10 px-5 py-14 sm:px-8 sm:gap-x-10 sm:gap-y-12 sm:py-16 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-16 lg:px-12 lg:py-20">
         <div className="col-span-2 lg:col-span-1">
-          <Link href="/" className="font-display text-3xl text-primary">
-            {site.name}
+          <Link
+            href="/"
+            className="flex items-center gap-3 font-display text-3xl text-primary"
+          >
+            <Logo className="h-10 w-10 shrink-0" />
+            <span className="mt-1">{site.name}</span>
           </Link>
           <p className="mt-4 max-w-sm text-[14px] leading-7 text-primary/72">
             {t.footer.intro}

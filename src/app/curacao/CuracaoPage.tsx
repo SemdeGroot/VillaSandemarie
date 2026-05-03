@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { RevealImage } from "@/components/ui/RevealImage";
 import { ArrowUpRight } from "lucide-react";
 import { Display, Eyebrow, Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/Reveal";
@@ -71,19 +71,20 @@ export function CuracaoPage() {
             "/media/curacao/strand-cas-abao-overhangende-takken.webp",
             "/media/curacao/duiken-freedive-silhouet.webp",
             "/media/curacao/willemstad-parasols-punda.webp",
-          ].map((src) => (
-            <div
+          ].map((src, i) => (
+            <Reveal
               key={src}
+              delay={i * 100}
               className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-soft"
             >
-              <Image
+              <RevealImage
                 src={src}
                 alt="Curaçao"
                 fill
                 sizes="(max-width: 1024px) 100vw, 33vw"
                 className="object-cover"
               />
-            </div>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -108,7 +109,7 @@ export function CuracaoPage() {
               >
                 <Reveal className={i % 2 === 1 ? "lg:order-2" : ""}>
                   <div className="relative aspect-[5/4] w-full overflow-hidden rounded-3xl shadow-soft">
-                    <Image
+                    <RevealImage
                       src={story.image}
                       alt={alt}
                       fill
@@ -160,11 +161,12 @@ export function CuracaoPage() {
           </Display>
         </Reveal>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {curacaoQuickTips.map((tip) => {
+          {curacaoQuickTips.map((tip, i) => {
             const c = getTip(tip, locale);
             return (
               <Reveal
                 key={c.title}
+                delay={i * 60}
                 className="rounded-2xl border border-line bg-paper p-5 sm:p-6"
               >
                 <p className="text-[10px] uppercase tracking-[0.22em] text-warm">
@@ -183,7 +185,7 @@ export function CuracaoPage() {
       </Section>
 
       <Section className="bg-paper py-16 sm:py-24">
-        <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <Reveal className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="max-w-xl">
             <Display as="h2" className="text-3xl sm:text-4xl">
               {FROM_VILLA_TITLE[locale] ?? FROM_VILLA_TITLE.en}
@@ -195,7 +197,7 @@ export function CuracaoPage() {
           <LinkButton href="/#beschikbaarheid" variant="primary" size="lg">
             {t.cta.planStay}
           </LinkButton>
-        </div>
+        </Reveal>
       </Section>
     </>
   );

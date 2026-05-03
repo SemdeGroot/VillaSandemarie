@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { RevealImage } from "@/components/ui/RevealImage";
 import { Check } from "lucide-react";
 import { Display, Eyebrow, Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/Reveal";
@@ -55,7 +55,7 @@ export function Rooms() {
             >
               {media && (
                 <div className="relative aspect-[5/4] w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-2/5">
-                  <Image
+                  <RevealImage
                     src={media.src}
                     alt={media.alt}
                     fill

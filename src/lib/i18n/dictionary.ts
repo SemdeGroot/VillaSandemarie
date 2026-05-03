@@ -397,7 +397,7 @@ const nl: Dict = {
         "De €500 borg is een voorschot voor water en elektra en wordt aan het einde van het verblijf met je verrekend.",
     },
     galleryTags: {
-      Villa: "Villa",
+      Drone: "Villa",
       Zwembad: "Zwembad",
       Balkon: "Balkon",
       Woonkamer: "Woonkamer",
@@ -643,7 +643,7 @@ const en: Dict = {
         "The €500 deposit is an advance for water and electricity and is settled at the end of your stay.",
     },
     galleryTags: {
-      Villa: "Villa",
+      Drone: "Villa",
       Zwembad: "Pool",
       Balkon: "Balcony",
       Woonkamer: "Living room",
@@ -800,7 +800,7 @@ const de: Dict = {
     insiderBy: (name) => `Geschrieben von ${name}`,
   },
   language: {
-    label: "Sprache",
+    label: "Taal",
   },
   content: {
     amenities: {
@@ -889,7 +889,7 @@ const de: Dict = {
         "Die Kaution von 500 € ist ein Vorschuss für Wasser und Strom und wird am Ende des Aufenthalts mit euch verrechnet.",
     },
     galleryTags: {
-      Villa: "Villa",
+      Drone: "Villa",
       Zwembad: "Pool",
       Balkon: "Balkon",
       Woonkamer: "Wohnzimmer",
@@ -945,7 +945,7 @@ const es: Dict = {
   amenities: {
     eyebrow: "Servicios",
     title: "Todo lo que necesitas, nada que sobre",
-    body: "Hemos preparado la villa como nos gusta estar a nosotros de vacaciones: cómoda, relajada y bien pensada. Una buena cocina, aire acondicionado en cada habitación, wifi rápido y tumbonas que no querrás dejar.",
+    body: "Hemos preparado la villa como nos gusta estar a nosotros de vacaciones: cómoda, relajada y bien pensada. Una buena cocina, aire acondicionado en cada habitación, wifi rápido—y tumbonas que no querrás dejar.",
   },
   rooms: {
     eyebrow: "Distribución y habitaciones",
@@ -996,7 +996,7 @@ const es: Dict = {
     formCheckinHint: "Ej. 12-07-2026",
     formCheckoutHint: "Ej. 19-07-2026",
     formGuests: "Número de personas",
-    formName: "Nombre",
+    formName: "Name",
     formEmail: "Email",
     formPhone: "Teléfono / WhatsApp",
     formMessage: "Mensaje (opcional)",
@@ -1018,7 +1018,7 @@ const es: Dict = {
   },
   footer: {
     explore: "Explorar",
-    contact: "Contacto",
+    contact: "Contact",
     whatsapp: "WhatsApp",
     chatNl: "Chatea en neerlandés",
     chatEn: "Chat in English",
@@ -1042,7 +1042,7 @@ const es: Dict = {
     titleHighlight: "como la conocemos",
     lead: "Curazao no es para nosotros un destino, es nuestra casa. Compartimos con gusto los sitios donde vamos.",
     storiesHeading: "Nuestras historias",
-    quickTipsHeading: "Práctico",
+    quickTipsHeading: "Praktisch",
     insiderBy: (name) => `Escrito por ${name}`,
   },
   language: {
@@ -1107,7 +1107,7 @@ const es: Dict = {
     ],
     audiences: {
       families: {
-        title: "Familias",
+        title: "Families",
         text: "Habitaciones de sobra, piscina propia y una casa que se siente como una base común. También con los abuelos sigue habiendo espacio.",
       },
       friends: {
@@ -1135,7 +1135,7 @@ const es: Dict = {
         "La fianza de 500 € es un adelanto para agua y electricidad y se ajusta al final de la estancia.",
     },
     galleryTags: {
-      Villa: "Villa",
+      Drone: "Villa",
       Zwembad: "Piscina",
       Balkon: "Balcón",
       Woonkamer: "Salón",

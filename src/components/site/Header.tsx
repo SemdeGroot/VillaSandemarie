@@ -8,6 +8,7 @@ import { LinkButton } from "@/components/ui/button";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { cn } from "@/lib/utils";
+import { Logo } from "./Logo";
 
 type Props = {
   variant?: "transparent" | "solid";
@@ -71,12 +72,13 @@ export function Header({ variant = "transparent" }: Props) {
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-8 sm:py-3.5 lg:px-12">
           <Link
             href="/"
-            className="header-logo font-display text-[1.2rem] font-semibold tracking-tight sm:text-xl lg:transition-colors"
+            className="header-logo flex items-center gap-2 font-display text-[1.15rem] font-semibold tracking-tight sm:gap-2.5 sm:text-xl lg:transition-colors"
             style={{ color: desktopSolid ? "#2d4829" : "#ffffff" }}
             aria-label={`${site.name} home`}
             onClick={() => setOpen(false)}
           >
-            {site.name}
+            <Logo className="h-8 w-8 shrink-0 sm:h-9 sm:w-9" />
+            <span className="mt-0.5">{site.name}</span>
           </Link>
 
           <nav
