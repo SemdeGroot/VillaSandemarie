@@ -13,7 +13,7 @@ export function Gallery() {
   const items = villaGallery;
   const featured = items[0];
   const secondary = items[1];
-  const thumbs = items.slice(2, 10);
+  const thumbs = items.slice(2, 12);
 
   return (
     <Section className="bg-background py-16 sm:py-24 lg:py-28">
@@ -64,11 +64,19 @@ export function Gallery() {
             as="figure"
             key={img.src}
             delay={120 + i * 70}
-            className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-soft"
+            className={`relative overflow-hidden rounded-2xl shadow-soft ${
+              img.wide
+                ? "col-span-2 aspect-[16/10] md:col-span-2"
+                : "aspect-[4/5]"
+            }`}
           >
             <FigureImage
               img={img}
-              sizes="(max-width: 768px) 50vw, 22vw"
+              sizes={
+                img.wide
+                  ? "(max-width: 768px) 100vw, 48vw"
+                  : "(max-width: 768px) 50vw, 22vw"
+              }
               small
               tagMap={tagMap}
             />

@@ -1,9 +1,10 @@
 "use client";
 
-import { RevealImage } from "@/components/ui/RevealImage";
+import Image from "next/image";
 import { Check } from "lucide-react";
 import { Display, Eyebrow, Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/Reveal";
+import { RevealImage } from "@/components/ui/RevealImage";
 import { villa } from "@/lib/villa";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 
@@ -50,11 +51,12 @@ export function Rooms() {
             <Reveal
               as="article"
               delay={80 + i * 60}
+              threshold={0.12}
               key={room.id}
               className="group relative flex flex-col overflow-hidden rounded-3xl border border-line bg-background shadow-soft sm:flex-row"
             >
               {media && (
-                <div className="relative aspect-[5/4] w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-2/5">
+                <div className="relative aspect-[5/4] w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-[45%]">
                   <RevealImage
                     src={media.src}
                     alt={media.alt}

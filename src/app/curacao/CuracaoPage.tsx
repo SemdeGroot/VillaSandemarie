@@ -30,9 +30,9 @@ const FROM_VILLA_TITLE: Record<string, string> = {
 
 const FROM_VILLA_BODY: Record<string, string> = {
   nl: "Cas Grandi ligt vlak bij Jan Thiel en het Spaanse Water. Eigen parkeerplek, auto aanbevolen.",
-  en: "Cas Grandi sits right next to Jan Thiel and the Spaanse Water. Own parking spot, car recommended.",
-  de: "Cas Grandi liegt direkt neben Jan Thiel und dem Spaanse Water. Eigener Parkplatz, Auto empfohlen.",
-  es: "Cas Grandi está al lado de Jan Thiel y del Spaanse Water. Aparcamiento propio, recomendamos coche.",
+  en: "Cas Grandi sits right next to Jan Thiel and Spanish Water. Own parking spot, car recommended.",
+  de: "Cas Grandi liegt direkt neben Jan Thiel und dem Spanischen Wasser. Eigener Parkplatz, Auto empfohlen.",
+  es: "Cas Grandi está al lado de Jan Thiel y de Aguas Españolas. Aparcamiento propio, recomendamos coche.",
 };
 
 export function CuracaoPage() {
@@ -71,22 +71,21 @@ export function CuracaoPage() {
             "/media/curacao/strand-cas-abao-overhangende-takken.webp",
             "/media/curacao/duiken-freedive-silhouet.webp",
             "/media/curacao/willemstad-parasols-punda.webp",
-          ].map((src, i) => (
+          ].map((src) => (
             <Reveal
               key={src}
-              delay={i * 100}
               className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-soft"
             >
               <RevealImage
                 src={src}
                 alt="Curaçao"
                 fill
+                priority
                 sizes="(max-width: 1024px) 100vw, 33vw"
                 className="object-cover"
               />
             </Reveal>
-          ))}
-        </div>
+          ))}        </div>
       </Section>
 
       <Section className="border-t border-line bg-paper py-16 sm:py-24">

@@ -3,6 +3,7 @@ export type GalleryImage = {
   alt: string;
   caption?: string;
   tag?: string;
+  wide?: boolean;
 };
 
 export const heroPoster = "/media/villa/villa-drone-1.webp";
@@ -11,13 +12,11 @@ export const villaGallery: GalleryImage[] = [
   {
     src: "/media/villa/villa-drone-1.webp",
     alt: "Luchtfoto van Villa Sandemarie met privézwembad en zicht op Spaanse Water",
-    tag: "Villa",
     caption: "Cas Grandi · Spaanse Water",
   },
   {
-    src: "/media/villa/pool-loungers.webp",
-    alt: "Privézwembad van Villa Sandemarie met ligbedden",
-    tag: "Zwembad",
+    src: "/media/villa/pool-evening.webp",
+    alt: "Zwembad in de avond, sfeerverlichting",
   },
   {
     src: "/media/villa/balcony-view.webp",
@@ -35,6 +34,17 @@ export const villaGallery: GalleryImage[] = [
     tag: "Keuken",
   },
   {
+    src: "/media/villa/bathroom.webp",
+    alt: "Badkamer met inloopdouche en twee wastafels",
+    tag: "Badkamer",
+  },
+  {
+    src: "/media/villa/bbq.webp",
+    alt: "BBQ-plek voor avonden thuis",
+    tag: "BBQ",
+    wide: true,
+  },
+  {
     src: "/media/villa/bedroom-master-l.webp",
     alt: "Slaapkamer met twee 1-persoonsbedden en airco",
     tag: "Slaapkamer",
@@ -43,31 +53,6 @@ export const villaGallery: GalleryImage[] = [
     src: "/media/villa/bedroom-master-r.webp",
     alt: "Tweede slaapkamer met houten plafond en airco",
     tag: "Slaapkamer",
-  },
-  {
-    src: "/media/villa/bathroom.webp",
-    alt: "Badkamer met inloopdouche en twee wastafels",
-    tag: "Badkamer",
-  },
-  {
-    src: "/media/villa/pool-evening.webp",
-    alt: "Zwembad in de avond, sfeerverlichting",
-    tag: "Avond",
-  },
-  {
-    src: "/media/villa/villa-drone-2.webp",
-    alt: "Tweede luchtfoto van de villa en het terrein",
-    tag: "Villa",
-  },
-  {
-    src: "/media/villa/garden.webp",
-    alt: "Tuin en buitenruimte van de villa",
-    tag: "Tuin",
-  },
-  {
-    src: "/media/villa/bbq.webp",
-    alt: "BBQ-plek voor avonden thuis",
-    tag: "BBQ",
   },
 ];
 

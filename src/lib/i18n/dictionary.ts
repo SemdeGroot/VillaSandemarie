@@ -331,9 +331,9 @@ const nl: Dict = {
       bedrooms: {
         title: "Slaapkamers",
         points: [
-          "5 slaapkamers, samen plek voor maximaal 11 personen",
-          "4 slaapkamers met twee losse 1-persoonsbedden, los of tegen elkaar als 2-persoonsbed",
-          "5e slaapkamer met stapelbed en extra 1-persoonsbed, leuk voor de kids",
+          "5 slaapkamers voor maximaal 11 personen",
+          "4 kamers met flexibele 1- of 2-persoonsbedden",
+          "5e kamer met stapelbed en 1-persoonsbed",
           "Airco in elke slaapkamer",
         ],
       },
@@ -439,13 +439,13 @@ const en: Dict = {
     titlePre: "Bon Bini na",
     titleHighlight: "Villa Sandemarie",
     titlePost: "",
-    lead: "Your home on Curaçao. A spacious, easy-going holiday villa for families and groups of friends up to 11 people, with private pool and views over the Spaanse Water.",
+    lead: "Your home on Curaçao. A spacious, easy-going holiday villa for families and groups of friends up to 11 people, with private pool and views over the Spanish Water.",
   },
   intro: {
     eyebrow: "The villa",
     titlePre: "Your island home on Curaçao,",
     titleHighlight: "room for everyone",
-    body: "Villa Sandemarie is a spacious detached villa in Cas Grandi, close to Jan Thiel. Five bedrooms, two bathrooms, a generous living area and a balcony catching the trade winds, plenty of space to land together. Outside, the private pool, loungers and views across the Spaanse Water are waiting.",
+    body: "Villa Sandemarie is a spacious detached villa in Cas Grandi, close to Jan Thiel. Five bedrooms, two bathrooms, a generous living area and a balcony catching the trade winds, plenty of space to land together. Outside, the private pool, loungers and views across the Spanish Water are waiting.",
     statsGuests: "Guests",
     statsBedrooms: "Bedrooms",
     statsBathrooms: "Bathrooms",
@@ -465,7 +465,7 @@ const en: Dict = {
     titlePre: "The",
     titleHighlight: "balcony in the breeze",
     titlePost: ", the pool, the sunset",
-    body: "Most of life at Villa Sandemarie happens outside. The balcony catches the trade winds with a view across the Spaanse Water and the Tafelberg. Down by the pool you swim, read, drink, or just do absolutely nothing.",
+    body: "Most of life at Villa Sandemarie happens outside. The balcony catches the trade winds with a view across the Spanish Water and the Tafelberg. Down by the pool you swim, read, drink, or just do absolutely nothing.",
   },
   gallery: {
     eyebrow: "Gallery",
@@ -577,9 +577,9 @@ const en: Dict = {
       bedrooms: {
         title: "Bedrooms",
         points: [
-          "5 bedrooms, sleeping up to 11 people in total",
-          "4 bedrooms with two single beds, separate or pushed together as a double",
-          "5th bedroom with bunk bed plus an extra single, great for the kids",
+          "5 bedrooms sleeping up to 11 people",
+          "4 rooms with flexible twin or double setups",
+          "5th room with bunk bed and single bed",
           "AC in every bedroom",
         ],
       },
@@ -608,7 +608,7 @@ const en: Dict = {
     },
     outdoor: [
       "Private pool with loungers and seating",
-      "180° view across Spaanse Water and the Tafelberg",
+      "180° view across Spanish Water and the Tafelberg",
       "Spacious balcony in the breeze, perfect for breakfast or sundowners",
       "BBQ for evenings in",
       "Outdoor lighting for long evenings outside",
@@ -685,13 +685,13 @@ const de: Dict = {
     titlePre: "Bon Bini na",
     titleHighlight: "Villa Sandemarie",
     titlePost: "",
-    lead: "Euer Inselzuhause auf Curaçao. Eine geräumige, gemütliche Ferienvilla für Familien und Freundesgruppen bis 11 Personen, mit privatem Pool und Blick über das Spaanse Water.",
+    lead: "Euer Inselzuhause auf Curaçao. Eine geräumige, gemütliche Ferienvilla für Familien und Freundesgruppen bis 11 Personen, mit privatem Pool und Blick über das Spanische Wasser.",
   },
   intro: {
     eyebrow: "Die Villa",
     titlePre: "Euer Inselzuhause auf Curaçao,",
     titleHighlight: "Platz für alle",
-    body: "Villa Sandemarie ist eine geräumige freistehende Ferienvilla in Cas Grandi, ganz in der Nähe von Jan Thiel. 5 Schlafzimmer, 2 Badezimmer, ein gemütlicher Wohnbereich und ein Balkon im Wind, ihr habt jede Menge Platz, um zusammen anzukommen. Draußen warten der private Pool, die Liegen und der Blick auf das Spaanse Water.",
+    body: "Villa Sandemarie ist eine geräumige freistehende Ferienvilla in Cas Grandi, ganz in der Nähe von Jan Thiel. 5 Schlafzimmer, 2 Badezimmer, ein gemütlicher Wohnbereich und ein Balkon im Wind, ihr habt jede Menge Platz, um zusammen anzukommen. Draußen warten der private Pool, die Liegen und der Blick auf das Spanische Wasser.",
     statsGuests: "Gäste",
     statsBedrooms: "Schlafzimmer",
     statsBathrooms: "Badezimmer",
@@ -711,7 +711,7 @@ const de: Dict = {
     titlePre: "Der",
     titleHighlight: "Balkon im Wind",
     titlePost: ", der Pool, der Sonnenuntergang",
-    body: "In der Villa Sandemarie spielt sich das meiste draußen ab. Auf dem Balkon sitzt ihr im Wind, mit Blick auf das Spaanse Water und den Tafelberg. Unten am Pool wird geschwommen, gelesen, ein Drink genommen oder einfach gar nichts gemacht.",
+    body: "In der Villa Sandemarie spielt sich das meiste draußen ab. Auf dem Balkon sitzt ihr im Wind, mit Blick auf das Spanische Wasser und den Tafelberg. Unten am Pool wird geschwommen, gelesen, ein Drink genommen oder einfach gar nichts gemacht.",
   },
   gallery: {
     eyebrow: "Galerie",
@@ -823,9 +823,9 @@ const de: Dict = {
       bedrooms: {
         title: "Schlafzimmer",
         points: [
-          "5 Schlafzimmer, Platz für insgesamt bis zu 11 Personen",
-          "4 Schlafzimmer mit zwei Einzelbetten, getrennt oder zusammengeschoben als Doppelbett",
-          "5. Schlafzimmer mit Etagenbett und zusätzlichem Einzelbett, ideal für Kinder",
+          "5 Schlafzimmer für bis zu 11 Personen",
+          "4 Zimmer mit flexiblen Einzel- oder Doppelbetten",
+          "5. Zimmer mit Etagenbett und Einzelbett",
           "Klimaanlage in jedem Schlafzimmer",
         ],
       },
@@ -854,7 +854,7 @@ const de: Dict = {
     },
     outdoor: [
       "Privater Pool mit Liegen und Sitzgelegenheiten",
-      "180° Blick über das Spaanse Water und den Tafelberg",
+      "180° Blick über das Spanische Wasser und den Tafelberg",
       "Großzügiger Balkon im Wind, ideal für Frühstück oder Aperitif",
       "BBQ für Abende zu Hause",
       "Außenbeleuchtung für lange Abende draußen",
@@ -931,13 +931,13 @@ const es: Dict = {
     titlePre: "Bon Bini na",
     titleHighlight: "Villa Sandemarie",
     titlePost: "",
-    lead: "Vuestra casa en Curazao. Una villa de vacaciones amplia y acogedora para familias y grupos de amigos hasta 11 personas, con piscina privada y vistas al Spaanse Water.",
+    lead: "Vuestra casa en Curazao. Una villa de vacaciones amplia y acogedora para familias y grupos de amigos hasta 11 personas, con piscina privada y vistas a Aguas Españolas.",
   },
   intro: {
     eyebrow: "La villa",
     titlePre: "Vuestra casa en la isla,",
     titleHighlight: "espacio para todos",
-    body: "Villa Sandemarie es una villa amplia e independiente en Cas Grandi, cerca de Jan Thiel. Cinco habitaciones, dos baños, una sala generosa y un balcón al viento, hay sitio de sobra para aterrizar todos juntos. Fuera os esperan la piscina privada, las tumbonas y las vistas al Spaanse Water.",
+    body: "Villa Sandemarie es una villa amplia e independiente en Cas Grandi, cerca de Jan Thiel. Cinco habitaciones, dos baños, una sala generosa y un balcón al viento, hay sitio de sobra para aterrizar todos juntos. Fuera os esperan la piscina privada, las tumbonas y las vistas a Aguas Españolas.",
     statsGuests: "Personas",
     statsBedrooms: "Habitaciones",
     statsBathrooms: "Baños",
@@ -957,7 +957,7 @@ const es: Dict = {
     titlePre: "El",
     titleHighlight: "balcón al viento",
     titlePost: ", la piscina, el atardecer",
-    body: "En Villa Sandemarie casi todo pasa fuera. En el balcón sopla la brisa, con vistas al Spaanse Water y al Tafelberg. Abajo en la piscina se nada, se lee, se toma algo o no se hace absolutamente nada.",
+    body: "En Villa Sandemarie casi todo pasa fuera. En el balcón sopla la brisa, con vistas a Aguas Españolas y al Tafelberg. Abajo en la piscina se nada, se lee, se toma algo o no se hace absolutamente nada.",
   },
   gallery: {
     eyebrow: "Galería",
@@ -1069,9 +1069,9 @@ const es: Dict = {
       bedrooms: {
         title: "Habitaciones",
         points: [
-          "5 habitaciones, sitio para hasta 11 personas",
-          "4 habitaciones con dos camas individuales, separadas o juntas como cama doble",
-          "5ª habitación con litera y cama individual extra, ideal para los peques",
+          "5 habitaciones para hasta 11 personas",
+          "4 habitaciones con camas flexibles (dobles o individuales)",
+          "5ª habitación con litera y cama individual",
           "Aire acondicionado en cada habitación",
         ],
       },
@@ -1100,7 +1100,7 @@ const es: Dict = {
     },
     outdoor: [
       "Piscina privada con tumbonas y zona de descanso",
-      "Vista de 180° sobre el Spaanse Water y el Tafelberg",
+      "Vista de 180° sobre Aguas Españolas y el Tafelberg",
       "Amplio balcón al viento, perfecto para desayunar o tomar algo",
       "Barbacoa para las noches en casa",
       "Iluminación exterior para largas noches al aire libre",

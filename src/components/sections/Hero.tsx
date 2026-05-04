@@ -87,14 +87,14 @@ export function Hero() {
       </video>
 
       <div
-        className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/45 to-black/75"
+        className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/70"
         aria-hidden="true"
       />
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(120% 80% at 20% 60%, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 60%)",
+            "radial-gradient(120% 80% at 20% 60%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 60%)",
         }}
         aria-hidden="true"
       />

@@ -233,7 +233,7 @@ export function Header({ variant = "transparent" }: Props) {
             <a href={`tel:${site.contact.phoneIntl}`} className="hover:text-[#2d4829]">
               {site.contact.phone}
             </a>
-            <span className="mx-2 text-[#2d4829]/30">·</span>
+            <span className="mx-2 text-[#2d4829]/30"></span>
             <a href={`mailto:${site.contact.email}`} className="hover:text-[#2d4829]">
               {site.contact.email}
             </a>

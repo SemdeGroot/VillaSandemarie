@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     default: `${site.name} | Vakantievilla op Curaçao voor groepen tot 11`,
-    template: `%s · ${site.name}`,
+    template: `%s - ${site.name}`,
   },
   description: site.description,
   keywords: [
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     locale: "nl_NL",
     url: site.url,
     siteName: site.name,
-    title: `${site.name} · Vakantievilla op Curaçao`,
+    title: `${site.name} - Vakantievilla op Curaçao`,
     description: site.description,
     images: [
       {
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} · Vakantievilla op Curaçao`,
+    title: `${site.name} - Vakantievilla op Curaçao`,
     description: site.description,
     images: ["/media/villa/villa-drone-1.webp"],
   },

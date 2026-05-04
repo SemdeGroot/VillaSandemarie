@@ -16,10 +16,10 @@ export function Outdoor() {
           alt="Privézwembad in de avond"
           fill
           sizes="100vw"
-          className="object-cover opacity-55"
+          className="object-cover opacity-50"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30"
+          className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/40"
           aria-hidden="true"
         />
       </div>

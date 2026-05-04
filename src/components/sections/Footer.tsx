@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, MessageCircle, Phone } from "lucide-react";
+import { Mail, MessageCircle, Phone, ArrowUpRight } from "lucide-react";
 import { site } from "@/lib/site";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { Logo } from "@/components/site/Logo";
@@ -143,9 +143,24 @@ export function Footer() {
         >
           <p>
             © {new Date().getFullYear()} {site.name}
-            {t.footer.rights ? ` · ${t.footer.rights}` : ""}
+            {t.footer.rights ? ` ${t.footer.rights}` : ""}
           </p>
-          <p>{site.address.full}</p>
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+              site.address.full,
+            )}`}
+            target="_blank"
+            rel="noreferrer"
+            className="group flex items-center gap-1.5 transition hover:text-primary"
+          >
+            <span className="underline underline-offset-4 decoration-primary/20 transition group-hover:decoration-primary/50">
+              {site.address.full}
+            </span>
+            <ArrowUpRight
+              size={13}
+              className="translate-y-px opacity-60 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
+            />
+          </a>
         </div>
       </div>
     </footer>
