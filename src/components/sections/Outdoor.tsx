@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { RevealImage } from "@/components/ui/RevealImage";
 import { Display, Eyebrow, Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/Reveal";
@@ -11,15 +12,31 @@ export function Outdoor() {
   return (
     <Section bleed className="relative overflow-hidden bg-[#0e1f15] text-white">
       <div className="absolute inset-0">
+        {/* Mobile: exact state from before (opacity 55, centered) */}
+        <Image
+          src="/media/villa/pool-evening.webp"
+          alt="Privézwembad in de avond"
+          fill
+          sizes="100vw"
+          className="object-cover opacity-55 sm:hidden"
+        />
+        {/* Desktop: current improved state */}
         <RevealImage
           src="/media/villa/pool-evening.webp"
           alt="Privézwembad in de avond"
           fill
           sizes="100vw"
-          className="object-cover opacity-50"
+          className="hidden object-cover opacity-50 sm:block"
         />
+        
+        {/* Mobile overlay: exact state from before (horizontal gradient) */}
         <div
-          className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/40"
+          className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30 sm:hidden"
+          aria-hidden="true"
+        />
+        {/* Desktop overlay: current improved state */}
+        <div
+          className="hidden absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/40 sm:block"
           aria-hidden="true"
         />
       </div>
