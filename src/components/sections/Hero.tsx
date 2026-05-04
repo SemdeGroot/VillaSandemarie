@@ -8,70 +8,49 @@ import { site } from "@/lib/site";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 
 export function Hero() {
+  const [isPlaying, setIsPlaying] = React.useState(false);
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const { t } = useLocale();
 
   React.useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
+
+    // Critical for Safari
     v.muted = true;
     v.defaultMuted = true;
     v.playsInline = true;
-    v.setAttribute("webkit-playsinline", "true");
-    v.setAttribute("playsinline", "true");
-    v.setAttribute("muted", "");
-    v.setAttribute("autoplay", "");
 
-    const tryPlay = () => {
+    const attemptPlay = () => {
       if (!v.paused) return;
-      const p = v.play();
-      if (p && typeof p.then === "function") {
-        p.catch(() => {});
-      }
+      v.play().catch(() => {
+        // Silently fail if blocked by OS (e.g. Low Power Mode)
+      });
     };
 
-    try {
-      v.load();
-    } catch {}
+    // Initial attempt
+    attemptPlay();
 
-    tryPlay();
-    requestAnimationFrame(tryPlay);
+    // Triggers that don't feel like "manual interaction" but count as user gestures
+    const triggers = ["touchstart", "mousedown", "scroll", "keydown"];
+    const handleTrigger = () => {
+      attemptPlay();
+      triggers.forEach((t) => window.removeEventListener(t, handleTrigger));
+    };
 
-    let attempts = 0;
-    const interval = window.setInterval(() => {
-      if (!v.paused) {
-        window.clearInterval(interval);
-        return;
-      }
-      tryPlay();
-      if (++attempts > 12) window.clearInterval(interval);
-    }, 250);
+    triggers.forEach((t) =>
+      window.addEventListener(t, handleTrigger, { passive: true })
+    );
 
-    v.addEventListener("loadedmetadata", tryPlay);
-    v.addEventListener("loadeddata", tryPlay);
-    v.addEventListener("canplay", tryPlay);
-
+    // Visibility change (switching tabs/apps)
     const onVisibility = () => {
-      if (!document.hidden) tryPlay();
+      if (!document.hidden) attemptPlay();
     };
     document.addEventListener("visibilitychange", onVisibility);
 
-    const onFirstTouch = () => {
-      tryPlay();
-      window.removeEventListener("touchstart", onFirstTouch);
-      window.removeEventListener("click", onFirstTouch);
-    };
-    window.addEventListener("touchstart", onFirstTouch, { passive: true });
-    window.addEventListener("click", onFirstTouch);
-
     return () => {
-      window.clearInterval(interval);
-      v.removeEventListener("loadedmetadata", tryPlay);
-      v.removeEventListener("loadeddata", tryPlay);
-      v.removeEventListener("canplay", tryPlay);
+      triggers.forEach((t) => window.removeEventListener(t, handleTrigger));
       document.removeEventListener("visibilitychange", onVisibility);
-      window.removeEventListener("touchstart", onFirstTouch);
-      window.removeEventListener("click", onFirstTouch);
     };
   }, []);
 
@@ -84,22 +63,22 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate flex min-h-svh flex-col overflow-hidden bg-[#0d1410] text-white"
+      className="relative isolate flex min-h-svh flex-col overflow-hidden bg-black text-white"
     >
       <video
         ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover"
+        className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+          isPlaying ? "opacity-100" : "opacity-0"
+        }`}
         autoPlay
         muted
         loop
         playsInline
-        {...({
-          "webkit-playsinline": "true",
-          "x5-playsinline": "true",
-          "x5-video-player-type": "h5",
-        } as Record<string, string>)}
+        onPlaying={() => setIsPlaying(true)}
+        onTimeUpdate={(e) => {
+          if (e.currentTarget.currentTime > 0) setIsPlaying(true);
+        }}
         preload="auto"
-        poster="/media/villa/villa-drone-1.webp"
         aria-hidden="true"
         tabIndex={-1}
         disablePictureInPicture
@@ -108,14 +87,14 @@ export function Hero() {
       </video>
 
       <div
-        className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/55 to-black/85"
+        className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/45 to-black/75"
         aria-hidden="true"
       />
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(120% 80% at 20% 60%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 60%)",
+            "radial-gradient(120% 80% at 20% 60%, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 60%)",
         }}
         aria-hidden="true"
       />
