@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     description: site.description,
     images: [
       {
-        url: "/media/villa/villa-drone-1.webp",
+        url: "/media/villa/Villa drone 1.webp",
         width: 1600,
         height: 1067,
         alt: "Villa Sandemarie luchtfoto met zwembad",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${site.name} - Vakantievilla op Curaçao`,
     description: site.description,
-    images: ["/media/villa/villa-drone-1.webp"],
+    images: ["/media/villa/Villa drone 1.webp"],
   },
   robots: {
     index: true,

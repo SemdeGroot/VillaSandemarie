@@ -22,6 +22,7 @@ type Props = {
   style?: React.CSSProperties;
   children?: React.ReactNode;
   id?: string;
+  onVisible?: () => void;
 };
 
 export function Reveal({
@@ -31,6 +32,7 @@ export function Reveal({
   className,
   style,
   children,
+  onVisible,
   ...props
 }: Props) {
   const ref = React.useRef<HTMLElement | null>(null);
@@ -50,6 +52,7 @@ export function Reveal({
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible(true);
+          onVisible?.();
           obs.disconnect();
         }
       },
@@ -57,7 +60,13 @@ export function Reveal({
     );
     obs.observe(node);
     return () => obs.disconnect();
-  }, [threshold]);
+  }, [threshold, onVisible]);
+
+  React.useEffect(() => {
+    if (typeof window === "undefined" || typeof IntersectionObserver === "undefined") {
+      onVisible?.();
+    }
+  }, [onVisible]);
 
   return React.createElement(
     Tag,

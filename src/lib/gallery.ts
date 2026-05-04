@@ -6,51 +6,51 @@ export type GalleryImage = {
   wide?: boolean;
 };
 
-export const heroPoster = "/media/villa/villa-drone-1.webp";
+export const heroPoster = "/media/villa/Villa drone 1.webp";
 
 export const villaGallery: GalleryImage[] = [
   {
-    src: "/media/villa/villa-drone-1.webp",
+    src: "/media/villa/Villa drone 1.webp",
     alt: "Luchtfoto van Villa Sandemarie met privézwembad en zicht op Spaanse Water",
     caption: "Cas Grandi · Spaanse Water",
   },
   {
-    src: "/media/villa/pool-evening.webp",
+    src: "/media/villa/Zwembad 5.webp",
     alt: "Zwembad in de avond, sfeerverlichting",
   },
   {
-    src: "/media/villa/balcony-view.webp",
+    src: "/media/villa/Balkon3.webp",
     alt: "Balkon van de villa met uitzicht over het Spaanse Water",
     tag: "Balkon",
   },
   {
-    src: "/media/villa/living-room.webp",
+    src: "/media/villa/Woonkamer 1.webp",
     alt: "Woonkamer met comfortabele bank en smart-tv",
     tag: "Woonkamer",
   },
   {
-    src: "/media/villa/kitchen.webp",
+    src: "/media/villa/Keuken1.webp",
     alt: "Volledig uitgeruste keuken met eiland",
     tag: "Keuken",
   },
   {
-    src: "/media/villa/bathroom.webp",
+    src: "/media/villa/Badkamer 1.webp",
     alt: "Badkamer met inloopdouche en twee wastafels",
     tag: "Badkamer",
   },
   {
-    src: "/media/villa/bbq.webp",
+    src: "/media/villa/BBQ.webp",
     alt: "BBQ-plek voor avonden thuis",
     tag: "BBQ",
     wide: true,
   },
   {
-    src: "/media/villa/bedroom-master-l.webp",
+    src: "/media/villa/Master bedroom L1.webp",
     alt: "Slaapkamer met twee 1-persoonsbedden en airco",
     tag: "Slaapkamer",
   },
   {
-    src: "/media/villa/bedroom-master-r.webp",
+    src: "/media/villa/Master bedroom R1.webp",
     alt: "Tweede slaapkamer met houten plafond en airco",
     tag: "Slaapkamer",
   },

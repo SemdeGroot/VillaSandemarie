@@ -14,7 +14,7 @@ export function Outdoor() {
       <div className="absolute inset-0">
         {/* Mobile: exact state from before (opacity 55, centered) */}
         <Image
-          src="/media/villa/pool-evening.webp"
+          src="/media/villa/Zwembad 5.webp"
           alt="Privézwembad in de avond"
           fill
           sizes="100vw"
@@ -22,7 +22,7 @@ export function Outdoor() {
         />
         {/* Desktop: current improved state */}
         <RevealImage
-          src="/media/villa/pool-evening.webp"
+          src="/media/villa/Zwembad 5.webp"
           alt="Privézwembad in de avond"
           fill
           sizes="100vw"

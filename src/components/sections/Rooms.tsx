@@ -4,25 +4,24 @@ import Image from "next/image";
 import { Check } from "lucide-react";
 import { Display, Eyebrow, Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/Reveal";
-import { RevealImage } from "@/components/ui/RevealImage";
 import { villa } from "@/lib/villa";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 
 const roomMedia: Record<string, { src: string; alt: string }> = {
   bedrooms: {
-    src: "/media/villa/bedroom-master-l.webp",
+    src: "/media/villa/Master bedroom L1.webp",
     alt: "Slaapkamer met twee bedden en airco",
   },
   bathrooms: {
-    src: "/media/villa/bathroom.webp",
+    src: "/media/villa/Badkamer 1.webp",
     alt: "Badkamer met inloopdouche",
   },
   living: {
-    src: "/media/villa/living-room.webp",
+    src: "/media/villa/Woonkamer 1.webp",
     alt: "Woonkamer met bank en smart-tv",
   },
   kitchen: {
-    src: "/media/villa/kitchen-2.webp",
+    src: "/media/villa/Keuken2.webp",
     alt: "Volledig uitgeruste keuken",
   },
 };
@@ -56,13 +55,13 @@ export function Rooms() {
               className="group relative flex flex-col overflow-hidden rounded-3xl border border-line bg-background shadow-soft sm:flex-row"
             >
               {media && (
-                <div className="relative aspect-[5/4] w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-[45%]">
-                  <RevealImage
+                <div className="group relative aspect-[5/4] w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-[45%]">
+                  <Image
                     src={media.src}
                     alt={media.alt}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 22vw"
-                    className="object-cover transition duration-700 group-hover:scale-[1.04]"
+                    className="object-cover transition duration-700 hover:scale-[1.04]"
                   />
                 </div>
               )}
