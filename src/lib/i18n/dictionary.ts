@@ -199,7 +199,7 @@ const nl: Dict = {
     eyebrow: "De villa",
     titlePre: "Jullie eilandhuis op Curaçao,",
     titleHighlight: "ruimte voor iedereen",
-    body: "Villa Sandemarie is een ruime, vrijstaande vakantievilla in Cas Grandi, dichtbij Jan Thiel. Met 5 slaapkamers, 2 badkamers, een gezellig leefgedeelte en een balkon op de wind heb je alle ruimte om met z'n allen te landen. Buiten wachten het privézwembad, de ligstoelen en het uitzicht over het Spaanse Water op je.",
+    body: "Villa Sandemarie is een ruime vakantievilla in Cas Grandi, vlakbij Jan Thiel. Met 5 slaapkamers, een gezellig leefgedeelte en een balkon op de wind heb je alle ruimte om met z'n allen te landen. Buiten wachten het privézwembad en het uitzicht over het Spaanse Water op je.",
     statsGuests: "Gasten",
     statsBedrooms: "Slaapkamers",
     statsBathrooms: "Badkamers",

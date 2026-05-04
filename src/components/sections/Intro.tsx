@@ -9,7 +9,7 @@ export function Intro() {
   const { t } = useLocale();
   return (
     <Section id="villa" className="bg-paper py-16 sm:py-24 lg:py-32">
-      <div className="grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-24">
+      <div className="grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:items-start lg:gap-24">
         <Reveal className="max-w-xl">
           <Eyebrow>{t.intro.eyebrow}</Eyebrow>
           <Display as="h2" className="mt-4">
@@ -22,52 +22,53 @@ export function Intro() {
             {t.intro.body}
           </p>
 
-          <dl className="mt-8 grid grid-cols-3 gap-6 border-t border-line pt-6">
+          <dl className="mt-8 hidden grid-cols-3 gap-6 border-t border-line pt-6 lg:grid">
             <Stat n="11" l={t.intro.statsGuests} />
             <Stat n="5" l={t.intro.statsBedrooms} />
             <Stat n="3" l={t.intro.statsBathrooms} />
           </dl>
         </Reveal>
 
-        <Reveal delay={120} className="grid grid-cols-6 gap-3 sm:gap-4">
-          <div className="relative col-span-6 aspect-[5/4] overflow-hidden rounded-2xl shadow-soft sm:col-span-4">
-            <RevealImage
-              src="/media/villa/villa-drone-1.webp"
-              alt="Luchtfoto van Villa Sandemarie met privézwembad"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 45vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="relative col-span-3 aspect-[3/4] overflow-hidden rounded-2xl shadow-soft sm:col-span-2 sm:translate-y-6">
-            <RevealImage
-              src="/media/villa/balcony-view.webp"
-              alt="Uitzicht vanaf het balkon over Spaanse Water"
-              fill
-              sizes="(max-width: 1024px) 50vw, 22vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="relative col-span-3 aspect-[3/4] overflow-hidden rounded-2xl shadow-soft sm:col-span-2 sm:-translate-y-2">
-            <RevealImage
-              src="/media/villa/pool-loungers.webp"
-              alt="Zwembad met ligbedden"
-              fill
-              sizes="(max-width: 1024px) 50vw, 22vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="relative col-span-6 hidden aspect-[5/3] overflow-hidden rounded-2xl shadow-soft sm:col-span-4 sm:block">
-            <RevealImage
-              src="/media/villa/living-room.webp"
-              alt="Woonkamer van Villa Sandemarie met comfortabele bank"
-              fill
-              sizes="(max-width: 1024px) 100vw, 45vw"
-              className="object-cover"
-            />
-          </div>
-        </Reveal>
+        <div className="space-y-10 sm:space-y-12 lg:pt-8">
+          <Reveal delay={120} className="grid grid-cols-2 gap-3 sm:gap-4">
+            <div className="relative col-span-2 aspect-[3/2] overflow-hidden rounded-2xl shadow-soft">
+              <RevealImage
+                src="/media/villa/villa-drone-1.webp"
+                alt="Luchtfoto van Villa Sandemarie met privézwembad"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="relative aspect-square overflow-hidden rounded-2xl shadow-soft sm:aspect-[4/3]">
+              <RevealImage
+                src="/media/villa/balcony-view.webp"
+                alt="Uitzicht vanaf het balkon over Spaanse Water"
+                fill
+                sizes="(max-width: 1024px) 50vw, 22vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="relative aspect-square overflow-hidden rounded-2xl shadow-soft sm:aspect-[4/3]">
+              <RevealImage
+                src="/media/villa/pool-day.webp"
+                alt="Het privézwembad van Villa Sandemarie"
+                fill
+                sizes="(max-width: 1024px) 50vw, 22vw"
+                className="object-cover"
+              />
+            </div>
+          </Reveal>
+
+          <Reveal delay={240} className="lg:hidden">
+            <dl className="grid grid-cols-3 gap-6 border-t border-line pt-8 sm:gap-12">
+              <Stat n="11" l={t.intro.statsGuests} />
+              <Stat n="5" l={t.intro.statsBedrooms} />
+              <Stat n="3" l={t.intro.statsBathrooms} />
+            </dl>
+          </Reveal>
+        </div>
       </div>
     </Section>
   );

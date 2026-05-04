@@ -47,7 +47,7 @@ export function Outdoor() {
             return (
               <div
                 key={point}
-                className="flex items-start gap-5 rounded-2xl border border-white/12 bg-white/5 p-4 backdrop-blur-md sm:p-5"
+                className="flex items-center gap-5 rounded-2xl border border-white/15 bg-white/15 p-4 backdrop-blur-md sm:p-5"
               >
                 <span className="font-display text-2xl text-[#fee7a9] sm:text-3xl">
                   0{i + 1}

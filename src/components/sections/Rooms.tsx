@@ -17,7 +17,7 @@ const roomMedia: Record<string, { src: string; alt: string }> = {
     alt: "Badkamer met inloopdouche",
   },
   living: {
-    src: "/media/villa/living-room-2.webp",
+    src: "/media/villa/living-room.webp",
     alt: "Woonkamer met bank en smart-tv",
   },
   kitchen: {
