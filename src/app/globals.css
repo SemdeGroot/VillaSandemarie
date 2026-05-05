@@ -82,7 +82,7 @@ a {
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translate3d(0, 14px, 0);
+    transform: translate3d(0, 10px, 0);
   }
   to {
     opacity: 1;
@@ -100,7 +100,8 @@ a {
 }
 
 .fade-up {
-  animation: fade-up 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: fade-up 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  will-change: opacity, transform;
 }
 
 .reveal {

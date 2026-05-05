@@ -83,6 +83,7 @@ export function Hero() {
         tabIndex={-1}
         disablePictureInPicture
       >
+        <source src="/media/home/hero-mobile.mp4" type="video/mp4" media="(max-width: 768px)" />
         <source src="/media/home/hero.mp4" type="video/mp4" />
       </video>
 
@@ -106,24 +107,33 @@ export function Hero() {
           paddingBottom: "calc(2.5rem + env(safe-area-inset-bottom, 0px))",
         }}
       >
-        <div className="fade-up max-w-3xl">
-          <p className="eyebrow flex items-center gap-2 text-white/85">
+        <div className="max-w-3xl">
+          <p className="fade-up eyebrow flex items-center gap-2 text-white/85">
             <MapPin size={14} className="shrink-0 text-[#fee7a9]" />
             <span>
               {t.hero.locationCountry} · {site.address.street},{" "}
               {site.address.neighborhood} · {t.hero.locationWater}
             </span>
           </p>
-          <h1 className="font-display mt-5 text-[1.8rem] font-medium leading-[1.08] tracking-tight text-white [text-wrap:balance] sm:text-5xl md:text-6xl lg:text-[4.8rem]">
+          <h1 
+            className="fade-up font-display mt-5 text-[1.8rem] font-medium leading-[1.08] tracking-tight text-white [text-wrap:balance] sm:text-5xl md:text-6xl lg:text-[4.8rem]"
+            style={{ animationDelay: "150ms" }}
+          >
             {t.hero.titlePre}{" "}
             <span style={{ color: "#fee7a9" }}>{t.hero.titleHighlight}</span>
             {t.hero.titlePost ? <>{t.hero.titlePost}</> : null}
           </h1>
-          <p className="mt-4 max-w-2xl text-[15px] leading-7 text-white/82 sm:mt-6 sm:text-lg sm:leading-9">
+          <p 
+            className="fade-up mt-4 max-w-2xl text-[15px] leading-7 text-white/82 sm:mt-6 sm:text-lg sm:leading-9"
+            style={{ animationDelay: "300ms" }}
+          >
             {t.hero.lead}
           </p>
 
-          <div className="mt-6 flex flex-col gap-3 sm:mt-9 sm:flex-row">
+          <div 
+            className="fade-up mt-6 flex flex-col gap-3 sm:mt-9 sm:flex-row"
+            style={{ animationDelay: "450ms" }}
+          >
             <LinkButton href="/#beschikbaarheid" variant="highlight" size="lg">
               {t.cta.seeAvailability} <ArrowRight size={18} />
             </LinkButton>
@@ -133,7 +143,10 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="mt-auto flex flex-col items-start justify-between gap-6 pt-10 sm:flex-row sm:items-end sm:pt-14">
+        <div 
+          className="fade-up mt-auto flex flex-col items-start justify-between gap-6 pt-10 sm:flex-row sm:items-end sm:pt-14"
+          style={{ animationDelay: "600ms" }}
+        >
           <div className="grid w-full grid-cols-3 gap-x-4 gap-y-3 sm:max-w-md sm:gap-x-6">
             {stats.map((item) => (
               <div key={item.l} className="border-l border-white/30 pl-3 sm:pl-4">

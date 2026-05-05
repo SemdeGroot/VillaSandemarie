@@ -7,14 +7,20 @@ import { allVillaImages } from "@/lib/gallery";
 import { useGallery } from "@/lib/GalleryProvider";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/site/Logo";
 
 export function VillaGalleryModal() {
   const { isOpen, activeIndex, closeGallery } = useGallery();
   const { t } = useLocale();
   const [internalIndex, setInternalIndex] = useState(activeIndex);
+  const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const railRef = useRef<HTMLDivElement>(null);
   const isScrollingRef = useRef(false);
   const hasMountedRef = useRef(false);
+
+  const handleImageLoad = (src: string) => {
+    setLoadedImages((prev) => ({ ...prev, [src]: true }));
+  };
 
   const scrollToIndex = useCallback((index: number, behavior: ScrollBehavior = "smooth") => {
     const rail = railRef.current;
@@ -128,13 +134,33 @@ export function VillaGalleryModal() {
               className="flex h-full w-full shrink-0 snap-center items-center justify-center px-4 py-32 lg:px-48"
             >
               <div className="relative h-full w-full select-none">
+                {/* Skeleton Loader */}
+                {!loadedImages[img.src] && (
+                  <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-primary/[0.04] overflow-hidden">
+                    {/* Shimmer Effect - middle ground prominence */}
+                    <div className="absolute inset-0 z-0 bg-gradient-to-tr from-transparent via-primary/[0.08] to-transparent animate-shimmer-diagonal" style={{ backgroundSize: '200% 200%' }} />
+                    
+                    <div className="relative z-10 flex flex-col items-center gap-5 opacity-20">
+                      <Logo className="h-16 w-16" />
+                       <span className="text-[11px] font-bold uppercase tracking-[0.35em] text-primary">
+                        Villa Sandemarie
+                      </span>
+                    </div>
+                  </div>
+                )}
+                
                 <Image
                   src={img.src}
                   alt={img.alt}
                   fill
-                  className="object-contain pointer-events-none"
+                  onLoad={() => handleImageLoad(img.src)}
+                  className={cn(
+                    "object-contain pointer-events-none transition-opacity duration-700 ease-out",
+                    loadedImages[img.src] ? "opacity-100" : "opacity-0"
+                  )}
                   sizes="100vw"
-                  priority={isOpen && Math.abs(i - internalIndex) <= 1}
+                  // Preload all images when gallery is open for maximum smoothness
+                  priority={isOpen}
                 />
               </div>
             </div>
@@ -144,7 +170,12 @@ export function VillaGalleryModal() {
         {/* Footer Info */}
         <div className="absolute bottom-0 left-0 right-0 z-[110] flex flex-col items-center bg-gradient-to-t from-paper to-transparent pb-10 pt-24">
           <p className="max-w-2xl px-6 text-center text-[15px] font-medium leading-relaxed text-primary sm:text-base">
-            {allVillaImages[internalIndex]?.alt}
+            {(() => {
+              const img = allVillaImages[internalIndex];
+              if (!img) return null;
+              const captionKey = img.src.split("/").pop()?.replace(".webp", "") || "";
+              return t.content.galleryCaptions[captionKey] ?? img.alt;
+            })()}
           </p>
           
           <div className="mt-5 flex items-center gap-8">
@@ -182,6 +213,19 @@ export function VillaGalleryModal() {
         .scrollbar-none {
           -ms-overflow-style: none;
           scrollbar-width: none;
+        }
+
+        @keyframes shimmer-diagonal {
+          0% {
+            transform: translate(-100%, 100%);
+          }
+          100% {
+            transform: translate(100%, -100%);
+          }
+        }
+        
+        .animate-shimmer-diagonal {
+          animation: shimmer-diagonal 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
       `}</style>
     </div>

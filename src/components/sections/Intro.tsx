@@ -16,8 +16,8 @@ export function Intro() {
   
   return (
     <Section id="villa" className="bg-paper py-16 sm:py-24 lg:py-32">
-      <div className="grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:items-start lg:gap-24">
-        <div className="max-w-xl">
+      <div className="grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-24">
+        <div className="max-w-xl lg:flex lg:flex-col">
           <Reveal>
             <Eyebrow>{t.intro.eyebrow}</Eyebrow>
             <Display as="h2" className="mt-4">
@@ -35,6 +35,7 @@ export function Intro() {
             threshold={0.52}
             delay={120}
             onVisible={() => setStatsVisible(true)}
+            className="lg:mt-auto"
           >
             <dl className="mt-8 grid grid-cols-3 gap-2 border-t border-line pt-6 sm:gap-6">
               <Stat

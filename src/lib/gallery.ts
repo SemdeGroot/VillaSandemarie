@@ -17,7 +17,7 @@ export const villaGallery: GalleryImage[] = [
   },
   {
     src: "/media/villa/zwembad-5.webp",
-    alt: "Zwembad in de avond, sfeerverlichting",
+    alt: "Zwembad in de avond met sfeerverlichting",
     tag: "Zwembad",
   },
   {
@@ -27,12 +27,12 @@ export const villaGallery: GalleryImage[] = [
   },
   {
     src: "/media/villa/woonkamer-1.webp",
-    alt: "Woonkamer met comfortabele bank en smart-tv",
+    alt: "Woonkamer met comfortabele bank en smart tv",
     tag: "Woonkamer",
   },
   {
     src: "/media/villa/keuken-1.webp",
-    alt: "Volledig uitgeruste keuken met eiland",
+    alt: "Volledig uitgeruste keuken met kookeiland",
     tag: "Keuken",
   },
   {
@@ -42,13 +42,13 @@ export const villaGallery: GalleryImage[] = [
   },
   {
     src: "/media/villa/bbq.webp",
-    alt: "BBQ-plek voor avonden thuis",
+    alt: "BBQ plek voor avonden thuis",
     tag: "BBQ",
     wide: true,
   },
   {
     src: "/media/villa/master-bedroom-l1.webp",
-    alt: "Slaapkamer met twee 1-persoonsbedden en airco",
+    alt: "Slaapkamer met twee 1 persoonsbedden en airco",
     tag: "Slaapkamer",
   },
   {
@@ -60,39 +60,39 @@ export const villaGallery: GalleryImage[] = [
 
 export const allVillaImages: GalleryImage[] = [
   // Exterior & Drone
-  { src: "/media/villa/villa-drone-1.webp", alt: "Villa Sandemarie - Drone 1", tag: "Drone" },
-  { src: "/media/villa/villa-drone-2.webp", alt: "Villa Sandemarie - Drone 2", tag: "Drone" },
-  { src: "/media/villa/villa-drone-3.webp", alt: "Villa Sandemarie - Drone 3", tag: "Drone" },
-  { src: "/media/villa/villa-drone-4.webp", alt: "Villa Sandemarie - Drone 4", tag: "Drone" },
+  { src: "/media/villa/villa-drone-1.webp", alt: "Luchtfoto van Villa Sandemarie", tag: "Drone" },
+  { src: "/media/villa/villa-drone-2.webp", alt: "Villa Sandemarie vanuit de lucht", tag: "Drone" },
+  { src: "/media/villa/villa-drone-3.webp", alt: "Overzicht van de villa", tag: "Drone" },
+  { src: "/media/villa/villa-drone-4.webp", alt: "Villa Sandemarie met Spaanse Water", tag: "Drone" },
 
   // Pool
-  { src: "/media/villa/zwembad-1.webp", alt: "Privézwembad - Overdag", tag: "Zwembad" },
-  { src: "/media/villa/zwembad-2.webp", alt: "Privézwembad - Loungesection", tag: "Zwembad" },
-  { src: "/media/villa/zwembad-4.webp", alt: "Privézwembad - Overzicht", tag: "Zwembad" },
-  { src: "/media/villa/zwembad-5.webp", alt: "Privézwembad - Avondsfeer", tag: "Zwembad" },
+  { src: "/media/villa/zwembad-1.webp", alt: "Privézwembad overdag", tag: "Zwembad" },
+  { src: "/media/villa/zwembad-2.webp", alt: "Loungegedeelte bij het zwembad", tag: "Zwembad" },
+  { src: "/media/villa/zwembad-4.webp", alt: "Overzicht van het zwembad", tag: "Zwembad" },
+  { src: "/media/villa/zwembad-5.webp", alt: "Zwembad met avondverlichting", tag: "Zwembad" },
 
   // Balcony & View
-  { src: "/media/villa/balkon-1.webp", alt: "Groot balkon - Eethoek", tag: "Balkon" },
-  { src: "/media/villa/balkon-2.webp", alt: "Groot balkon - Loungestoelen", tag: "Balkon" },
-  { src: "/media/villa/balkon-3.webp", alt: "Uitzicht over Spaanse Water", tag: "Balkon" },
-  { src: "/media/villa/balkon-4.webp", alt: "Balkon - Detail", tag: "Balkon" },
-  { src: "/media/villa/balkon-5.webp", alt: "Balkon - Hoekje", tag: "Balkon" },
+  { src: "/media/villa/balkon-1.webp", alt: "Groot balkon met eethoek", tag: "Balkon" },
+  { src: "/media/villa/balkon-2.webp", alt: "Balkon met loungestoelen", tag: "Balkon" },
+  { src: "/media/villa/balkon-3.webp", alt: "Uitzicht over het Spaanse Water", tag: "Balkon" },
+  { src: "/media/villa/balkon-4.webp", alt: "Detail van het balkon", tag: "Balkon" },
+  { src: "/media/villa/balkon-5.webp", alt: "Gezellig hoekje op het balkon", tag: "Balkon" },
 
   // Interior
-  { src: "/media/villa/woonkamer-1.webp", alt: "Woonkamer - Zithoek", tag: "Woonkamer" },
-  { src: "/media/villa/woonkamer-2.webp", alt: "Woonkamer - Overzicht", tag: "Woonkamer" },
-  { src: "/media/villa/keuken-1.webp", alt: "Keuken - Kookeiland", tag: "Keuken" },
-  { src: "/media/villa/keuken-2.webp", alt: "Keuken - Apparatuur", tag: "Keuken" },
+  { src: "/media/villa/woonkamer-1.webp", alt: "Woonkamer met zithoek", tag: "Woonkamer" },
+  { src: "/media/villa/woonkamer-2.webp", alt: "Overzicht van de woonkamer", tag: "Woonkamer" },
+  { src: "/media/villa/keuken-1.webp", alt: "Keuken met kookeiland", tag: "Keuken" },
+  { src: "/media/villa/keuken-2.webp", alt: "Keuken met inbouwapparatuur", tag: "Keuken" },
 
   // Bedrooms & Bathrooms
-  { src: "/media/villa/master-bedroom-l1.webp", alt: "Slaapkamer 1 - Twee bedden", tag: "Slaapkamer" },
-  { src: "/media/villa/master-bedroom-l2.webp", alt: "Slaapkamer 1 - Detail", tag: "Slaapkamer" },
-  { src: "/media/villa/master-bedroom-r1.webp", alt: "Slaapkamer 2 - Houten plafond", tag: "Slaapkamer" },
-  { src: "/media/villa/master-bedroom-r2.webp", alt: "Slaapkamer 2 - Overzicht", tag: "Slaapkamer" },
+  { src: "/media/villa/master-bedroom-l1.webp", alt: "Slaapkamer 1 met twee bedden", tag: "Slaapkamer" },
+  { src: "/media/villa/master-bedroom-l2.webp", alt: "Detail van slaapkamer 1", tag: "Slaapkamer" },
+  { src: "/media/villa/master-bedroom-r1.webp", alt: "Slaapkamer 2 met houten plafond", tag: "Slaapkamer" },
+  { src: "/media/villa/master-bedroom-r2.webp", alt: "Overzicht van slaapkamer 2", tag: "Slaapkamer" },
   { src: "/media/villa/master-bedroom-r3.webp", alt: "Slaapkamer 3", tag: "Slaapkamer" },
   { src: "/media/villa/master-bedroom-r4.webp", alt: "Slaapkamer 4", tag: "Slaapkamer" },
   { src: "/media/villa/master-en-badkamer.webp", alt: "Slaapkamer met badkamer en suite", tag: "Slaapkamer" },
-  { src: "/media/villa/badkamer-1.webp", alt: "Luxe badkamer", tag: "Badkamer" },
+  { src: "/media/villa/badkamer-1.webp", alt: "Badkamer met inloopdouche", tag: "Badkamer" },
 
   // Garden & BBQ
   { src: "/media/villa/bbq.webp", alt: "BBQ en buitenkeuken", tag: "BBQ" },
