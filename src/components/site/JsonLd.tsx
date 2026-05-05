@@ -58,9 +58,9 @@ export function LodgingJsonLd() {
     url: site.url,
     description: site.description,
     image: [
-      `${site.url}/media/villa/Villa drone 1.webp`,
-      `${site.url}/media/villa/Zwembad 3.webp`,
-      `${site.url}/media/villa/Balkon3.webp`,
+      `${site.url}/media/villa/villa-drone-1.webp`,
+      `${site.url}/media/villa/balkon-3.webp`,
+      `${site.url}/media/villa/zwembad-1.webp`,
     ],
     telephone: site.contact.phoneIntl,
     email: site.contact.email,

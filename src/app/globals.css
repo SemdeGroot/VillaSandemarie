@@ -123,7 +123,9 @@ a {
 
 .image-reveal.is-loaded {
   opacity: 1;
-  transition: opacity 0.8s ease-out;
+  transition-property: opacity;
+  transition-duration: 0.8s;
+  transition-timing-function: ease-out;
 }
 
 @keyframes ken-burns {

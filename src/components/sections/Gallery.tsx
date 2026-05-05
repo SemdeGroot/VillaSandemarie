@@ -1,14 +1,16 @@
 "use client";
 
-import Image from "next/image";
+import { RevealImage } from "@/components/ui/RevealImage";
 import { Display, Eyebrow, Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/Reveal";
 import { villaGallery, type GalleryImage } from "@/lib/gallery";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
+import { useGallery } from "@/lib/GalleryProvider";
 import type { Dict } from "@/lib/i18n/dictionary";
 
 export function Gallery() {
   const { t } = useLocale();
+  const { openGallery } = useGallery();
   const tagMap = t.content.galleryTags;
   const items = villaGallery;
   const featured = items[0];
@@ -40,6 +42,7 @@ export function Gallery() {
               img={featured}
               sizes="(max-width: 768px) 100vw, 55vw"
               tagMap={tagMap}
+              onClick={() => openGallery(featured.src)}
             />
           </Reveal>
         )}
@@ -53,6 +56,7 @@ export function Gallery() {
               img={secondary}
               sizes="(max-width: 768px) 100vw, 40vw"
               tagMap={tagMap}
+              onClick={() => openGallery(secondary.src)}
             />
           </Reveal>
         )}
@@ -79,6 +83,7 @@ export function Gallery() {
               }
               small
               tagMap={tagMap}
+              onClick={() => openGallery(img.src)}
             />
           </Reveal>
         ))}
@@ -92,21 +97,26 @@ function FigureImage({
   sizes,
   small,
   tagMap,
+  onClick,
 }: {
   img: GalleryImage;
   sizes: string;
   small?: boolean;
   tagMap: Dict["content"]["galleryTags"];
+  onClick?: () => void;
 }) {
   const tagLabel = img.tag ? tagMap[img.tag] ?? img.tag : null;
   return (
-    <>
-      <Image
+    <button
+      onClick={onClick}
+      className="group relative h-full w-full text-left focus:outline-none"
+    >
+      <RevealImage
         src={img.src}
         alt={img.alt}
         fill
         sizes={sizes}
-        className="object-cover transition duration-700 hover:scale-[1.04]"
+        className="object-cover transition duration-700 group-hover:scale-[1.04] cursor-pointer"
       />
       {tagLabel && (
         <figcaption
@@ -119,6 +129,6 @@ function FigureImage({
           {tagLabel}
         </figcaption>
       )}
-    </>
+    </button>
   );
 }

@@ -1,33 +1,35 @@
 "use client";
 
-import Image from "next/image";
+import { RevealImage } from "@/components/ui/RevealImage";
 import { Check } from "lucide-react";
 import { Display, Eyebrow, Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/Reveal";
 import { villa } from "@/lib/villa";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
+import { useGallery } from "@/lib/GalleryProvider";
 
 const roomMedia: Record<string, { src: string; alt: string }> = {
   bedrooms: {
-    src: "/media/villa/Master bedroom L1.webp",
+    src: "/media/villa/master-bedroom-l1.webp",
     alt: "Slaapkamer met twee bedden en airco",
   },
   bathrooms: {
-    src: "/media/villa/Badkamer 1.webp",
+    src: "/media/villa/badkamer-1.webp",
     alt: "Badkamer met inloopdouche",
   },
   living: {
-    src: "/media/villa/Woonkamer 1.webp",
+    src: "/media/villa/woonkamer-1.webp",
     alt: "Woonkamer met bank en smart-tv",
   },
   kitchen: {
-    src: "/media/villa/Keuken2.webp",
+    src: "/media/villa/keuken-2.webp",
     alt: "Volledig uitgeruste keuken",
   },
 };
 
 export function Rooms() {
   const { t } = useLocale();
+  const { openGallery } = useGallery();
   return (
     <Section className="bg-paper py-16 sm:py-24 lg:py-28">
       <Reveal className="max-w-2xl">
@@ -55,15 +57,18 @@ export function Rooms() {
               className="group relative flex flex-col overflow-hidden rounded-3xl border border-line bg-background shadow-soft sm:flex-row"
             >
               {media && (
-                <div className="group relative aspect-[5/4] w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-[45%]">
-                  <Image
+                <button
+                  onClick={() => openGallery(media.src)}
+                  className="group relative aspect-[5/4] w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-[45%] text-left focus:outline-none"
+                >
+                  <RevealImage
                     src={media.src}
                     alt={media.alt}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 22vw"
-                    className="object-cover transition duration-700 hover:scale-[1.04]"
+                    className="object-cover transition duration-700 group-hover:scale-[1.04] cursor-pointer"
                   />
-                </div>
+                </button>
               )}
               <div className="flex flex-1 flex-col justify-start space-y-3 px-5 py-5 sm:px-7 sm:py-8">
                 <h3 className="font-display text-2xl text-primary sm:text-3xl">

@@ -4,6 +4,8 @@ import { fontDisplay, fontSans } from "@/lib/fonts";
 import { site } from "@/lib/site";
 import { LocaleProvider } from "@/lib/i18n/LocaleProvider";
 import { getServerLocale } from "@/lib/i18n/server";
+import { GalleryProvider } from "@/lib/GalleryProvider";
+import { VillaGalleryModal } from "@/components/ui/VillaGalleryModal";
 
 export const metadata: Metadata = {
   formatDetection: {
@@ -45,7 +47,7 @@ export const metadata: Metadata = {
     description: site.description,
     images: [
       {
-        url: "/media/villa/Villa drone 1.webp",
+        url: "/media/villa/villa-drone-1.webp",
         width: 1600,
         height: 1067,
         alt: "Villa Sandemarie luchtfoto met zwembad",
@@ -56,7 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${site.name} - Vakantievilla op Curaçao`,
     description: site.description,
-    images: ["/media/villa/Villa drone 1.webp"],
+    images: ["/media/villa/villa-drone-1.webp"],
   },
   robots: {
     index: true,
@@ -99,7 +101,12 @@ export default async function RootLayout({
       className={`${fontDisplay.variable} ${fontSans.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-paper font-sans text-primary">
-        <LocaleProvider initialLocale={locale}>{children}</LocaleProvider>
+        <LocaleProvider initialLocale={locale}>
+          <GalleryProvider>
+            {children}
+            <VillaGalleryModal />
+          </GalleryProvider>
+        </LocaleProvider>
         <form
           name="inquiry"
           data-netlify="true"

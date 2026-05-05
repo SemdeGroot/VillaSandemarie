@@ -6,6 +6,7 @@ export type Dict = {
     amenities: string;
     about: string;
     curacao: string;
+    gallery: string;
     booking: string;
   };
   cta: {
@@ -120,6 +121,7 @@ export type Dict = {
     chatEn: string;
     intro: string;
     rights: string;
+    gallery: string;
   };
   about: {
     pageTitle: string;
@@ -171,6 +173,7 @@ const nl: Dict = {
     amenities: "Voorzieningen",
     about: "Over ons",
     curacao: "Curaçao",
+    gallery: "Foto's",
     booking: "Beschikbaarheid",
   },
   cta: {
@@ -286,6 +289,7 @@ const nl: Dict = {
     chatEn: "Chat in English",
     intro: "Een familievilla op Curaçao, gemaakt voor samen zijn. Cas Grandi, vlak bij Jan Thiel, met privézwembad en directe lijn met de familie.",
     rights: "",
+    gallery: "Fotogallerij",
   },
   about: {
     pageTitle: "Over ons",
@@ -417,6 +421,7 @@ const en: Dict = {
     amenities: "Amenities",
     about: "About us",
     curacao: "Curaçao",
+    gallery: "Photos",
     booking: "Availability",
   },
   cta: {
@@ -532,6 +537,7 @@ const en: Dict = {
     chatEn: "Chat in English",
     intro: "A family villa on Curaçao, made for being together. Cas Grandi, close to Jan Thiel, with private pool and a direct line to the family.",
     rights: "",
+    gallery: "Photo gallery",
   },
   about: {
     pageTitle: "About us",
@@ -663,6 +669,7 @@ const de: Dict = {
     amenities: "Ausstattung",
     about: "Über uns",
     curacao: "Curaçao",
+    gallery: "Fotos",
     booking: "Verfügbarkeit",
   },
   cta: {
@@ -714,9 +721,9 @@ const de: Dict = {
     body: "In der Villa Sandemarie spielt sich das meiste draußen ab. Auf dem Balkon sitzt ihr im Wind, mit Blick auf das Spanische Wasser und den Tafelberg. Unten am Pool wird geschwommen, gelesen, ein Drink genommen oder einfach gar nichts gemacht.",
   },
   gallery: {
-    eyebrow: "Galerie",
+    eyebrow: "Fotos",
     title: "Ein Rundgang durch die Villa",
-    body: "Drohnenfoto, Pool, Schlafzimmer und die Ecken, in denen man sitzen bleibt. Alles selbst aufgenommen.",
+    body: "Drohnenfoto, pool, Schlafzimmer und die Ecken, in denen man sitzen bleibt. Alles selbst aufgenommen.",
   },
   audiences: {
     eyebrow: "Für wen",
@@ -778,6 +785,7 @@ const de: Dict = {
     chatEn: "Chat in English",
     intro: "Eine Familienvilla auf Curaçao, gemacht zum Zusammensein. Cas Grandi, nahe Jan Thiel, mit privatem Pool und direktem Draht zur Familie.",
     rights: "",
+    gallery: "Fotogalerie",
   },
   about: {
     pageTitle: "Über uns",
@@ -910,6 +918,7 @@ const es: Dict = {
     about: "Sobre nosotros",
     curacao: "Curazao",
     booking: "Disponibilidad",
+    gallery: "Galería de fotos",
   },
   cta: {
     book: "Solicitar reserva",
@@ -1024,6 +1033,7 @@ const es: Dict = {
     chatEn: "Chat in English",
     intro: "Una villa familiar en Curazao, hecha para estar juntos. Cas Grandi, cerca de Jan Thiel, con piscina privada y trato directo con la familia.",
     rights: "",
+    gallery: "Galería de fotos",
   },
   about: {
     pageTitle: "Sobre nosotros",

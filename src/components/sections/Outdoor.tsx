@@ -6,37 +6,49 @@ import { Display, Eyebrow, Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/Reveal";
 import { villa } from "@/lib/villa";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
+import { useGallery } from "@/lib/GalleryProvider";
 
 export function Outdoor() {
   const { t } = useLocale();
+  const { openGallery } = useGallery();
   return (
     <Section bleed className="relative overflow-hidden bg-[#0e1f15] text-white">
       <div className="absolute inset-0">
-        {/* Mobile: exact state from before (opacity 55, centered) */}
-        <Image
-          src="/media/villa/Zwembad 5.webp"
-          alt="Privézwembad in de avond"
-          fill
-          sizes="100vw"
-          className="object-cover opacity-55 sm:hidden"
-        />
-        {/* Desktop: current improved state */}
-        <RevealImage
-          src="/media/villa/Zwembad 5.webp"
-          alt="Privézwembad in de avond"
-          fill
-          sizes="100vw"
-          className="hidden object-cover opacity-50 sm:block"
-        />
+        {/* Mobile: middle ground between 55 and 60 */}
+        <button
+          onClick={() => openGallery("/media/villa/zwembad-5.webp")}
+          className="absolute inset-0 block w-full h-full p-0 border-0 bg-transparent text-left focus:outline-none sm:hidden"
+        >
+          <Image
+            src="/media/villa/zwembad-5.webp"
+            alt="Privézwembad in de avond"
+            fill
+            sizes="100vw"
+            className="object-cover opacity-[0.57] cursor-pointer transition duration-700 hover:scale-[1.02]"
+          />
+        </button>
+        {/* Desktop: middle ground between 50 and 75 */}
+        <button
+          onClick={() => openGallery("/media/villa/zwembad-5.webp")}
+          className="absolute inset-0 hidden w-full h-full p-0 border-0 bg-transparent text-left focus:outline-none sm:block"
+        >
+          <RevealImage
+            src="/media/villa/zwembad-5.webp"
+            alt="Privézwembad in de avond"
+            fill
+            sizes="100vw"
+            className="object-cover opacity-[0.62] cursor-pointer transition duration-700 hover:scale-[1.02]"
+          />
+        </button>
         
-        {/* Mobile overlay: exact state from before (horizontal gradient) */}
+        {/* Mobile overlay: middle ground */}
         <div
-          className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30 sm:hidden"
+          className="absolute inset-0 bg-gradient-to-r from-black/82 via-black/58 to-black/28 sm:hidden pointer-events-none"
           aria-hidden="true"
         />
-        {/* Desktop overlay: current improved state */}
+        {/* Desktop overlay: middle ground */}
         <div
-          className="hidden absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/40 sm:block"
+          className="hidden absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/15 sm:block pointer-events-none"
           aria-hidden="true"
         />
       </div>

@@ -9,6 +9,7 @@ import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { cn } from "@/lib/utils";
 import { Logo } from "./Logo";
+import { useGallery } from "@/lib/GalleryProvider";
 
 type Props = {
   variant?: "transparent" | "solid";
@@ -18,6 +19,7 @@ export function Header({ variant = "transparent" }: Props) {
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const { t } = useLocale();
+  const { openGallery } = useGallery();
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
@@ -49,6 +51,7 @@ export function Header({ variant = "transparent" }: Props) {
     { href: "/#voorzieningen", label: t.nav.amenities },
     { href: "/about", label: t.nav.about },
     { href: "/curacao", label: t.nav.curacao },
+    { type: "gallery", label: t.nav.gallery },
     { href: "/#beschikbaarheid", label: t.nav.booking },
   ];
 
@@ -90,13 +93,23 @@ export function Header({ variant = "transparent" }: Props) {
             }}
           >
             {nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="transition hover:opacity-100"
-              >
-                {item.label}
-              </Link>
+              "type" in item && item.type === "gallery" ? (
+                <button
+                  key="gallery"
+                  onClick={() => openGallery(0)}
+                  className="transition hover:opacity-100 cursor-pointer"
+                >
+                  {item.label}
+                </button>
+              ) : (
+                <Link
+                  key={"href" in item ? item.href : "gallery"}
+                  href={"href" in item ? item.href : "#"}
+                  className="transition hover:opacity-100"
+                >
+                  {item.label}
+                </Link>
+              )
             ))}
           </nav>
 
@@ -139,9 +152,12 @@ export function Header({ variant = "transparent" }: Props) {
       {/* Mobile drawer overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-[60] bg-[#0d1410]/55 transition-opacity duration-300 ease-out lg:hidden",
+          "fixed inset-x-0 top-0 z-[60] bg-[#0d1410]/55 transition-opacity duration-300 ease-out lg:hidden",
           open ? "opacity-100" : "pointer-events-none opacity-0",
         )}
+        style={{
+          bottom: "env(safe-area-inset-bottom, 0px)",
+        }}
         onClick={() => setOpen(false)}
         aria-hidden="true"
       />
@@ -165,23 +181,45 @@ export function Header({ variant = "transparent" }: Props) {
       >
         <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-5 pt-3 sm:px-8">
           {nav.map((item, i) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className={cn(
-                "group flex items-center justify-between border-b border-[#2d4829]/10 py-4 text-[1.4rem] font-display text-[#2d4829] transition-[opacity,transform] duration-300 ease-out hover:text-[#59392e]",
-                open ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0",
-              )}
-              style={{ transitionDelay: open ? `${100 + i * 45}ms` : "0ms" }}
-            >
-              <span>{item.label}</span>
-              <ArrowRight
-                size={18}
-                strokeWidth={1.7}
-                className="opacity-30 transition group-hover:translate-x-1 group-hover:opacity-100"
-              />
-            </Link>
+            "type" in item && item.type === "gallery" ? (
+              <button
+                key="gallery"
+                onClick={() => {
+                  setOpen(false);
+                  openGallery(0);
+                }}
+                className={cn(
+                  "group flex items-center justify-between border-b border-[#2d4829]/10 py-4 text-[1.4rem] font-display text-[#2d4829] transition-[opacity,transform] duration-300 ease-out hover:text-[#59392e]",
+                  open ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0",
+                )}
+                style={{ transitionDelay: open ? `${100 + i * 45}ms` : "0ms" }}
+              >
+                <span>{item.label}</span>
+                <ArrowRight
+                  size={18}
+                  strokeWidth={1.7}
+                  className="opacity-30 transition group-hover:translate-x-1 group-hover:opacity-100"
+                />
+              </button>
+            ) : (
+              <Link
+                key={"href" in item ? item.href : "gallery"}
+                href={"href" in item ? item.href : "#"}
+                onClick={() => setOpen(false)}
+                className={cn(
+                  "group flex items-center justify-between border-b border-[#2d4829]/10 py-4 text-[1.4rem] font-display text-[#2d4829] transition-[opacity,transform] duration-300 ease-out hover:text-[#59392e]",
+                  open ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0",
+                )}
+                style={{ transitionDelay: open ? `${100 + i * 45}ms` : "0ms" }}
+              >
+                <span>{item.label}</span>
+                <ArrowRight
+                  size={18}
+                  strokeWidth={1.7}
+                  className="opacity-30 transition group-hover:translate-x-1 group-hover:opacity-100"
+                />
+              </Link>
+            )
           ))}
         </nav>
 

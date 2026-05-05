@@ -5,6 +5,7 @@ import { Mail, MessageCircle, Phone, ArrowUpRight } from "lucide-react";
 import { site } from "@/lib/site";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { Logo } from "@/components/site/Logo";
+import { useGallery } from "@/lib/GalleryProvider";
 
 type IconProps = React.SVGProps<SVGSVGElement>;
 
@@ -39,11 +40,13 @@ const TikTokIcon = (props: IconProps) => (
 
 export function Footer() {
   const { t } = useLocale();
+  const { openGallery } = useGallery();
   const nav = [
     { href: "/#villa", label: t.nav.villa },
     { href: "/#voorzieningen", label: t.nav.amenities },
     { href: "/about", label: t.nav.about },
     { href: "/curacao", label: t.nav.curacao },
+    { type: "gallery", label: t.footer.gallery },
     { href: "/#beschikbaarheid", label: t.nav.booking },
   ];
 
@@ -78,10 +81,22 @@ export function Footer() {
           <p className="eyebrow text-warm">{t.footer.explore}</p>
           <ul className="mt-3 space-y-2 text-[14px] text-primary/78">
             {nav.map((n) => (
-              <li key={n.href}>
-                <Link href={n.href} className="transition hover:text-primary">
-                  {n.label}
-                </Link>
+              <li key={"href" in n ? n.href : "gallery"}>
+                {"type" in n && n.type === "gallery" ? (
+                  <button
+                    onClick={() => openGallery(0)}
+                    className="transition hover:text-primary cursor-pointer text-left"
+                  >
+                    {n.label}
+                  </button>
+                ) : (
+                  <Link
+                    href={"href" in n ? n.href : "#"}
+                    className="transition hover:text-primary"
+                  >
+                    {n.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
