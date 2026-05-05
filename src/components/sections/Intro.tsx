@@ -35,7 +35,7 @@ export function Intro() {
             threshold={0.52}
             delay={120}
             onVisible={() => setStatsVisible(true)}
-            className="lg:mt-auto"
+            className="hidden lg:block lg:mt-auto"
           >
             <dl className="mt-8 grid grid-cols-3 gap-2 border-t border-line pt-6 sm:gap-6">
               <Stat
@@ -90,6 +90,27 @@ export function Intro() {
                 className="object-cover transition duration-700 group-hover:scale-[1.04] cursor-pointer"
               />
             </button>
+          </Reveal>
+        </div>
+
+        {/* Mobile Stats */}
+        <div className="lg:hidden">
+          <Reveal
+            threshold={0.52}
+            delay={120}
+            onVisible={() => setStatsVisible(true)}
+          >
+            <dl className="grid grid-cols-3 gap-2 border-t border-line pt-6 sm:gap-6">
+              <Stat
+                n={11}
+                l={t.intro.statsGuests}
+                countUp
+                play={statsVisible}
+                align="start"
+              />
+              <Stat n={5} l={t.intro.statsBedrooms} align="center" />
+              <Stat n={2} l={t.intro.statsBathrooms} align="end" />
+            </dl>
           </Reveal>
         </div>
       </div>

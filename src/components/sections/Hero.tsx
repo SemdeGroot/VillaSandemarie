@@ -74,6 +74,7 @@ export function Hero() {
         muted
         loop
         playsInline
+        controls={false}
         onPlaying={() => setIsPlaying(true)}
         onTimeUpdate={(e) => {
           if (e.currentTarget.currentTime > 0) setIsPlaying(true);
@@ -82,6 +83,8 @@ export function Hero() {
         aria-hidden="true"
         tabIndex={-1}
         disablePictureInPicture
+        disableRemotePlayback
+        controlsList="nodownload nofullscreen noremoteplayback"
       >
         <source src="/media/home/hero-mobile.mp4" type="video/mp4" media="(max-width: 768px)" />
         <source src="/media/home/hero.mp4" type="video/mp4" />

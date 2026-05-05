@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, MessageCircle, Phone, ArrowUpRight } from "lucide-react";
+import { Mail, MessageCircle, Phone, ArrowUpRight, MapPin } from "lucide-react";
 import { site } from "@/lib/site";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { Logo } from "@/components/site/Logo";
@@ -105,8 +105,8 @@ export function Footer() {
         <div className="min-w-0">
           <p className="eyebrow text-warm">{t.footer.contact}</p>
           <ul className="mt-3 space-y-3 text-[14px] text-primary/78">
-            <li className="flex items-center gap-2">
-              <Phone size={14} className="shrink-0 text-warm" />
+            <li className="flex items-start gap-2">
+              <Phone size={14} className="mt-1 shrink-0 text-warm" />
               <a
                 href={`tel:${site.contact.phoneIntl}`}
                 className="break-all transition hover:text-primary"
@@ -114,8 +114,8 @@ export function Footer() {
                 {site.contact.phone}
               </a>
             </li>
-            <li className="flex items-center gap-2">
-              <Mail size={14} className="shrink-0 text-warm" />
+            <li className="flex items-start gap-2">
+              <Mail size={14} className="mt-1 shrink-0 text-warm" />
               <a
                 href={`mailto:${site.contact.email}`}
                 className="break-all transition hover:text-primary"
@@ -123,8 +123,8 @@ export function Footer() {
                 {site.contact.email}
               </a>
             </li>
-            <li className="flex items-center gap-2">
-              <MessageCircle size={14} className="shrink-0 text-warm" />
+            <li className="flex items-start gap-2">
+              <MessageCircle size={14} className="mt-1 shrink-0 text-warm" />
               <a
                 href={site.whatsapp.nl}
                 target="_blank"
@@ -134,8 +134,8 @@ export function Footer() {
                 WhatsApp <span className="text-primary/55">(NL)</span>
               </a>
             </li>
-            <li className="flex items-center gap-2">
-              <MessageCircle size={14} className="shrink-0 text-warm" />
+            <li className="flex items-start gap-2">
+              <MessageCircle size={14} className="mt-1 shrink-0 text-warm" />
               <a
                 href={site.whatsapp.en}
                 target="_blank"
@@ -143,6 +143,25 @@ export function Footer() {
                 className="transition hover:text-primary"
               >
                 WhatsApp <span className="text-primary/55">(EN)</span>
+              </a>
+            </li>
+            <li className="flex items-start gap-2">
+              <MapPin size={14} className="mt-1 shrink-0 text-warm" />
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                  site.address.full,
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex items-center gap-1.5 transition hover:text-primary"
+              >
+                <span className="underline underline-offset-4 decoration-primary/20 transition group-hover:decoration-primary/50">
+                  {site.address.full}
+                </span>
+                <ArrowUpRight
+                  size={13}
+                  className="translate-y-px opacity-60 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
+                />
               </a>
             </li>
           </ul>
@@ -160,22 +179,6 @@ export function Footer() {
             © {new Date().getFullYear()} {site.name}
             {t.footer.rights ? ` ${t.footer.rights}` : ""}
           </p>
-          <a
-            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-              site.address.full,
-            )}`}
-            target="_blank"
-            rel="noreferrer"
-            className="group flex items-center gap-1.5 transition hover:text-primary"
-          >
-            <span className="underline underline-offset-4 decoration-primary/20 transition group-hover:decoration-primary/50">
-              {site.address.full}
-            </span>
-            <ArrowUpRight
-              size={13}
-              className="translate-y-px opacity-60 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
-            />
-          </a>
         </div>
       </div>
     </footer>

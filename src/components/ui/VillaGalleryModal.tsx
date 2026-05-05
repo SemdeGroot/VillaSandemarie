@@ -54,6 +54,41 @@ export function VillaGalleryModal() {
     });
   }, [scrollToIndex]);
 
+  const onScroll = useCallback(() => {
+    if (isScrollingRef.current || !hasMountedRef.current) return;
+    
+    const rail = railRef.current;
+    if (!rail) return;
+    
+    const scrollLeft = rail.scrollLeft;
+    const width = rail.clientWidth;
+    if (width === 0) return;
+    
+    const newIndex = Math.round(scrollLeft / width);
+    
+    if (newIndex !== internalIndex && newIndex >= 0 && newIndex < allVillaImages.length) {
+      setInternalIndex(newIndex);
+    }
+  }, [internalIndex]);
+
+  const dotsRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll the active dot into view - ONLY on mobile
+  useEffect(() => {
+    const handleDotScroll = () => {
+      if (dotsRef.current && window.innerWidth < 1024) {
+        const activeDot = dotsRef.current.children[internalIndex] as HTMLElement;
+        if (activeDot) {
+          const container = dotsRef.current;
+          const scrollLeft = activeDot.offsetLeft - container.clientWidth / 2 + activeDot.clientWidth / 2;
+          container.scrollTo({ left: scrollLeft, behavior: "smooth" });
+        }
+      }
+    };
+
+    handleDotScroll();
+  }, [internalIndex]);
+
   // Sync internal index when modal opens and do instant scroll
   useEffect(() => {
     if (isOpen) {
@@ -71,7 +106,7 @@ export function VillaGalleryModal() {
         // Small delay to ensure the scroll has finished before enabling observer
         setTimeout(() => {
           hasMountedRef.current = true;
-        }, 50);
+        }, 100);
       });
     }
   }, [isOpen, activeIndex]);
@@ -122,6 +157,7 @@ export function VillaGalleryModal() {
         {/* Image Rail */}
         <div
           ref={railRef}
+          onScroll={onScroll}
           className={cn(
             "flex h-full w-full overflow-x-auto scrollbar-none",
             "snap-x snap-mandatory lg:overflow-x-hidden"
@@ -178,12 +214,12 @@ export function VillaGalleryModal() {
             })()}
           </p>
           
-          <div className="mt-5 flex items-center gap-8">
-             <div className="text-[10px] font-bold tracking-[0.2em] text-primary/30 tabular-nums uppercase">
+          {/* Desktop Footer: Original centered layout */}
+          <div className="mt-5 hidden lg:flex items-center gap-8">
+            <div className="text-[10px] font-bold tracking-[0.2em] text-primary/30 tabular-nums uppercase">
               {internalIndex + 1} / {allVillaImages.length}
             </div>
 
-            {/* Dots Navigation */}
             <div className="flex gap-2">
               {allVillaImages.map((_, i) => (
                 <button
@@ -201,6 +237,53 @@ export function VillaGalleryModal() {
                   aria-label={`Go to image ${i + 1}`}
                 />
               ))}
+            </div>
+          </div>
+
+          {/* Mobile Footer: New layout with chevrons and centered counter on newline */}
+          <div className="mt-5 flex lg:hidden flex-col items-center gap-4 w-full">
+            <div className="flex items-center gap-2 justify-center w-full px-6">
+              <button
+                onClick={prev}
+                className="rounded-full p-2 text-primary/40 active:bg-primary/5 active:scale-90"
+                aria-label="Previous"
+              >
+                <ChevronLeft size={20} />
+              </button>
+
+              <div 
+                ref={dotsRef}
+                className="flex gap-2 overflow-x-auto scrollbar-none snap-x py-1 px-4 max-w-[160px]"
+              >
+                {allVillaImages.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      scrollToIndex(i);
+                      setInternalIndex(i);
+                    }}
+                    className={cn(
+                      "h-1.5 shrink-0 rounded-full transition-all duration-500 snap-center",
+                      i === internalIndex
+                        ? "w-6 bg-warm shadow-sm"
+                        : "w-1.5 bg-primary/15 hover:bg-primary/30"
+                    )}
+                    aria-label={`Go to image ${i + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={next}
+                className="rounded-full p-2 text-primary/40 active:bg-primary/5 active:scale-90"
+                aria-label="Next"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+
+            <div className="text-[10px] font-bold tracking-[0.2em] text-primary/30 tabular-nums uppercase">
+              {internalIndex + 1} / {allVillaImages.length}
             </div>
           </div>
         </div>
