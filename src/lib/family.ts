@@ -1,18 +1,26 @@
 import type { Locale } from "@/lib/i18n/locales";
 
 export const familyIntro: Record<Locale, string> = {
-  nl: `Soms kom je op een plek waar alles klopt. Voor ons is dat Curaçao. Ruim twintig jaar geleden werden we als familie verliefd op het eiland. We hebben er acht jaar gewoond, onze villa gebouwd en een thuis gemaakt waar zon, zee en samenzijn vanzelfsprekend zijn.
+  nl: `Soms kom je op een plek waar alles klopt. Voor ons is die plek Curaçao. Ruim twintig jaar geleden werd onze familie verliefd op het eiland. We woonden er acht jaar lang, bouwden hier onze vakantievilla en creëerden een thuis waar zon, zee en samenzijn centraal staan. Inmiddels wonen we weer in Nederland, maar Curaçao is nooit uit ons hart verdwenen.
 
-Inmiddels woont Lisa-Marie weer fulltime op Curaçao en is het eiland meer dan ooit deel van ons dagelijks leven. We hebben de villa gebouwd zoals we zelf graag op vakantie gaan: comfortabel, ontspannen en gewoon goed voor elkaar. Boxspringbedden, airco in elke slaapkamer, snelle wifi en een keuken waar je echt mee kunt koken. We wilden een plek maken waar gasten zich meteen thuis voelen, net zoals wij dat hier ook doen.`,
-  en: `Sometimes you arrive somewhere and everything just clicks. For us, that's Curaçao. More than twenty years ago we fell in love with the island as a family. We lived here for eight years, built our villa and made a home where sun, sea and being together are simply a given.
+Elke zomer keren we met de hele familie terug naar “ons eiland” – naar de plek waar we kunnen ontspannen, ontdekken en herinneringen maken. Inmiddels woont Lisa-Marie weer op Curaçao en is het eiland meer dan ooit onderdeel van ons dagelijks leven.
 
-Lisa-Marie now lives on Curaçao full-time again, so the island is more than ever part of our daily life. We built the villa the way we like to be on holiday ourselves: comfortable, relaxed and just well taken care of. Boxspring beds, AC in every bedroom, fast wifi and a kitchen you can actually cook in. We wanted a place where guests feel at home immediately, the way we do here.`,
-  de: `Manchmal kommt man irgendwo an, und alles passt einfach. Für uns ist das Curaçao. Vor mehr als zwanzig Jahren haben wir uns als Familie in die Insel verliebt. Wir haben acht Jahre hier gewohnt, unsere Villa gebaut und ein Zuhause geschaffen, in dem Sonne, Meer und Zusammensein selbstverständlich sind.
+Onze villa is gebouwd en ingericht zoals wij zelf graag vakantie vieren: comfortabel, ontspannen en praktisch. Boxspringbedden, airco in elke slaapkamer, snelle wifi en een goed uitgeruste keuken zijn voor ons vanzelfsprekend. We wilden een plek creëren waar gasten zich meteen thuis voelen — net zoals wij dat doen zodra we hier voet op de stoep zetten.`,
+  en: `Sometimes you come to a place where everything is right. For us, that place is Curaçao. More than twenty years ago, our family fell in love with the island. We lived there for eight years, built our holiday villa here and created a home where sun, sea and togetherness are central. We now live in the Netherlands again, but Curaçao has never left our hearts.
 
-Lisa-Marie lebt inzwischen wieder ganz auf Curaçao, und die Insel ist mehr denn je Teil unseres Alltags. Wir haben die Villa so gebaut, wie wir selbst gerne Urlaub machen: bequem, entspannt und einfach gut versorgt. Boxspringbetten, Klimaanlage in jedem Schlafzimmer, schnelles WLAN und eine Küche, in der man wirklich kochen kann. Wir wollten einen Ort schaffen, an dem sich Gäste sofort zu Hause fühlen, so wie wir hier.`,
-  es: `A veces llegas a un sitio y todo cuadra. Para nosotros, ese sitio es Curazao. Hace más de veinte años nos enamoramos de la isla como familia. Vivimos aquí ocho años, construimos nuestra villa y creamos un hogar donde el sol, el mar y estar juntos son lo más natural.
+Every summer we return with the whole family to “our island” – to the place where we can relax, explore and make memories. Lisa-Marie now lives on Curaçao again and the island is more than ever part of our daily life.
 
-Hoy Lisa-Marie vuelve a vivir en Curazao a tiempo completo, y la isla forma parte más que nunca de nuestro día a día. Construimos la villa como nos gusta estar a nosotros de vacaciones: cómoda, relajada y bien cuidada. Camas con boxspring, aire acondicionado en cada habitación, wifi rápido y una cocina con la que de verdad se puede cocinar. Queríamos un sitio donde los huéspedes se sientan en casa al instante, igual que nosotros aquí.`,
+Our villa is built and furnished exactly the way we like to vacation ourselves: comfortable, relaxed and practical. Boxspring beds, AC in every bedroom, fast wifi and a well-equipped kitchen are a given for us. We wanted to create a place where guests feel right at home – just as we do as soon as we step onto the pavement here.`,
+  de: `Manchmal kommt man an einen Ort, an dem einfach alles stimmt. Für uns ist dieser Ort Curaçao. Vor mehr als zwanzig Jahren hat sich unsere Familie in die Insel verliebt. Wir haben dort acht Jahre lang gelebt, unsere Ferienvilla hier gebaut und ein Zuhause geschaffen, in dem Sonne, Meer und das Zusammensein im Mittelpunkt stehen. Inzwischen leben wir wieder in den Niederlanden, aber Curaçao ist nie aus unseren Herzen verschwunden.
+
+Jeden Sommer kehren wir mit der ganzen Familie auf „unsere Insel“ zurück – an den Ort, an dem wir uns entspannen, Neues entdecken und Erinnerungen sammeln können. Inzwischen lebt Lisa-Marie wieder auf Curaçao, und die Insel ist mehr denn je Teil unseres täglichen Lebens.
+
+Unsere Villa ist so gebaut und eingerichtet, wie wir selbst gerne Urlaub machen: komfortabel, entspannt und praktisch. Boxspringbetten, Klimaanlage in jedem Schlafzimmer, schnelles WLAN und eine gut ausgestattete Küche sind für uns selbstverständlich. Wir wollten einen Ort schaffen, an dem sich die Gäste sofort wie zu Hause fühlen – genau wie wir, sobald wir hier den Fuß auf den Gehweg setzen.`,
+  es: `A veces llegas a un lugar donde todo encaja. Para nosotros, ese lugar es Curazao. Hace más de veinte años, nuestra familia se enamoró de la isla. Vivimos allí durante ocho años, construimos nuestra villa de vacaciones aquí y creamos un hogar donde el sol, el mar y la convivencia son lo principal. Ahora vivimos de nuevo en los Países Bajos, pero Curazao nunca ha salido de nuestros corazones.
+
+Cada verano regresamos con toda la familia a “nuestra isla”, al lugar donde podemos relajarnos, explorar y crear recuerdos. Actualmente, Lisa-Marie vive de nuevo en Curazao y la isla forma parte de nuestra vida diaria más que nunca.
+
+Nuestra villa está construida y amueblada tal como nos gusta pasar las vacaciones a nosotros mismos: cómoda, relajada y práctica. Camas boxspring, aire acondicionado en cada habitación, wifi rápido y una cocina bien equipada son algo natural para nosotros. Queríamos crear un lugar donde los huéspedes se sientan como en casa, tal como nos sentimos nosotros en cuanto ponemos un pie en la acera.`,
 };
 
 export type FamilyMember = {
@@ -32,30 +40,30 @@ export const family: readonly FamilyMember[] = [
       es: "Libros, playa y ciudad",
     },
     bio: {
-      nl: "Curaçao is voor mij ultiem ontspannen: een fijn strandbedje, een goed boek en de zachte bries van zee. Ik hou van de charme van Willemstad en struin graag door de boetiekjes in Punda en Otrobanda.",
-      en: "For me, Curaçao is the ultimate way to unwind: a comfortable beach bed, a good book and the soft sea breeze. I love the charm of Willemstad and like wandering through the boutiques in Punda and Otrobanda.",
-      de: "Curaçao bedeutet für mich pure Entspannung: eine bequeme Strandliege, ein gutes Buch und die sanfte Meeresbrise. Ich liebe den Charme von Willemstad und stöbere gerne durch die Boutiquen in Punda und Otrobanda.",
-      es: "Para mí, Curazao es desconectar de verdad: una buena tumbona, un buen libro y la brisa del mar. Me encanta el encanto de Willemstad y me gusta perderme por las tiendas de Punda y Otrobanda.",
+      nl: "Voor mij betekent Curaçao ultiem ontspannen. Geef me een fijn strandbedje, een goed boek en de zachte bries van de zee en ik ben gelukkig. Ik hou van de charme van Willemstad en struin graag door de leuke boetiekjes. Mijn ideale dag op het eiland bestaat uit strand, lezen, puzzelen en afsluiten met een lekker diner bij een van onze favoriete restaurants.",
+      en: "For me, Curaçao means ultimate relaxation. Give me a comfortable beach bed, a good book and the soft sea breeze and I'm happy. I love the charm of Willemstad and enjoy browsing the lovely boutiques. My ideal day on the island consists of the beach, reading, puzzling and ending with a delicious dinner at one of our favourite restaurants.",
+      de: "Für mich bedeutet Curaçao ultimative Entspannung. Geben Sie mir eine bequeme Strandliege, ein gutes Buch und die sanfte Meeresbrise, und ich bin glücklich. Ich liebe den Charme von Willemstad und stöbere gerne durch die hübschen Boutiquen. Mein idealer Tag auf der Insel besteht aus Strand, Lesen, Puzzeln und einem leckeren Abendessen in einem unserer Lieblingsrestaurants zum Abschluss.",
+      es: "Para mí, Curazao significa relajación total. Dame una buena tumbona, un buen libro y la suave brisa del mar y soy feliz. Me encanta el encanto de Willemstad y disfruto paseando por las bonitas boutiques. Mi día ideal en la isla consiste en playa, lectura, rompecabezas y terminar con una deliciosa cena en uno de nuestros restaurantes favoritos.",
     },
     favorites: {
       nl: [
         "Frozen cappuccino bij Chill Beach Bar & Grill",
-        "Boetiekjes in Punda en Otrobanda",
-        "Diner bij Mosa Caña",
+        "Struinen langs boetiekjes in Punda & Otrobanda",
+        "Uiteten bij Mosa Caña",
       ],
       en: [
         "Frozen cappuccino at Chill Beach Bar & Grill",
-        "Boutiques in Punda and Otrobanda",
+        "Strolling past boutiques in Punda & Otrobanda",
         "Dinner at Mosa Caña",
       ],
       de: [
-        "Frozen Cappuccino in Chill Beach Bar & Grill",
-        "Boutiquen in Punda und Otrobanda",
+        "Frozen Cappuccino in der Chill Beach Bar & Grill",
+        "Stöbern in Boutiquen in Punda & Otrobanda",
         "Abendessen im Mosa Caña",
       ],
       es: [
-        "Frozen cappuccino en Chill Beach Bar & Grill",
-        "Tiendas en Punda y Otrobanda",
+        "Cappuccino helado en Chill Beach Bar & Grill",
+        "Pasear por las boutiques de Punda y Otrobanda",
         "Cena en Mosa Caña",
       ],
     },
@@ -69,30 +77,30 @@ export const family: readonly FamilyMember[] = [
       es: "El manitas de la casa",
     },
     bio: {
-      nl: "Zodra Alex op Curaçao landt, beginnen de ideeën te borrelen. Je vindt hem met kwast, boormachine of rolmaat in de hand, altijd bezig de villa weer wat fijner te maken. En als het werk klaar is: een goed boek, een koud biertje en uit eten.",
-      en: "The moment Alex lands on Curaçao, the ideas start bubbling up. You'll find him with a brush, drill or tape measure in hand, always making the villa a little nicer. And once the work is done: a good book, a cold beer and dinner out.",
-      de: "Sobald Alex auf Curaçao landet, sprudeln die Ideen. Man findet ihn mit Pinsel, Bohrer oder Zollstock in der Hand, immer dabei, die Villa noch ein bisschen schöner zu machen. Und wenn die Arbeit getan ist: ein gutes Buch, ein kaltes Bier und essen gehen.",
-      es: "En cuanto Alex aterriza en Curazao, las ideas empiezan a salir. Lo encuentras con pincel, taladro o metro en la mano, siempre dejando la villa un poquito mejor. Y cuando termina: un buen libro, una cerveza fría y a cenar fuera.",
+      nl: "Alex is onze klussende vader — zodra hij op Curaçao landt, borrelen er nieuwe ideeën op. Je vindt hem meestal met een kwast, boormachine of rolmaat in zijn hand. Hij geniet ervan om de villa steeds weer een beetje mooier en comfortabeler te maken. Maar zodra het kluswerk erop zit, is het tijd voor ontspanning: een goed boek, een koud biertje bij happy hour of een gezellig diner bij een van zijn favoriete restaurants.",
+      en: "Alex is our handy dad — as soon as he lands on Curaçao, new ideas bubble up. You'll usually find him with a brush, drill or measuring tape in his hand. He enjoys making the villa a little more beautiful and comfortable time and again. But as soon as the DIY work is done, it's time for relaxation: a good book, a cold beer at happy hour or a cozy dinner at one of his favourite restaurants.",
+      de: "Alex ist unser heimwerkelnder Vater – sobald er auf Curaçao landet, sprudeln neue Ideen hervor. Meistens findet man ihn mit Pinsel, Bohrmaschine oder Maßband in der Hand. Er genießt es, die Villa immer wieder ein Stück schöner und komfortabler zu machen. Aber sobald die handwerkliche Arbeit getan ist, ist Zeit für Entspannung: ein gutes Buch, ein kaltes Bier zur Happy Hour oder ein gemütliches Abendessen in einem seiner Lieblingsrestaurants.",
+      es: "Alex es nuestro padre manitas: en cuanto aterriza en Curazao, le surgen nuevas ideas. Normalmente lo encontrarás con un pincel, un taladro o una cinta métrica en la mano. Disfruta haciendo la villa cada vez un poco más bonita y cómoda. Pero en cuanto termina el trabajo de bricolaje, llega el momento de relajarse: un buen libro, una cerveza fría en el happy hour o una cena acogedora en uno de sus restaurantes favoritos.",
     },
     favorites: {
       nl: [
         "Polar bij happy hour",
-        "Lezen bij Koko's",
-        "Diner bij De Heeren at Sea",
+        "Boek lezen bij Koko’s",
+        "Uiteten bij de Heeren at Sea",
       ],
       en: [
         "Polar at happy hour",
-        "Reading at Koko's",
+        "Reading a book at Koko’s",
         "Dinner at De Heeren at Sea",
       ],
       de: [
         "Polar zur Happy Hour",
-        "Lesen bei Koko's",
+        "Buch lesen im Koko’s",
         "Abendessen im De Heeren at Sea",
       ],
       es: [
         "Polar en el happy hour",
-        "Leer en Koko's",
+        "Leer un libro en Koko’s",
         "Cena en De Heeren at Sea",
       ],
     },
@@ -106,30 +114,30 @@ export const family: readonly FamilyMember[] = [
       es: "En la isla misma",
     },
     bio: {
-      nl: "In 2022 liep ik stage op Curaçao en raakte opnieuw verliefd op de plek waar ik een deel van mijn jeugd doorbracht. Sinds 2024 woon ik er weer permanent. Het liefst ben ik in of op het water, duikend of freedivend tussen de riffen. Of nieuwe koffietentjes ontdekken.",
-      en: "In 2022 I did an internship on Curaçao and fell in love all over again with the place where I spent part of my childhood. Since 2024 I've been living here permanently again. I'm happiest in or on the water, diving or freediving along the reefs. Or discovering new coffee spots.",
-      de: "2022 habe ich auf Curaçao ein Praktikum gemacht und mich erneut in den Ort verliebt, an dem ich einen Teil meiner Kindheit verbracht habe. Seit 2024 lebe ich wieder fest hier. Am liebsten bin ich im oder auf dem Wasser, beim Tauchen oder Freediven an den Riffen. Oder ich entdecke neue Cafés.",
-      es: "En 2022 hice una pasantía en Curazao y volví a enamorarme del lugar donde pasé parte de mi infancia. Desde 2024 vivo aquí de forma permanente otra vez. Lo que más disfruto es estar en el agua, buceando o haciendo apnea por los arrecifes. O descubrir cafeterías nuevas.",
+      nl: "In 2022 liep ik stage op Curaçao en raakte ik opnieuw verliefd op het eiland waar ik ooit een deel van mijn jeugd doorbracht. Na mijn studie ben ik in 2024 definitief terugverhuisd — dit keer niet voor vakantie, maar om hier echt mijn leven op te bouwen. Je vindt me het liefst in of op het water: duikend of freedivend tussen de kleurrijke riffen. Daarnaast ben ik gek op gezellige koffietentjes en nieuwe hotspots ontdekken.",
+      en: "In 2022 I did an internship on Curaçao and fell in love all over again with the island where I once spent part of my youth. After my studies, I moved back permanently in 2024 — this time not for a holiday, but to truly build my life here. You'll most often find me in or on the water: diving or freediving among the colourful reefs. In addition, I love cozy coffee shops and discovering new hotspots.",
+      de: "2022 habe ich ein Praktikum auf Curaçao gemacht und mich erneut in die Insel verliebt, auf der ich einen Teil meiner Kindheit verbracht habe. Nach meinem Studium bin ich 2024 endgültig zurückgezogen – diesmal nicht für den Urlaub, sondern um mir hier wirklich mein Leben aufzubauen. Am liebsten bin ich im oder auf dem Wasser: beim Tauchen oder Freitauchen zwischen den farbenfrohen Riffen. Außerdem liebe ich gemütliche Cafés und das Entdecken neuer Hotspots.",
+      es: "En 2022 hice unas prácticas en Curazao y me volví a enamorar de la isla donde pasé parte de mi juventud. Después de mis estudios, regresé definitivamente en 2024, esta vez no por vacaciones, sino para construir realmente mi vida aquí. Lo que más me gusta es estar en el agua: buceando o haciendo apnea entre los coloridos arrecifes. Además, me encantan las cafeterías acogedoras y descubrir nuevos lugares de moda.",
     },
     favorites: {
       nl: [
-        "Awa di Lamunchi bij Number Ten",
+        "Awa di Lamunchi bij Number Ten Curacao",
         "Duiken bij Oostpunt",
-        "Diner bij Villa Vis",
+        "Uiteten bij Villa Vis",
       ],
       en: [
-        "Awa di Lamunchi at Number Ten",
-        "Diving at Oostpunt",
+        "Awa di Lamunchi at Number Ten Curacao",
+        "Diving at East Point",
         "Dinner at Villa Vis",
       ],
       de: [
-        "Awa di Lamunchi im Number Ten",
-        "Tauchen bei Oostpunt",
+        "Awa di Lamunchi im Number Ten Curacao",
+        "Tauchen am East Point",
         "Abendessen im Villa Vis",
       ],
       es: [
-        "Awa di Lamunchi en Number Ten",
-        "Buceo en Oostpunt",
+        "Awa di Lamunchi en Number Ten Curacao",
+        "Buceo en East Point",
         "Cena en Villa Vis",
       ],
     },
@@ -143,16 +151,16 @@ export const family: readonly FamilyMember[] = [
       es: "Nacido en la isla",
     },
     bio: {
-      nl: "Geboren op Curaçao, dat blijft een bijzonder gevoel. Mijn dag begint vaak actief: de Christoffelberg op of de zee in. Daarna een relaxte happy hour, muziek, zonsondergang en een koude Brasa. Voor mij is dat pure Curaçao.",
-      en: "Born on Curaçao, that's still a special feeling. My day often starts active: up the Christoffelberg or into the sea. After that a relaxed happy hour, music, sunset and a cold Brasa. To me, that's Curaçao at its purest.",
-      de: "Auf Curaçao geboren, das bleibt ein besonderes Gefühl. Mein Tag beginnt oft aktiv: rauf auf den Christoffelberg oder rein ins Meer. Danach entspannte Happy Hour, Musik, Sonnenuntergang und ein kaltes Brasa. Für mich ist das Curaçao pur.",
-      es: "Haber nacido en Curazao sigue siendo algo especial. Mi día suele empezar activo: subir el Christoffelberg o meterme en el mar. Después un happy hour tranquilo, música, atardecer y una Brasa fría. Para mí, eso es Curazao en estado puro.",
+      nl: "Ik ben geboren op Curaçao en dat blijft een bijzonder gevoel. Wanneer ik terug ben, begint mijn dag vaak met iets actiefs — de Christoffelberg beklimmen of zwemmen in zee. Maar ik geniet net zo veel van de relaxte happy hour sfeer op het eiland. De combinatie van muziek, zonsondergang en een koude Brasa is voor mij pure Curaçao-vibe.",
+      en: "I was born on Curaçao and that remains a special feeling. Whenever I'm back, my day often starts with something active — climbing Mount Christoffel or swimming in the sea. But I enjoy the relaxed happy hour atmosphere on the island just as much. The combination of music, sunset and a cold Brasa is pure Curaçao vibe for me.",
+      de: "Ich wurde auf Curaçao geboren, und das ist immer noch ein besonderes Gefühl. Wenn ich zurück bin, beginnt mein Tag oft mit etwas Aktivem – den Christoffelberg besteigen oder im Meer schwimmen. Aber ich genieße die entspannte Happy-Hour-Atmosphäre auf der Insel genauso sehr. Die Kombination aus Musik, Sonnenuntergang und einem kühlen Brasa ist für mich das pure Curaçao-Gefühl.",
+      es: "Nací en Curazao y eso sigue siendo un sentimiento especial. Cuando vuelvo, mi día suele empezar con algo activo: subir al monte Christoffel o nadar en el mar. Pero disfruto igual del ambiente relajado del happy hour en la isla. La combinación de música, atardecer y una Brasa fría es para mí la pura esencia de Curazao.",
     },
     favorites: {
       nl: [
         "Brasa bij Zanzibar Beach",
         "Chillen bij Kokomo Beach",
-        "Diner bij De Gouverneur",
+        "Uiteten bij de Gouverneur",
       ],
       en: [
         "Brasa at Zanzibar Beach",

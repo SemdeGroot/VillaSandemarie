@@ -240,14 +240,14 @@ const nl: Dict = {
   },
   aboutTeaser: {
     eyebrow: "Over ons",
-    titlePre: "Een echt",
-    titleHighlight: "familiebedrijf",
+    titlePre: "Wie er achter Villa Sandemarie",
+    titleHighlight: "zitten",
     body: "Geen onpersoonlijk bedrijf, gewoon onze familie. Lisa-Marie woont op Curaçao en zorgt ter plekke voor de villa, de rest van ons denkt vanuit Nederland mee. Direct contact, van je eerste vraag tot na je verblijf.",
   },
   curacaoTeaser: {
     eyebrow: "Curaçao",
-    titlePre: "Het eiland zoals",
-    titleHighlight: "wij het kennen",
+    titlePre: "Curaçao ontdekken vanuit",
+    titleHighlight: "Villa Sandemarie",
     body: "Vanuit Cas Grandi sta je zo bij Jan Thiel, Mambo en de bekende stranden, en de rustigere baaitjes liggen er net achter. We delen graag onze favoriete plekken: stranden, duikspots, restaurantjes en de Willemstad-loops die wij zelf doen.",
   },
   booking: {
@@ -516,14 +516,14 @@ const en: Dict = {
   },
   aboutTeaser: {
     eyebrow: "About us",
-    titlePre: "A real",
-    titleHighlight: "family business",
+    titlePre: "The family behind",
+    titleHighlight: "Villa Sandemarie",
     body: "No faceless company, just our family. Lisa-Marie lives on Curaçao and takes care of the villa on the spot, the rest of us think along from the Netherlands. Direct contact, from your first question to after your stay.",
   },
   curacaoTeaser: {
     eyebrow: "Curaçao",
-    titlePre: "The island the",
-    titleHighlight: "way we know it",
+    titlePre: "Discover Curaçao from",
+    titleHighlight: "Villa Sandemarie",
     body: "From Cas Grandi you're at Jan Thiel, Mambo and the well-known beaches in minutes, and the quieter bays sit just behind them. We're happy to share our own favourites: beaches, dive sites, restaurants and the Willemstad walks we do ourselves.",
   },
   booking: {
@@ -792,14 +792,14 @@ const de: Dict = {
   },
   aboutTeaser: {
     eyebrow: "Über uns",
-    titlePre: "Ein echtes",
-    titleHighlight: "Familienunternehmen",
+    titlePre: "Die Familie hinter",
+    titleHighlight: "Villa Sandemarie",
     body: "Keine anonyme Firma, einfach unsere Familie. Lisa-Marie lebt auf Curaçao und kümmert sich vor Ort um die Villa, der Rest denkt aus den Niederlanden mit. Direkter Kontakt, von der ersten Frage bis nach dem Aufenthalt.",
   },
   curacaoTeaser: {
     eyebrow: "Curaçao",
-    titlePre: "Die Insel, wie",
-    titleHighlight: "wir sie kennen",
+    titlePre: "Curaçao entdecken von",
+    titleHighlight: "Villa Sandemarie",
     body: "Von Cas Grandi seid ihr in wenigen Minuten in Jan Thiel, Mambo und an den bekannten Stränden, und die ruhigen Buchten liegen direkt dahinter. Wir teilen unsere eigenen Lieblingsplätze: Strände, Tauchspots, Restaurants und unsere Willemstad-Runden.",
   },
   booking: {
@@ -1202,7 +1202,7 @@ const es: Dict = {
     ],
     audiences: {
       families: {
-        title: "Families",
+        title: "Familias",
         text: "Habitaciones de sobra, piscina propia y una casa que se siente como una base común. También con los abuelos sigue habiendo espacio.",
       },
       friends: {
