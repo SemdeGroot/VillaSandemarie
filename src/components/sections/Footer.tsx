@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Mail, MessageCircle, Phone, ArrowUpRight, MapPin } from "lucide-react";
 import { site } from "@/lib/site";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
@@ -41,6 +42,19 @@ const TikTokIcon = (props: IconProps) => (
 export function Footer() {
   const { t } = useLocale();
   const { openGallery } = useGallery();
+  const pathname = usePathname();
+
+  // Clicking a link to the current page scrolls to the top instead of being
+  // a no-op. Hash links never equal the bare pathname so they keep their
+  // default in-page scroll.
+  const goTopIfSame =
+    (href: string) => (e: React.MouseEvent) => {
+      if (href === pathname) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    };
+
   const nav = [
     { href: "/#villa", label: t.nav.villa },
     { href: "/#voorzieningen", label: t.nav.amenities },
@@ -56,6 +70,8 @@ export function Footer() {
         <div className="col-span-2 lg:col-span-1">
           <Link
             href="/"
+            prefetch={false}
+            onClick={goTopIfSame("/")}
             className="flex items-center gap-3 font-display text-3xl text-primary"
           >
             <Logo className="h-10 w-10 shrink-0" />
@@ -91,7 +107,9 @@ export function Footer() {
                   </button>
                 ) : (
                   <Link
-                    href={"href" in n ? n.href : "#"}
+                    href={("href" in n ? n.href : undefined) ?? "#"}
+                    prefetch={false}
+                    onClick={goTopIfSame(("href" in n ? n.href : undefined) ?? "#")}
                     className="transition hover:text-primary"
                   >
                     {n.label}

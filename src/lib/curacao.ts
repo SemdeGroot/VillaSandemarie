@@ -155,7 +155,6 @@ export const curacaoStories: CuracaoStory[] = [
       de: "Bunte Fassaden von Willemstad an der Handelskade",
       es: "Fachadas de colores de Willemstad en la Handelskade",
     },
-    by: "Margriet",
     content: {
       nl: {
         category: "Stad",

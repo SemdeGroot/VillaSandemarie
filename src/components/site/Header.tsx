@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowRight, Mail, Menu, MessageCircle, X } from "lucide-react";
 import { site } from "@/lib/site";
 import { LinkButton } from "@/components/ui/button";
@@ -20,6 +21,19 @@ export function Header({ variant = "transparent" }: Props) {
   const [open, setOpen] = React.useState(false);
   const { t } = useLocale();
   const { openGallery } = useGallery();
+  const pathname = usePathname();
+
+  // Clicking a link to the page you're already on scrolls back to the top
+  // instead of doing nothing. Hash links (e.g. "/#villa") never match the
+  // bare pathname, so they keep their default in-page scroll behaviour.
+  const goTopIfSame =
+    (href: string) => (e: React.MouseEvent) => {
+      setOpen(false);
+      if (href === pathname) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    };
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
@@ -75,10 +89,11 @@ export function Header({ variant = "transparent" }: Props) {
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-8 sm:py-3.5 lg:px-12">
           <Link
             href="/"
+            prefetch={false}
             className="header-logo flex items-center gap-2 font-display text-[1.15rem] font-semibold tracking-tight sm:gap-2.5 sm:text-xl lg:transition-colors"
             style={{ color: desktopSolid ? "#2d4829" : "#ffffff" }}
             aria-label={`${site.name} home`}
-            onClick={() => setOpen(false)}
+            onClick={goTopIfSame("/")}
           >
             <Logo className="h-8 w-8 shrink-0 sm:h-9 sm:w-9" />
             <span className="mt-0.5">{site.name}</span>
@@ -104,7 +119,9 @@ export function Header({ variant = "transparent" }: Props) {
               ) : (
                 <Link
                   key={"href" in item ? item.href : "gallery"}
-                  href={"href" in item ? item.href : "#"}
+                  href={("href" in item ? item.href : undefined) ?? "#"}
+                  prefetch={false}
+                  onClick={goTopIfSame(("href" in item ? item.href : undefined) ?? "#")}
                   className="transition hover:opacity-100"
                 >
                   {item.label}
@@ -149,23 +166,13 @@ export function Header({ variant = "transparent" }: Props) {
         </div>
       </header>
 
-      {/* Mobile drawer overlay */}
-      <div
-        className={cn(
-          "fixed inset-x-0 top-0 z-[60] bg-[#0d1410]/55 transition-opacity duration-300 ease-out lg:hidden",
-          open ? "opacity-100" : "pointer-events-none opacity-0",
-        )}
-        style={{
-          bottom: "env(safe-area-inset-bottom, 0px)",
-        }}
-        onClick={() => setOpen(false)}
-        aria-hidden="true"
-      />
-
-      {/* Mobile drawer panel */}
+      {/* Mobile drawer panel: full-screen paper sheet. Covering the whole
+          viewport (incl. the bottom safe area) keeps the browser chrome /
+          gesture bar the same paper tone as every other page, instead of the
+          grey a partial dark overlay produced. */}
       <aside
         className={cn(
-          "fixed inset-x-0 top-0 z-[70] origin-top bg-[#faf8f3] transition-[transform,opacity] duration-[320ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] lg:hidden",
+          "fixed inset-0 z-[70] overflow-y-auto bg-[#faf8f3] transition-[transform,opacity] duration-[320ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] lg:hidden",
           open
             ? "translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-4 opacity-0",
@@ -173,9 +180,6 @@ export function Header({ variant = "transparent" }: Props) {
         style={{
           paddingTop: "calc(env(safe-area-inset-top, 0px) + 4rem)",
           paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1.5rem)",
-          boxShadow: open
-            ? "0 24px 60px -28px rgba(45,72,41,0.35)"
-            : "none",
         }}
         aria-hidden={!open}
       >
@@ -204,8 +208,9 @@ export function Header({ variant = "transparent" }: Props) {
             ) : (
               <Link
                 key={"href" in item ? item.href : "gallery"}
-                href={"href" in item ? item.href : "#"}
-                onClick={() => setOpen(false)}
+                href={("href" in item ? item.href : undefined) ?? "#"}
+                prefetch={false}
+                onClick={goTopIfSame(("href" in item ? item.href : undefined) ?? "#")}
                 className={cn(
                   "group flex items-center justify-between border-b border-[#2d4829]/10 py-4 text-[1.4rem] font-display text-[#2d4829] transition-[opacity,transform] duration-300 ease-out hover:text-[#59392e]",
                   open ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0",
