@@ -228,7 +228,7 @@ const nl: Dict = {
   gallery: {
     eyebrow: "Galerij",
     title: "Een rondje door de villa",
-    body: "Drone-foto, zwembad, slaapkamers en de hoekjes waar je vanzelf neerploft. Allemaal door ons zelf gemaakt.",
+    body: "De villa van buiten en van binnen. Van het zwembad tot de hoekjes waar je vanzelf neerploft.",
   },
   audiences: {
     eyebrow: "Voor wie",
@@ -504,7 +504,7 @@ const en: Dict = {
   gallery: {
     eyebrow: "Gallery",
     title: "A walk through the villa",
-    body: "Drone shot, pool, bedrooms, and the corners where you end up sitting for hours. All shot by us.",
+    body: "The villa from outside and inside. From the pool to the corners where you end up sitting for hours.",
   },
   audiences: {
     eyebrow: "Who it's for",
@@ -780,7 +780,7 @@ const de: Dict = {
   gallery: {
     eyebrow: "Fotos",
     title: "Ein Rundgang durch die Villa",
-    body: "Drohnenfoto, pool, Schlafzimmer und die Ecken, in denen man sitzen bleibt. Alles selbst aufgenommen.",
+    body: "Die Villa von außen und innen. Vom Pool bis zu den Ecken, in denen man einfach sitzen bleibt.",
   },
   audiences: {
     eyebrow: "Für wen",
@@ -1039,7 +1039,7 @@ const es: Dict = {
   amenities: {
     eyebrow: "Servicios",
     title: "Todo lo que necesitas, nada que sobre",
-    body: "Hemos preparado la villa como nos gusta estar a nosotros de vacaciones: cómoda, relajada y bien pensada. Una buena cocina, aire acondicionado en cada habitación, wifi rápido—y tumbonas que no querrás dejar.",
+    body: "Hemos preparado la villa como nos gusta estar a nosotros de vacaciones: cómoda, relajada y bien pensada. Una buena cocina, aire acondicionado en cada habitación, wifi rápido y tumbonas que no querrás dejar.",
   },
   rooms: {
     eyebrow: "Distribución y habitaciones",
@@ -1056,7 +1056,7 @@ const es: Dict = {
   gallery: {
     eyebrow: "Galería",
     title: "Una vuelta por la villa",
-    body: "Foto con drone, piscina, dormitorios y los rincones donde te quedas un rato largo. Todo lo hicimos nosotros.",
+    body: "La villa por fuera y por dentro. Desde la piscina hasta los rincones donde uno simplemente se queda.",
   },
   audiences: {
     eyebrow: "Para quién",
@@ -1112,7 +1112,7 @@ const es: Dict = {
   },
   footer: {
     explore: "Explorar",
-    contact: "Contact",
+    contact: "Contacto",
     whatsapp: "WhatsApp",
     chatNl: "Chatea en neerlandés",
     chatEn: "Chat in English",
@@ -1137,7 +1137,7 @@ const es: Dict = {
     titleHighlight: "como la conocemos",
     lead: "Curazao no es para nosotros un destino, es nuestra casa. Compartimos con gusto los sitios donde vamos.",
     storiesHeading: "Nuestras historias",
-    quickTipsHeading: "Praktisch",
+    quickTipsHeading: "Práctico",
     insiderBy: (name) => `Escrito por ${name}`,
   },
   language: {

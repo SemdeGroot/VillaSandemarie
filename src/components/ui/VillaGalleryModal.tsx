@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { allVillaImages } from "@/lib/gallery";
@@ -73,37 +73,37 @@ export function VillaGalleryModal() {
 
   const dotsRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll the active dot into view - ONLY on mobile
+  // Auto-scroll the active dot into view - ONLY on mobile, ONLY after gallery has settled
   useEffect(() => {
-    const handleDotScroll = () => {
-      if (dotsRef.current && window.innerWidth < 1024) {
-        const activeDot = dotsRef.current.children[internalIndex] as HTMLElement;
-        if (activeDot) {
-          const container = dotsRef.current;
-          const scrollLeft = activeDot.offsetLeft - container.clientWidth / 2 + activeDot.clientWidth / 2;
-          container.scrollTo({ left: scrollLeft, behavior: "smooth" });
-        }
+    if (!hasMountedRef.current) return;
+    if (dotsRef.current && window.innerWidth < 1024) {
+      const activeDot = dotsRef.current.children[internalIndex] as HTMLElement;
+      if (activeDot) {
+        const container = dotsRef.current;
+        const scrollLeft = activeDot.offsetLeft - container.clientWidth / 2 + activeDot.clientWidth / 2;
+        container.scrollTo({ left: scrollLeft, behavior: "smooth" });
       }
-    };
-
-    handleDotScroll();
+    }
   }, [internalIndex]);
 
-  // Sync internal index when modal opens and do instant scroll
+  // Sync index synchronously before paint to prevent title flicker
+  useLayoutEffect(() => {
+    if (isOpen) {
+      setInternalIndex(activeIndex);
+      hasMountedRef.current = false;
+    }
+  }, [isOpen, activeIndex]);
+
+  // Instantly scroll rail to the correct position after the index is synced
   useEffect(() => {
     if (isOpen) {
-      hasMountedRef.current = false;
-      
-      // We use requestAnimationFrame to ensure the rail is rendered before scrolling
       requestAnimationFrame(() => {
-        setInternalIndex(activeIndex);
-        if (railRef.current) {
-          const cell = railRef.current.children[activeIndex] as HTMLElement;
-          if (cell) {
-            railRef.current.scrollTo({ left: cell.offsetLeft, behavior: "auto" });
-          }
+        const rail = railRef.current;
+        if (!rail) return;
+        const cell = rail.children[activeIndex] as HTMLElement;
+        if (cell) {
+          rail.scrollTo({ left: cell.offsetLeft, behavior: "auto" });
         }
-        // Small delay to ensure the scroll has finished before enabling observer
         setTimeout(() => {
           hasMountedRef.current = true;
         }, 100);
@@ -127,10 +127,10 @@ export function VillaGalleryModal() {
         </div>
         <button
           onClick={closeGallery}
-          className="rounded-full bg-primary/5 p-2.5 text-primary transition hover:bg-primary/10 active:scale-95"
+          className="rounded-full bg-primary/5 p-3 text-primary transition hover:bg-primary/10 active:scale-95"
           aria-label="Close gallery"
         >
-          <X size={22} />
+          <X size={20} />
         </button>
       </div>
 
@@ -138,14 +138,14 @@ export function VillaGalleryModal() {
       <div className="hidden lg:block">
         <button
           onClick={prev}
-          className="absolute left-8 top-1/2 z-[110] -translate-y-1/2 rounded-full bg-primary/5 p-4 text-primary transition hover:bg-primary/10 hover:scale-105 active:scale-95"
+          className="absolute left-8 top-1/2 z-[110] -translate-y-1/2 cursor-pointer rounded-full bg-primary/5 p-4 text-primary transition hover:bg-primary/10 hover:scale-105 active:scale-95"
           aria-label="Previous image"
         >
           <ChevronLeft size={32} strokeWidth={1.5} />
         </button>
         <button
           onClick={next}
-          className="absolute right-8 top-1/2 z-[110] -translate-y-1/2 rounded-full bg-primary/5 p-4 text-primary transition hover:bg-primary/10 hover:scale-105 active:scale-95"
+          className="absolute right-8 top-1/2 z-[110] -translate-y-1/2 cursor-pointer rounded-full bg-primary/5 p-4 text-primary transition hover:bg-primary/10 hover:scale-105 active:scale-95"
           aria-label="Next image"
         >
           <ChevronRight size={32} strokeWidth={1.5} />
@@ -167,7 +167,7 @@ export function VillaGalleryModal() {
             <div
               key={img.src}
               data-index={i}
-              className="flex h-full w-full shrink-0 snap-center items-center justify-center px-4 py-32 lg:px-48"
+              className="flex h-full w-full shrink-0 snap-center items-center justify-center px-4 pt-20 pb-28 lg:px-48 lg:py-32"
             >
               <div className="relative h-full w-full select-none">
                 {/* Skeleton Loader */}
@@ -204,7 +204,10 @@ export function VillaGalleryModal() {
         </div>
 
         {/* Footer Info */}
-        <div className="absolute bottom-0 left-0 right-0 z-[110] flex flex-col items-center bg-gradient-to-t from-paper to-transparent pb-10 pt-24">
+        <div
+          className="absolute bottom-0 left-0 right-0 z-[110] flex flex-col items-center bg-gradient-to-t from-paper to-transparent pt-16"
+          style={{ paddingBottom: 'max(2.5rem, env(safe-area-inset-bottom))' }}
+        >
           <p className="max-w-2xl px-6 text-center text-[15px] font-medium leading-relaxed text-primary sm:text-base">
             {(() => {
               const img = allVillaImages[internalIndex];
@@ -240,51 +243,49 @@ export function VillaGalleryModal() {
             </div>
           </div>
 
-          {/* Mobile Footer: New layout with chevrons and centered counter on newline */}
-          <div className="mt-5 flex lg:hidden flex-col items-center gap-4 w-full">
-            <div className="flex items-center gap-2 justify-center w-full px-6">
-              <button
-                onClick={prev}
-                className="rounded-full p-2 text-primary/40 active:bg-primary/5 active:scale-90"
-                aria-label="Previous"
-              >
-                <ChevronLeft size={20} />
-              </button>
+          {/* Mobile Footer: chevrons | dots | counter — one row */}
+          <div className="mt-4 flex lg:hidden items-center gap-2 justify-center w-full px-4">
+            <button
+              onClick={prev}
+              className="cursor-pointer rounded-full p-3 text-primary/60 active:bg-primary/8 active:scale-90"
+              aria-label="Previous"
+            >
+              <ChevronLeft size={24} strokeWidth={1.5} />
+            </button>
 
-              <div 
-                ref={dotsRef}
-                className="flex gap-2 overflow-x-auto scrollbar-none snap-x py-1 px-4 max-w-[160px]"
-              >
-                {allVillaImages.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      scrollToIndex(i);
-                      setInternalIndex(i);
-                    }}
-                    className={cn(
-                      "h-1.5 shrink-0 rounded-full transition-all duration-500 snap-center",
-                      i === internalIndex
-                        ? "w-6 bg-warm shadow-sm"
-                        : "w-1.5 bg-primary/15 hover:bg-primary/30"
-                    )}
-                    aria-label={`Go to image ${i + 1}`}
-                  />
-                ))}
-              </div>
-
-              <button
-                onClick={next}
-                className="rounded-full p-2 text-primary/40 active:bg-primary/5 active:scale-90"
-                aria-label="Next"
-              >
-                <ChevronRight size={20} />
-              </button>
+            <div
+              ref={dotsRef}
+              className="flex gap-2 overflow-x-auto scrollbar-none snap-x py-1 px-2 max-w-[200px]"
+            >
+              {allVillaImages.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    scrollToIndex(i);
+                    setInternalIndex(i);
+                  }}
+                  className={cn(
+                    "h-1.5 shrink-0 rounded-full transition-all duration-500 snap-center",
+                    i === internalIndex
+                      ? "w-6 bg-warm shadow-sm"
+                      : "w-1.5 bg-primary/15"
+                  )}
+                  aria-label={`Go to image ${i + 1}`}
+                />
+              ))}
             </div>
 
-            <div className="text-[10px] font-bold tracking-[0.2em] text-primary/30 tabular-nums uppercase">
-              {internalIndex + 1} / {allVillaImages.length}
-            </div>
+            <button
+              onClick={next}
+              className="cursor-pointer rounded-full p-3 text-primary/60 active:bg-primary/8 active:scale-90"
+              aria-label="Next"
+            >
+              <ChevronRight size={24} strokeWidth={1.5} />
+            </button>
+
+            <span className="ml-1 text-[10px] font-bold tracking-[0.2em] text-primary/30 tabular-nums uppercase shrink-0">
+              {internalIndex + 1}&thinsp;/&thinsp;{allVillaImages.length}
+            </span>
           </div>
         </div>
       </div>

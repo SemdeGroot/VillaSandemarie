@@ -219,7 +219,7 @@ export const curacaoStories: CuracaoStory[] = [
         intro:
           "Curaçao is meer dan alleen strand. Je vindt er ruige kust, zoutpannen, flamingo’s en wandelroutes met mooie uitzichten.",
         body: [
-          "De Christoffelberg is die bekendste hike van het eiland. Het is even klimmen, maar boven word je beloond met een prachtig uitzicht. Ook de minder bekende Tafelberg is een aanrader. Deze kun je beklimmen met Curaçao Rock Climbing.",
+          "De Christoffelberg is de bekendste hike van het eiland. Het is even klimmen, maar boven word je beloond met een prachtig uitzicht. Ook de minder bekende Tafelberg is een aanrader. Deze kun je beklimmen met Curaçao Rock Climbing.",
           "Aan de noordkust liggen verschillende boca’s, waar de zee hard tegen de rotsen slaat. Mooi om even te stoppen tijdens een rondje over het eiland.",
           "Bij de zoutpannen kun je vaak flamingo’s zien. Geen groot uitje, maar wel leuk om mee te pakken als je toch die kant op rijdt.",
           "En dan is er nog Klein Curaçao. Een dagtrip met de boot naar dit onbewoonde eiland is echt een van de leukste uitjes op Curaçao. Denk aan helderblauw water, een breed wit strand, snorkelen, de oude vuurtoren en onderweg gewoon lekker op zee zijn.",
