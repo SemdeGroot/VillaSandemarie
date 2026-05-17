@@ -40,7 +40,7 @@ export function CuracaoPage() {
   return (
     <>
       <Section className="bg-paper pt-[calc(env(safe-area-inset-top,0px)+5rem)] pb-12 sm:pt-32 sm:pb-20 lg:pt-40">
-        <Reveal className="max-w-3xl">
+        <Reveal immediate className="max-w-3xl">
           <Eyebrow>{t.curacao.eyebrow}</Eyebrow>
           <Display as="h1" className="mt-4">
             {t.curacao.titlePre}{" "}
@@ -74,6 +74,7 @@ export function CuracaoPage() {
           ].map((src) => (
             <Reveal
               key={src}
+              immediate
               className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-soft"
             >
               <RevealImage
@@ -81,6 +82,7 @@ export function CuracaoPage() {
                 alt="Curaçao"
                 fill
                 priority
+                immediate
                 sizes="(max-width: 1024px) 100vw, 33vw"
                 className="object-cover"
               />
