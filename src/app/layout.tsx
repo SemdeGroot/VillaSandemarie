@@ -6,6 +6,7 @@ import { LocaleProvider } from "@/lib/i18n/LocaleProvider";
 import { getServerLocale } from "@/lib/i18n/server";
 import { GalleryProvider } from "@/lib/GalleryProvider";
 import { VillaGalleryModal } from "@/components/ui/VillaGalleryModal";
+import { SmoothScroll } from "@/components/ui/SmoothScroll";
 
 export const metadata: Metadata = {
   formatDetection: {
@@ -101,6 +102,7 @@ export default async function RootLayout({
       className={`${fontDisplay.variable} ${fontSans.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-paper font-sans text-primary">
+        <SmoothScroll />
         <LocaleProvider initialLocale={locale}>
           <GalleryProvider>
             {children}
