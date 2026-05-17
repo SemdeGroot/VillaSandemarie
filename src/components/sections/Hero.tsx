@@ -5,6 +5,7 @@ import { ArrowRight, MapPin } from "lucide-react";
 import { LinkButton } from "@/components/ui/button";
 import { villa } from "@/lib/villa";
 import { site } from "@/lib/site";
+import { heroPoster } from "@/lib/gallery";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 
 export function Hero() {
@@ -80,6 +81,7 @@ export function Hero() {
           if (e.currentTarget.currentTime > 0) setIsPlaying(true);
         }}
         preload="auto"
+        poster={heroPoster}
         aria-hidden="true"
         tabIndex={-1}
         disablePictureInPicture

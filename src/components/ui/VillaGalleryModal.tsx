@@ -5,10 +5,13 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { allVillaImages } from "@/lib/gallery";
 import { useGallery } from "@/lib/GalleryProvider";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
-import { cn } from "@/lib/utils";
 import { Logo } from "@/components/site/Logo";
+import { pickWidthBucket, buildOptimizedUrl, preloadOptimized } from "@/lib/imageOptimizer";
 
 const globalLoadedImages = new Set<string>();
+// Keep ≤ the browser's ~6 sockets so the active photo is never starved while
+// the rest of the gallery precaches in the background.
+const PRECACHE_CONCURRENCY = 5;
 
 export function VillaGalleryModal() {
   const { isOpen, activeIndex, closeGallery } = useGallery();
@@ -45,6 +48,14 @@ function GalleryModal({
   const touchStartX = useRef(0);
   const dotsRef = useRef<HTMLDivElement>(null);
 
+  // Freeze one optimizer width bucket per open so the displayed <img> and the
+  // precache request always resolve to a byte-identical URL (-> cache hit).
+  const widthBucketRef = useRef<number | null>(null);
+  if (widthBucketRef.current === null && typeof window !== "undefined") {
+    widthBucketRef.current = pickWidthBucket(window.innerWidth, window.devicePixelRatio || 1);
+  }
+  const widthBucket = widthBucketRef.current ?? 1920; // SSR / no-window fallback
+
   // Fade-in the modal on open.
   useEffect(() => {
     const raf = requestAnimationFrame(() => setMounted(true));
@@ -56,28 +67,67 @@ function GalleryModal({
     setLoadedImages((prev) => ({ ...prev, [src]: true }));
   }, []);
 
-  // Preload current ±2 images so navigation feels instant.
+  // Precache EVERY gallery photo ONCE when the modal opens, ordered outward
+  // from the opening photo, concurrency-capped. This effect runs once and is
+  // never torn down on navigation, so moving between photos (incl. the
+  // 26 -> 1 wrap) never aborts/restarts in-flight loads. Each load resolves
+  // only after decode() so the reveal is paint-ready and jank-free.
   useEffect(() => {
+    const controller = new AbortController();
     const count = allVillaImages.length;
-    for (let offset = -2; offset <= 2; offset++) {
-      const idx = ((index + offset) % count + count) % count;
-      const src = allVillaImages[idx].src;
-      if (!globalLoadedImages.has(src)) {
-        const img = new window.Image();
-        img.onload = () => handleImageLoad(src);
-        img.src = src;
-      }
+    const order: number[] = [activeIndex];
+    for (let d = 1; d < count; d++) {
+      order.push((activeIndex + d) % count);
+      order.push((activeIndex - d + count) % count);
     }
-  }, [index, handleImageLoad]);
+    const queue = order.filter(
+      (i, pos) =>
+        order.indexOf(i) === pos && !globalLoadedImages.has(allVillaImages[i].src),
+    );
+    let cursor = 0;
+    let active = 0;
+    let cancelled = false;
+    const pump = () => {
+      if (cancelled) return;
+      while (active < PRECACHE_CONCURRENCY && cursor < queue.length) {
+        const src = allVillaImages[queue[cursor++]].src;
+        active++;
+        preloadOptimized(src, widthBucket, controller.signal)
+          .then((loaded) => {
+            if (!cancelled) handleImageLoad(loaded);
+          })
+          .catch(() => {
+            /* aborted or failed — skeleton stays for that one */
+          })
+          .finally(() => {
+            active--;
+            pump();
+          });
+      }
+    };
+    pump();
+    return () => {
+      cancelled = true;
+      controller.abort();
+    };
+    // Runs once per open. widthBucket + handleImageLoad are stable for the
+    // modal's lifetime; activeIndex is fixed (component is keyed by it).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  // Scroll active dot into view on mobile.
+  // Keep the active dot in view on mobile. Adjacent steps scroll smoothly;
+  // bigger jumps and the 26 -> 1 wrap snap instantly so the whole strip
+  // doesn't visibly race across (which read as a glitch).
+  const prevIndexRef = useRef(index);
   useEffect(() => {
+    const prev = prevIndexRef.current;
+    prevIndexRef.current = index;
     if (dotsRef.current && window.innerWidth < 1024) {
       const activeDot = dotsRef.current.children[index] as HTMLElement;
       if (activeDot) {
         dotsRef.current.scrollTo({
           left: activeDot.offsetLeft - dotsRef.current.clientWidth / 2 + activeDot.clientWidth / 2,
-          behavior: "smooth",
+          behavior: Math.abs(index - prev) <= 1 ? "smooth" : "auto",
         });
       }
     }
@@ -87,6 +137,16 @@ function GalleryModal({
     if (isNavigatingRef.current) return;
     isNavigatingRef.current = true;
     const tagWillChange = allVillaImages[index]?.tag !== allVillaImages[targetIndex]?.tag;
+    // Jump the target to the front of the load order if it isn't ready yet,
+    // so a far jump reveals as soon as possible instead of waiting for the
+    // background sweep to reach it. The browser dedupes this with the sweep
+    // (identical optimizer URL), so it costs nothing extra.
+    const targetSrc = allVillaImages[targetIndex]?.src;
+    if (targetSrc && !globalLoadedImages.has(targetSrc)) {
+      preloadOptimized(targetSrc, widthBucket)
+        .then((s) => handleImageLoad(s))
+        .catch(() => {});
+    }
     setVisible(false);
     if (tagWillChange) setLabelVisible(false);
     setTimeout(() => {
@@ -95,7 +155,7 @@ function GalleryModal({
       if (tagWillChange) setLabelVisible(true);
       isNavigatingRef.current = false;
     }, 260);
-  }, [index]);
+  }, [index, widthBucket, handleImageLoad]);
 
   const next = useCallback(() => {
     navigateTo((index + 1) % allVillaImages.length);
@@ -117,6 +177,9 @@ function GalleryModal({
   }, [closeGallery, next, prev]);
 
   const img = allVillaImages[index];
+  // The photo is shown only once it is decoded (`ready`). This makes the
+  // reveal one consistent fade for seen and unseen photos alike.
+  const ready = !!loadedImages[img.src];
 
   return (
     <div
@@ -166,38 +229,40 @@ function GalleryModal({
         </button>
       </div>
 
-      {/* Image area — opacity transition drives the crossfade */}
+      {/* Image area. ONE consistent reveal: the photo only becomes visible
+          once it is decoded (`ready`) AND not mid-navigation (`visible`).
+          Seen and unseen photos animate identically — unseen ones just show
+          the skeleton a little longer first, then the same single fade. */}
       <div
         className="relative flex min-h-0 flex-1 items-center justify-center px-4 py-3 lg:px-48 lg:py-10"
-        style={{ opacity: visible ? 1 : 0, transition: "opacity 0.28s ease-out" }}
         onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
         onTouchEnd={(e) => {
           const dx = e.changedTouches[0].clientX - touchStartX.current;
           if (Math.abs(dx) > 50) dx < 0 ? next() : prev();
         }}
       >
-        {!loadedImages[img.src] && (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-            <div className="flex flex-col items-center gap-4">
-              <Logo className="h-14 w-14 gallery-logo-pulse" />
-              <span className="gallery-text-shimmer text-[11px] font-bold uppercase tracking-[0.35em]">
-                Villa Sandemarie
-              </span>
-            </div>
+        <div
+          className="absolute inset-0 flex items-center justify-center pointer-events-none select-none transition-opacity duration-300 ease-out"
+          style={{ opacity: ready ? 0 : 1 }}
+        >
+          <div className="flex flex-col items-center gap-4">
+            <Logo className="h-14 w-14 gallery-logo-pulse" />
+            <span className="gallery-text-shimmer text-[11px] font-bold uppercase tracking-[0.35em]">
+              Villa Sandemarie
+            </span>
           </div>
-        )}
+        </div>
 
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={img.src}
+          src={buildOptimizedUrl(img.src, widthBucket)}
           alt={img.alt}
           onLoad={() => handleImageLoad(img.src)}
           loading="eager"
           fetchPriority="high"
-          className={cn(
-            "block max-h-full max-w-full rounded-xl object-contain pointer-events-none select-none transition-opacity duration-500 ease-out",
-            loadedImages[img.src] ? "opacity-100" : "opacity-0"
-          )}
+          decoding="async"
+          className="block max-h-full max-w-full rounded-xl object-contain pointer-events-none select-none transition-opacity duration-300 ease-out"
+          style={{ opacity: visible && ready ? 1 : 0 }}
         />
       </div>
 
@@ -208,7 +273,7 @@ function GalleryModal({
       >
         <p
           className="max-w-2xl px-6 text-center text-[14px] font-medium leading-relaxed text-primary line-clamp-2 sm:text-[15px]"
-          style={{ opacity: visible ? 1 : 0, transition: "opacity 0.28s ease-out" }}
+          style={{ opacity: visible && ready ? 1 : 0, transition: "opacity 0.28s ease-out" }}
         >
           {(() => {
             if (!img) return null;
