@@ -141,7 +141,8 @@ a {
 @media (prefers-reduced-motion: reduce) {
   .reveal,
   .fade-up,
-  .ken-burns {
+  .ken-burns,
+  .gallery-photo-in {
     animation: none !important;
     transition: none !important;
     opacity: 1 !important;
@@ -232,6 +233,17 @@ a {
 @keyframes gallery-text-sweep {
   0%   { background-position: 0% 100%; }
   100% { background-position: 100% 0%; }
+}
+
+/* One-shot reveal for a freshly keyed gallery photo/caption. Using an
+   animation (not a transition) means it plays reliably on mount, so rapid
+   re-keying during fast navigation always fades in cleanly. */
+.gallery-photo-in {
+  animation: gallery-photo-in 0.34s ease-out both;
+}
+@keyframes gallery-photo-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* Date input native styling */

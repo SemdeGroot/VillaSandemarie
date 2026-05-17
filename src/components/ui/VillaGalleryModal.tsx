@@ -33,10 +33,12 @@ function GalleryModal({
   closeGallery: () => void;
 }) {
   const { t } = useLocale();
+  // `index` = the photo the user is navigating to (intent: drives the dots
+  // + counter). `shown` = the photo actually painted, plus its caption/tag.
+  // `shown` only ever advances to a fully decoded photo, so the photo and
+  // its caption can never disagree no matter how erratically the user clicks.
   const [index, setIndex] = useState(activeIndex);
-  // `visible` is only toggled during navigation transitions — starts true.
-  const [visible, setVisible] = useState(true);
-  const [labelVisible, setLabelVisible] = useState(true);
+  const [shown, setShown] = useState(activeIndex);
   // `mounted` drives the modal open fade-in (false → true on first paint).
   const [mounted, setMounted] = useState(false);
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>(() => {
@@ -44,7 +46,10 @@ function GalleryModal({
     globalLoadedImages.forEach((src) => { init[src] = true; });
     return init;
   });
-  const isNavigatingRef = useRef(false);
+  // Monotonic token: every navigation bumps it, so any older in-flight load
+  // is discarded and can never swap in the wrong photo.
+  const reqRef = useRef(0);
+  const indexRef = useRef(activeIndex);
   const touchStartX = useRef(0);
   const dotsRef = useRef<HTMLDivElement>(null);
 
@@ -133,37 +138,41 @@ function GalleryModal({
     }
   }, [index]);
 
-  const navigateTo = useCallback((targetIndex: number) => {
-    if (isNavigatingRef.current) return;
-    isNavigatingRef.current = true;
-    const tagWillChange = allVillaImages[index]?.tag !== allVillaImages[targetIndex]?.tag;
-    // Jump the target to the front of the load order if it isn't ready yet,
-    // so a far jump reveals as soon as possible instead of waiting for the
-    // background sweep to reach it. The browser dedupes this with the sweep
-    // (identical optimizer URL), so it costs nothing extra.
-    const targetSrc = allVillaImages[targetIndex]?.src;
-    if (targetSrc && !globalLoadedImages.has(targetSrc)) {
-      preloadOptimized(targetSrc, widthBucket)
-        .then((s) => handleImageLoad(s))
-        .catch(() => {});
+  // Navigation only updates intent (`index`). It is synchronous, lock-free
+  // and reads the live index from a ref, so spamming or alternating
+  // directions can never desync. `indexRef` is updated immediately so two
+  // clicks in the same tick still compute the right neighbour.
+  const navigateTo = useCallback((target: number) => {
+    const count = allVillaImages.length;
+    const t = ((target % count) + count) % count;
+    if (t === indexRef.current) return;
+    indexRef.current = t;
+    setIndex(t);
+  }, []);
+
+  const next = useCallback(() => navigateTo(indexRef.current + 1), [navigateTo]);
+  const prev = useCallback(() => navigateTo(indexRef.current - 1), [navigateTo]);
+
+  // Resolve the target into the displayed photo. The photo is only swapped
+  // in once decoded; the token discards any older in-flight load, so the
+  // painted photo + caption always match the latest settled target. With the
+  // open-time precache this is usually instant; a far jump past the precache
+  // front waits briefly while the previous photo stays up (never a mismatch).
+  useEffect(() => {
+    const token = ++reqRef.current;
+    const src = allVillaImages[index].src;
+    if (globalLoadedImages.has(src)) {
+      setShown(index);
+      return;
     }
-    setVisible(false);
-    if (tagWillChange) setLabelVisible(false);
-    setTimeout(() => {
-      setIndex(targetIndex);
-      setVisible(true);
-      if (tagWillChange) setLabelVisible(true);
-      isNavigatingRef.current = false;
-    }, 260);
+    preloadOptimized(src, widthBucket)
+      .then((s) => {
+        if (reqRef.current !== token) return;
+        handleImageLoad(s);
+        setShown(index);
+      })
+      .catch(() => {});
   }, [index, widthBucket, handleImageLoad]);
-
-  const next = useCallback(() => {
-    navigateTo((index + 1) % allVillaImages.length);
-  }, [index, navigateTo]);
-
-  const prev = useCallback(() => {
-    navigateTo((index - 1 + allVillaImages.length) % allVillaImages.length);
-  }, [index, navigateTo]);
 
   // Keyboard: Escape closes, arrow keys navigate.
   useEffect(() => {
@@ -176,10 +185,11 @@ function GalleryModal({
     return () => window.removeEventListener("keydown", onKey);
   }, [closeGallery, next, prev]);
 
-  const img = allVillaImages[index];
-  // The photo is shown only once it is decoded (`ready`). This makes the
-  // reveal one consistent fade for seen and unseen photos alike.
-  const ready = !!loadedImages[img.src];
+  // Everything the user actually sees (photo, caption, tag) derives from
+  // `shown` so they are always in lock-step. Dots + counter use `index`
+  // (intent) for instant tap feedback.
+  const img = allVillaImages[shown];
+  const shownReady = !!loadedImages[img.src];
 
   return (
     <div
@@ -197,7 +207,7 @@ function GalleryModal({
           </span>
           <span
             className="font-display text-lg text-primary"
-            style={{ opacity: labelVisible ? 1 : 0, transition: "opacity 0.28s ease-out" }}
+            style={{ opacity: shownReady ? 1 : 0, transition: "opacity 0.28s ease-out" }}
           >
             {img?.tag ? t.content.galleryTags[img.tag] : t.gallery.eyebrow}
           </span>
@@ -229,10 +239,11 @@ function GalleryModal({
         </button>
       </div>
 
-      {/* Image area. ONE consistent reveal: the photo only becomes visible
-          once it is decoded (`ready`) AND not mid-navigation (`visible`).
-          Seen and unseen photos animate identically — unseen ones just show
-          the skeleton a little longer first, then the same single fade. */}
+      {/* Image area. `shown` only ever points at a decoded photo, and the
+          <img> is keyed by it so React mounts a fresh element per photo — no
+          stale bitmap can linger behind a newer caption. The fade is a
+          one-shot CSS animation so it plays reliably on every (re)mount,
+          which keeps it clean under rapid, erratic navigation. */}
       <div
         className="relative flex min-h-0 flex-1 items-center justify-center px-4 py-3 lg:px-48 lg:py-10"
         onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
@@ -243,7 +254,7 @@ function GalleryModal({
       >
         <div
           className="absolute inset-0 flex items-center justify-center pointer-events-none select-none transition-opacity duration-300 ease-out"
-          style={{ opacity: ready ? 0 : 1 }}
+          style={{ opacity: shownReady ? 0 : 1 }}
         >
           <div className="flex flex-col items-center gap-4">
             <Logo className="h-14 w-14 gallery-logo-pulse" />
@@ -255,14 +266,18 @@ function GalleryModal({
 
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
+          key={shown}
           src={buildOptimizedUrl(img.src, widthBucket)}
           alt={img.alt}
           onLoad={() => handleImageLoad(img.src)}
           loading="eager"
           fetchPriority="high"
           decoding="async"
-          className="block max-h-full max-w-full rounded-xl object-contain pointer-events-none select-none transition-opacity duration-300 ease-out"
-          style={{ opacity: visible && ready ? 1 : 0 }}
+          className={
+            "block max-h-full max-w-full rounded-xl object-contain pointer-events-none select-none" +
+            (shownReady ? " gallery-photo-in" : "")
+          }
+          style={shownReady ? undefined : { opacity: 0 }}
         />
       </div>
 
@@ -271,15 +286,15 @@ function GalleryModal({
         className="z-[110] flex shrink-0 flex-col items-center pt-4"
         style={{ paddingBottom: "max(1.25rem, env(safe-area-inset-bottom))" }}
       >
-        <p
-          className="max-w-2xl px-6 text-center text-[14px] font-medium leading-relaxed text-primary line-clamp-2 sm:text-[15px]"
-          style={{ opacity: visible && ready ? 1 : 0, transition: "opacity 0.28s ease-out" }}
-        >
-          {(() => {
-            if (!img) return null;
-            const captionKey = img.src.split("/").pop()?.replace(".webp", "") || "";
-            return t.content.galleryCaptions[captionKey] ?? img.alt;
-          })()}
+        <p className="flex min-h-[2.6em] max-w-2xl items-center px-6 text-center text-[14px] font-medium leading-relaxed text-primary line-clamp-2 sm:text-[15px]">
+          {shownReady && (
+            <span key={shown} className="gallery-photo-in">
+              {(() => {
+                const captionKey = img.src.split("/").pop()?.replace(".webp", "") || "";
+                return t.content.galleryCaptions[captionKey] ?? img.alt;
+              })()}
+            </span>
+          )}
         </p>
 
         {/* Desktop: counter + dots */}
