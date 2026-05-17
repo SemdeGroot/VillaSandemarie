@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { allVillaImages } from "@/lib/gallery";
 import { useGallery } from "@/lib/GalleryProvider";
@@ -50,21 +50,16 @@ function GalleryModal({
   // is discarded and can never swap in the wrong photo.
   const reqRef = useRef(0);
   const indexRef = useRef(activeIndex);
-  const shownRef = useRef(activeIndex);
   const dotsRef = useRef<HTMLDivElement>(null);
 
-  // Mobile (<lg) gets a real Instagram-style swipe; desktop is untouched.
+  // Mobile (<lg) gets a native scroll-snap carousel (Instagram-style: the
+  // browser owns momentum + snapping, no JS runs during the gesture).
+  // Desktop is the untouched keyed <img> + chevrons + fade.
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== "undefined" && window.matchMedia("(max-width: 1023px)").matches,
   );
-  // `dragging` swaps the mobile photo into a finger-tracked 3-slide track.
-  // `fadePhoto` decides whether the idle <img> plays the entrance fade: true
-  // for chevron / dots / keyboard, false right after a swipe (the photo
-  // already physically slid, so it must not also fade).
-  const [dragging, setDragging] = useState(false);
-  const [fadePhoto, setFadePhoto] = useState(true);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const swipeRef = useRef({ x: 0, dx: 0, armed: false, dragging: false, animating: false });
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const scrollRafRef = useRef(0);
 
   // Freeze one optimizer width bucket per open so the displayed <img> and the
   // precache request always resolve to a byte-identical URL (-> cache hit).
@@ -87,10 +82,6 @@ function GalleryModal({
     mql.addEventListener("change", onChange);
     return () => mql.removeEventListener("change", onChange);
   }, []);
-
-  // Mirror `shown` into a ref so the swipe-commit callback (stable identity)
-  // can compute the right neighbour without going stale.
-  useEffect(() => { shownRef.current = shown; }, [shown]);
 
   const handleImageLoad = useCallback((src: string) => {
     globalLoadedImages.add(src);
@@ -163,90 +154,81 @@ function GalleryModal({
     }
   }, [index]);
 
-  // Navigation only updates intent (`index`). It is synchronous, lock-free
-  // and reads the live index from a ref, so spamming or alternating
-  // directions can never desync. `indexRef` is updated immediately so two
-  // clicks in the same tick still compute the right neighbour.
+  // Navigation updates intent (`index`). Lock-free; reads the live index from
+  // a ref so spamming/alternating can't desync. On mobile a native scroller is
+  // mounted: drive that and let its scroll handler settle the index, so dots
+  // and keyboard share the exact same path as a swipe (no parallel state).
   const navigateTo = useCallback((target: number) => {
     const count = allVillaImages.length;
     const t = ((target % count) + count) % count;
     if (t === indexRef.current) return;
+    const scroller = scrollerRef.current;
+    if (scroller) {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      scroller.scrollTo({
+        left: t * scroller.clientWidth,
+        behavior: reduce ? "auto" : "smooth",
+      });
+      return;
+    }
     indexRef.current = t;
-    setFadePhoto(true); // chevron / dots / keyboard => keep the fade
     setIndex(t);
   }, []);
 
   const next = useCallback(() => navigateTo(indexRef.current + 1), [navigateTo]);
   const prev = useCallback(() => navigateTo(indexRef.current - 1), [navigateTo]);
 
-  // --- Mobile swipe (Instagram-style). The photo physically tracks the
-  // finger; on release it slides to the neighbour or springs back. The photo
-  // itself never fades here (it slid); the caption still re-fades on commit.
-  const SWIPE_MS = 300;
-  const commitSwipe = useCallback((dir: -1 | 0 | 1) => {
-    const track = trackRef.current;
-    const finish = () => {
-      const s = swipeRef.current;
-      s.animating = false;
-      s.dragging = false;
-      if (dir !== 0) {
-        const count = allVillaImages.length;
-        const target = ((shownRef.current + dir) % count + count) % count;
-        shownRef.current = target;
-        indexRef.current = target;
-        setFadePhoto(false); // it slid in — must not also fade
-        setShown(target);
-        setIndex(target);
-      } else {
-        setFadePhoto(false); // unchanged photo — re-show without a fade
+  // --- Mobile carousel (native CSS scroll-snap). The browser owns the
+  // gesture; we only read which slide settled (rAF-throttled, off-gesture) to
+  // sync the counter/dots/caption. No JS transform, so nothing fights the
+  // native scroll or React re-renders.
+  const onScrollerScroll = useCallback(() => {
+    if (scrollRafRef.current) return;
+    scrollRafRef.current = requestAnimationFrame(() => {
+      scrollRafRef.current = 0;
+      const el = scrollerRef.current;
+      if (!el) return;
+      const w = el.clientWidth || 1;
+      const i = Math.round(el.scrollLeft / w);
+      if (i !== indexRef.current && i >= 0 && i < allVillaImages.length) {
+        indexRef.current = i;
+        setIndex(i);
+        setShown(i);
       }
-      setDragging(false);
-    };
-    if (!track) { finish(); return; }
-    swipeRef.current.animating = true;
-    track.style.transition = `transform ${SWIPE_MS}ms cubic-bezier(0.22,0.61,0.36,1)`;
-    const to = dir === -1 ? "0%" : dir === 1 ? "-200%" : "-100%";
-    void track.offsetWidth; // flush so the transition runs from the drag pos
-    track.style.transform = `translate3d(${to},0,0)`;
-    window.setTimeout(finish, SWIPE_MS + 20);
+    });
   }, []);
 
-  const onSwipeStart = useCallback((e: React.TouchEvent) => {
-    if (!isMobile || allVillaImages.length < 2 || swipeRef.current.animating) return;
-    const s = swipeRef.current;
-    s.x = e.touches[0].clientX;
-    s.dx = 0;
-    s.armed = true;
-    s.dragging = false;
+  // Open the carousel directly on the active photo (instant, no animation).
+  // Re-runs if the breakpoint flips desktop -> mobile so the scroller mounts
+  // already centred on the current photo. `indexRef` == activeIndex at mount.
+  useLayoutEffect(() => {
+    const el = scrollerRef.current;
+    if (el) el.scrollLeft = indexRef.current * el.clientWidth;
   }, [isMobile]);
 
-  const onSwipeMove = useCallback((e: React.TouchEvent) => {
-    const s = swipeRef.current;
-    if (!s.armed) return;
-    s.dx = e.touches[0].clientX - s.x;
-    if (!s.dragging) {
-      if (Math.abs(s.dx) < 8) return; // ignore taps / tiny moves
-      s.dragging = true;
-      setFadePhoto(false);
-      setDragging(true);
-    }
-    const track = trackRef.current;
-    if (track) {
-      track.style.transition = "none";
-      track.style.transform = `translate3d(calc(-100% + ${s.dx}px),0,0)`;
-    }
-  }, []);
+  // Keep the current photo centred across resize / orientation change.
+  useEffect(() => {
+    if (!isMobile) return;
+    let raf = 0;
+    const onResize = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const el = scrollerRef.current;
+        if (el) el.scrollLeft = indexRef.current * el.clientWidth;
+      });
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [isMobile]);
 
-  const onSwipeEnd = useCallback(() => {
-    const s = swipeRef.current;
-    s.armed = false;
-    if (!s.dragging) return;
-    const vw = trackRef.current ? trackRef.current.clientWidth / 3 : window.innerWidth;
-    const threshold = Math.max(56, vw * 0.18);
-    if (s.dx <= -threshold) commitSwipe(1);
-    else if (s.dx >= threshold) commitSwipe(-1);
-    else commitSwipe(0);
-  }, [commitSwipe]);
+  // Drop any pending scroll-read rAF on unmount.
+  useEffect(() => () => {
+    if (scrollRafRef.current) cancelAnimationFrame(scrollRafRef.current);
+  }, []);
 
   // Resolve the target into the displayed photo. The photo is only swapped
   // in once decoded; the token discards any older in-flight load, so the
@@ -339,88 +321,87 @@ function GalleryModal({
           stale bitmap can linger behind a newer caption. The fade is a
           one-shot CSS animation so it plays reliably on every (re)mount,
           which keeps it clean under rapid, erratic navigation. */}
-      <div
-        className="relative flex min-h-0 flex-1 items-center justify-center px-4 py-3 lg:px-48 lg:py-10"
-        style={isMobile ? { touchAction: "none" } : undefined}
-        onTouchStart={onSwipeStart}
-        onTouchMove={onSwipeMove}
-        onTouchEnd={onSwipeEnd}
-        onTouchCancel={onSwipeEnd}
-      >
-        <div
-          className="absolute inset-0 flex items-center justify-center pointer-events-none select-none transition-opacity duration-300 ease-out"
-          style={{ opacity: !shownReady && !dragging ? 1 : 0 }}
-        >
-          <div className="flex flex-col items-center gap-4">
-            <Logo className="h-14 w-14 gallery-logo-pulse" />
-            <span className="gallery-text-shimmer text-[11px] font-bold uppercase tracking-[0.35em]">
-              Villa Sandemarie
-            </span>
-          </div>
-        </div>
-
-        {isMobile && dragging ? (
-          /* Mobile drag: a finger-tracked 3-slide track. The photo slides
-             with the finger (no fade); neighbours are precached so they are
-             already decoded. */
-          <div className="absolute inset-0 overflow-hidden">
-            <div
-              ref={trackRef}
-              className="flex h-full"
-              style={{ width: "300%", transform: "translate3d(-100%,0,0)" }}
-            >
-              {[
-                (shown - 1 + allVillaImages.length) % allVillaImages.length,
-                shown,
-                (shown + 1) % allVillaImages.length,
-              ].map((idx, i) => {
-                const slide = allVillaImages[idx];
-                const slideReady = !!loadedImages[slide.src];
-                return (
-                  <div
-                    key={i}
-                    className="flex h-full w-full shrink-0 items-center justify-center px-4 py-3"
-                  >
-                    {slideReady ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={buildOptimizedUrl(slide.src, widthBucket)}
-                        alt={slide.alt}
-                        draggable={false}
-                        className="block max-h-full max-w-full rounded-xl object-contain pointer-events-none select-none"
-                      />
-                    ) : (
-                      <div className="flex flex-col items-center gap-4">
-                        <Logo className="h-14 w-14 gallery-logo-pulse" />
-                        <span className="gallery-text-shimmer text-[11px] font-bold uppercase tracking-[0.35em]">
-                          Villa Sandemarie
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+      <div className="relative flex min-h-0 flex-1 items-center justify-center px-4 py-3 lg:px-48 lg:py-10">
+        {isMobile ? (
+          /* Mobile: a native CSS scroll-snap carousel. Every photo is a
+             fixed full-width snap child so the layout never shifts (the key
+             to it being jank-free). Photos outside a small window around the
+             current one render the skeleton until the open-time precache
+             fills them in; swapping skeleton <-> <img> doesn't move layout. */
+          <div
+            ref={scrollerRef}
+            onScroll={onScrollerScroll}
+            className="absolute inset-0 flex h-full w-full overflow-x-auto overflow-y-hidden overscroll-x-contain scrollbar-none"
+            // Snap set inline: Tailwind v4 token/utility resolution is flaky in
+            // this project (see CLAUDE.md); scroll-snap MUST work, so it is not
+            // left to a class. `mandatory` + per-slide `scroll-snap-stop:always`
+            // = exactly one photo per swipe, with a snap (Instagram behaviour).
+            style={{
+              scrollSnapType: "x mandatory",
+              WebkitOverflowScrolling: "touch",
+            }}
+          >
+            {allVillaImages.map((slide, i) => {
+              const ready = !!loadedImages[slide.src] || Math.abs(i - shown) <= 2;
+              return (
+                <div
+                  key={slide.src}
+                  className="relative flex h-full w-full shrink-0 items-center justify-center px-4 py-3"
+                  style={{ scrollSnapAlign: "start", scrollSnapStop: "always" }}
+                >
+                  {ready ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={buildOptimizedUrl(slide.src, widthBucket)}
+                      alt={slide.alt}
+                      onLoad={() => handleImageLoad(slide.src)}
+                      draggable={false}
+                      decoding="async"
+                      className="block max-h-full max-w-full rounded-xl object-contain pointer-events-none select-none"
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center gap-4">
+                      <Logo className="h-14 w-14 gallery-logo-pulse" />
+                      <span className="gallery-text-shimmer text-[11px] font-bold uppercase tracking-[0.35em]">
+                        Villa Sandemarie
+                      </span>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         ) : (
-          /* Desktop + mobile-idle: the keyed <img> with the one-shot fade
-             (chevron / dots / keyboard). Desktop behaviour is unchanged:
-             `fadePhoto` only ever goes false via the mobile swipe. */
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
-            key={shown}
-            src={buildOptimizedUrl(img.src, widthBucket)}
-            alt={img.alt}
-            onLoad={() => handleImageLoad(img.src)}
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-            className={
-              "block max-h-full max-w-full rounded-xl object-contain pointer-events-none select-none" +
-              (shownReady && fadePhoto ? " gallery-photo-in" : "")
-            }
-            style={shownReady ? undefined : { opacity: 0 }}
-          />
+          /* Desktop: the keyed <img> with the one-shot fade (chevron / dots
+             / keyboard). Behaviour is byte-identical to before. */
+          <>
+            <div
+              className="absolute inset-0 flex items-center justify-center pointer-events-none select-none transition-opacity duration-300 ease-out"
+              style={{ opacity: !shownReady ? 1 : 0 }}
+            >
+              <div className="flex flex-col items-center gap-4">
+                <Logo className="h-14 w-14 gallery-logo-pulse" />
+                <span className="gallery-text-shimmer text-[11px] font-bold uppercase tracking-[0.35em]">
+                  Villa Sandemarie
+                </span>
+              </div>
+            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              key={shown}
+              src={buildOptimizedUrl(img.src, widthBucket)}
+              alt={img.alt}
+              onLoad={() => handleImageLoad(img.src)}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className={
+                "block max-h-full max-w-full rounded-xl object-contain pointer-events-none select-none" +
+                (shownReady ? " gallery-photo-in" : "")
+              }
+              style={shownReady ? undefined : { opacity: 0 }}
+            />
+          </>
         )}
       </div>
 
@@ -463,38 +444,22 @@ function GalleryModal({
           {index + 1} / {allVillaImages.length}
         </div>
 
-        {/* Mobile: chevrons + dots */}
-        <div className="mt-1.5 flex lg:hidden items-center gap-2 justify-center w-full px-4">
-          <button
-            onClick={prev}
-            className="shrink-0 cursor-pointer rounded-full p-3 text-primary/60 active:scale-90"
-            aria-label="Previous"
-          >
-            <ChevronLeft size={26} strokeWidth={1.5} />
-          </button>
-
+        {/* Mobile: dots only (swipe + dots + counter, like Instagram). */}
+        <div className="mt-1.5 flex lg:hidden items-center justify-center w-full px-4">
           <div
             ref={dotsRef}
-            className="flex gap-2 overflow-x-auto scrollbar-none py-1 px-2 max-w-[62vw]"
+            className="flex gap-2 overflow-x-auto scrollbar-none py-1 px-2 max-w-[80vw]"
           >
             {allVillaImages.map((_, i) => (
               <button
                 key={i}
                 onClick={() => navigateTo(i)}
-                className="gallery-dot"
+                className="gallery-dot shrink-0"
                 data-active={i === index ? "" : undefined}
                 aria-label={`Go to image ${i + 1}`}
               />
             ))}
           </div>
-
-          <button
-            onClick={next}
-            className="shrink-0 cursor-pointer rounded-full p-3 text-primary/60 active:scale-90"
-            aria-label="Next"
-          >
-            <ChevronRight size={26} strokeWidth={1.5} />
-          </button>
         </div>
       </div>
 
