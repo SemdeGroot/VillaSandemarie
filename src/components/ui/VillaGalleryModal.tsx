@@ -33,6 +33,7 @@ function GalleryModal({
   const [index, setIndex] = useState(activeIndex);
   // `visible` is only toggled during navigation transitions — starts true.
   const [visible, setVisible] = useState(true);
+  const [labelVisible, setLabelVisible] = useState(true);
   // `mounted` drives the modal open fade-in (false → true on first paint).
   const [mounted, setMounted] = useState(false);
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>(() => {
@@ -85,20 +86,16 @@ function GalleryModal({
   const navigateTo = useCallback((targetIndex: number) => {
     if (isNavigatingRef.current) return;
     isNavigatingRef.current = true;
+    const tagWillChange = allVillaImages[index]?.tag !== allVillaImages[targetIndex]?.tag;
     setVisible(false);
-    // Wait for the fade-out transition to fully complete (matches FADE_OUT_MS below).
+    if (tagWillChange) setLabelVisible(false);
     setTimeout(() => {
       setIndex(targetIndex);
-      // Two rAFs: first lets React paint the new image at opacity:0,
-      // second triggers the CSS transition to opacity:1.
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setVisible(true);
-          isNavigatingRef.current = false;
-        });
-      });
+      setVisible(true);
+      if (tagWillChange) setLabelVisible(true);
+      isNavigatingRef.current = false;
     }, 260);
-  }, []);
+  }, [index]);
 
   const next = useCallback(() => {
     navigateTo((index + 1) % allVillaImages.length);
@@ -135,7 +132,10 @@ function GalleryModal({
           <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary/40">
             Villa Sandemarie
           </span>
-          <span className="font-display text-lg text-primary">
+          <span
+            className="font-display text-lg text-primary"
+            style={{ opacity: labelVisible ? 1 : 0, transition: "opacity 0.28s ease-out" }}
+          >
             {img?.tag ? t.content.galleryTags[img.tag] : t.gallery.eyebrow}
           </span>
         </div>
@@ -227,10 +227,8 @@ function GalleryModal({
               <button
                 key={i}
                 onClick={() => navigateTo(i)}
-                className={cn(
-                  "h-1.5 rounded-full transition-all duration-500",
-                  i === index ? "w-6 bg-warm shadow-sm" : "w-1.5 bg-primary/15 hover:bg-primary/30"
-                )}
+                className="gallery-dot"
+                data-active={i === index ? "" : undefined}
                 aria-label={`Go to image ${i + 1}`}
               />
             ))}
@@ -260,10 +258,8 @@ function GalleryModal({
               <button
                 key={i}
                 onClick={() => navigateTo(i)}
-                className={cn(
-                  "h-1.5 shrink-0 rounded-full transition-all duration-500",
-                  i === index ? "w-6 bg-warm shadow-sm" : "w-1.5 bg-primary/15"
-                )}
+                className="gallery-dot"
+                data-active={i === index ? "" : undefined}
                 aria-label={`Go to image ${i + 1}`}
               />
             ))}
