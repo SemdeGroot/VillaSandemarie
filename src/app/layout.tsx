@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { site } from "@/lib/site";
@@ -102,6 +103,15 @@ export default async function RootLayout({
       className={`${fontDisplay.variable} ${fontSans.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-paper font-sans text-primary">
+        {/* Disable the browser's automatic scroll restoration. It otherwise
+            repaints at y=0 and then jumps/animates back to the saved position
+            on refresh (visible glitch on mobile). `beforeInteractive` runs in
+            the initial HTML, before restoration and hydration, so a refresh
+            always starts at the top. Accepted tradeoff: browser Back no longer
+            restores scroll. (next/script avoids React's raw-<script> warning.) */}
+        <Script id="scroll-restoration-manual" strategy="beforeInteractive">
+          {"if('scrollRestoration' in history)history.scrollRestoration='manual';"}
+        </Script>
         <SmoothScroll />
         <LocaleProvider initialLocale={locale}>
           <GalleryProvider>
