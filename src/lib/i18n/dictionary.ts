@@ -210,7 +210,7 @@ const nl: Dict = {
   },
   amenities: {
     eyebrow: "Voorzieningen",
-    title: "Alles wat je nodig hebt, niets wat je niet wilt",
+    title: "Alles wat je nodig hebt",
     body: "We hebben de villa ingericht zoals we zelf graag op vakantie zijn: comfortabel, ontspannen en gewoon goed voor elkaar. Een fijne keuken, airco in elke slaapkamer, snelle wifi en een ligstoel waar je niet vanaf wilt komen.",
   },
   rooms: {
@@ -486,7 +486,7 @@ const en: Dict = {
   },
   amenities: {
     eyebrow: "Amenities",
-    title: "Everything you need, nothing you don't",
+    title: "Everything you need",
     body: "We've set up the villa the way we like to be on holiday ourselves: comfortable, relaxed and just right. A proper kitchen, AC in every bedroom, fast wifi and loungers you won't want to leave.",
   },
   rooms: {
@@ -762,7 +762,7 @@ const de: Dict = {
   },
   amenities: {
     eyebrow: "Ausstattung",
-    title: "Alles was ihr braucht, nichts was nervt",
+    title: "Alles, was ihr braucht",
     body: "Wir haben die Villa so eingerichtet, wie wir selbst gerne Urlaub machen: bequem, entspannt und einfach gut. Eine richtige Küche, Klimaanlage in jedem Schlafzimmer, schnelles WLAN und Liegen, von denen ihr nicht mehr aufstehen wollt.",
   },
   rooms: {
@@ -1038,7 +1038,7 @@ const es: Dict = {
   },
   amenities: {
     eyebrow: "Servicios",
-    title: "Todo lo que necesitas, nada que sobre",
+    title: "Todo lo que necesitas",
     body: "Hemos preparado la villa como nos gusta estar a nosotros de vacaciones: cómoda, relajada y bien pensada. Una buena cocina, aire acondicionado en cada habitación, wifi rápido y tumbonas que no querrás dejar.",
   },
   rooms: {

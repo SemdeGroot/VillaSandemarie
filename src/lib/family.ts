@@ -5,22 +5,22 @@ export const familyIntro: Record<Locale, string> = {
 
 Elke zomer keren we met de hele familie terug naar “ons eiland” – naar de plek waar we kunnen ontspannen, ontdekken en herinneringen maken. Inmiddels woont Lisa-Marie weer op Curaçao en is het eiland meer dan ooit onderdeel van ons dagelijks leven.
 
-Onze villa is gebouwd en ingericht zoals wij zelf graag vakantie vieren: comfortabel, ontspannen en praktisch. Boxspringbedden, airco in elke slaapkamer, snelle wifi en een goed uitgeruste keuken zijn voor ons vanzelfsprekend. We wilden een plek creëren waar gasten zich meteen thuis voelen, net zoals wij dat doen zodra we hier voet op de stoep zetten.`,
+Onze villa is gebouwd en ingericht zoals wij zelf graag vakantie vieren: comfortabel, ontspannen en praktisch. Boxspringbedden, airco in elke slaapkamer, snelle wifi en een goed uitgeruste keuken zijn voor ons vanzelfsprekend. We wilden een plek creëren waar gasten zich meteen thuis voelen, net zoals wij dat doen zodra wij arriveren.`,
   en: `Sometimes you come to a place where everything is right. For us, that place is Curaçao. More than twenty years ago, our family fell in love with the island. We lived there for eight years, built our holiday villa here and created a home where sun, sea and togetherness are central. We now live in the Netherlands again, but Curaçao has never left our hearts.
 
 Every summer we return with the whole family to “our island” – to the place where we can relax, explore and make memories. Lisa-Marie now lives on Curaçao again and the island is more than ever part of our daily life.
 
-Our villa is built and furnished exactly the way we like to vacation ourselves: comfortable, relaxed and practical. Boxspring beds, AC in every bedroom, fast wifi and a well-equipped kitchen are a given for us. We wanted to create a place where guests feel right at home – just as we do as soon as we step onto the pavement here.`,
+Our villa is built and furnished exactly the way we like to vacation ourselves: comfortable, relaxed and practical. Boxspring beds, AC in every bedroom, fast wifi and a well-equipped kitchen are a given for us. We wanted to create a place where guests feel right at home, just as we do as soon as we arrive.`,
   de: `Manchmal kommt man an einen Ort, an dem einfach alles stimmt. Für uns ist dieser Ort Curaçao. Vor mehr als zwanzig Jahren hat sich unsere Familie in die Insel verliebt. Wir haben dort acht Jahre lang gelebt, unsere Ferienvilla hier gebaut und ein Zuhause geschaffen, in dem Sonne, Meer und das Zusammensein im Mittelpunkt stehen. Inzwischen leben wir wieder in den Niederlanden, aber Curaçao ist nie aus unseren Herzen verschwunden.
 
 Jeden Sommer kehren wir mit der ganzen Familie auf „unsere Insel“ zurück – an den Ort, an dem wir uns entspannen, Neues entdecken und Erinnerungen sammeln können. Inzwischen lebt Lisa-Marie wieder auf Curaçao, und die Insel ist mehr denn je Teil unseres täglichen Lebens.
 
-Unsere Villa ist so gebaut und eingerichtet, wie wir selbst gerne Urlaub machen: komfortabel, entspannt und praktisch. Boxspringbetten, Klimaanlage in jedem Schlafzimmer, schnelles WLAN und eine gut ausgestattete Küche sind für uns selbstverständlich. Wir wollten einen Ort schaffen, an dem sich die Gäste sofort wie zu Hause fühlen – genau wie wir, sobald wir hier den Fuß auf den Gehweg setzen.`,
+Unsere Villa ist so gebaut und eingerichtet, wie wir selbst gerne Urlaub machen: komfortabel, entspannt und praktisch. Boxspringbetten, Klimaanlage in jedem Schlafzimmer, schnelles WLAN und eine gut ausgestattete Küche sind für uns selbstverständlich. Wir wollten einen Ort schaffen, an dem sich die Gäste sofort wie zu Hause fühlen, genau wie wir, sobald wir ankommen.`,
   es: `A veces llegas a un lugar donde todo encaja. Para nosotros, ese lugar es Curazao. Hace más de veinte años, nuestra familia se enamoró de la isla. Vivimos allí durante ocho años, construimos nuestra villa de vacaciones aquí y creamos un hogar donde el sol, el mar y la convivencia son lo principal. Ahora vivimos de nuevo en los Países Bajos, pero Curazao nunca ha salido de nuestros corazones.
 
 Cada verano regresamos con toda la familia a “nuestra isla”, al lugar donde podemos relajarnos, explorar y crear recuerdos. Actualmente, Lisa-Marie vive de nuevo en Curazao y la isla forma parte de nuestra vida diaria más que nunca.
 
-Nuestra villa está construida y amueblada tal como nos gusta pasar las vacaciones a nosotros mismos: cómoda, relajada y práctica. Camas boxspring, aire acondicionado en cada habitación, wifi rápido y una cocina bien equipada son algo natural para nosotros. Queríamos crear un lugar donde los huéspedes se sientan como en casa, tal como nos sentimos nosotros en cuanto ponemos un pie en la acera.`,
+Nuestra villa está construida y amueblada tal como nos gusta pasar las vacaciones a nosotros mismos: cómoda, relajada y práctica. Camas boxspring, aire acondicionado en cada habitación, wifi rápido y una cocina bien equipada son algo natural para nosotros. Queríamos crear un lugar donde los huéspedes se sientan como en casa, igual que nosotros al llegar.`,
 };
 
 export type FamilyMember = {
