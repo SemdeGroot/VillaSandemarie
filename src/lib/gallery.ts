@@ -90,7 +90,7 @@ export const allVillaImages: GalleryImage[] = [
   { src: "/media/villa/master-bedroom-r1.webp", alt: "Slaapkamer 2 met houten plafond", tag: "Slaapkamer" },
   { src: "/media/villa/master-bedroom-r2.webp", alt: "Overzicht van slaapkamer 2", tag: "Slaapkamer" },
   { src: "/media/villa/master-bedroom-r3.webp", alt: "Slaapkamer 3", tag: "Slaapkamer" },
-  { src: "/media/villa/master-bedroom-r4.webp", alt: "Slaapkamer 4", tag: "Slaapkamer" },
+  { src: "/media/villa/master-bedroom-r4.webp", alt: "Slaapkamer 3", tag: "Slaapkamer" },
   { src: "/media/villa/master-en-badkamer.webp", alt: "Slaapkamer met badkamer en suite", tag: "Slaapkamer" },
   { src: "/media/villa/badkamer-1.webp", alt: "Badkamer met inloopdouche", tag: "Badkamer" },
 
