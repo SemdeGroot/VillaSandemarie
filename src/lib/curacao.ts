@@ -334,34 +334,34 @@ export const curacaoStories: CuracaoStory[] = [
 export const curacaoQuickTips: CuracaoTip[] = [
   {
     content: {
-      nl: { category: "Praktisch", title: "Huur een auto", text: "Een eigen auto maakt het eiland kleiner en de baaitjes bereikbaar. Bij de villa is een eigen parkeerplek." },
-      en: { category: "Practical", title: "Rent a car", text: "Your own car shrinks the island and makes the bays reachable. The villa has its own parking spot." },
-      de: { category: "Praktisch", title: "Mietet ein Auto", text: "Ein eigenes Auto macht die Insel kleiner und die Buchten erreichbar. An der Villa gibt es einen eigenen Parkplatz." },
-      es: { category: "Práctico", title: "Alquila un coche", text: "Un coche propio hace la isla más pequeña y las calas accesibles. La villa tiene plaza de aparcamiento." },
+      nl: { category: "Vervoer", title: "Huur een auto", text: "Een eigen auto maakt het eiland kleiner en de baaitjes bereikbaar. Bij de villa is een eigen parkeerplek." },
+      en: { category: "Transport", title: "Rent a car", text: "Your own car shrinks the island and makes the bays reachable. The villa has its own parking spot." },
+      de: { category: "Mobilität", title: "Mietet ein Auto", text: "Ein eigenes Auto macht die Insel kleiner und die Buchten erreichbar. An der Villa gibt es einen eigenen Parkplatz." },
+      es: { category: "Transporte", title: "Alquila un coche", text: "Un coche propio hace la isla más pequeña y las calas accesibles. La villa tiene plaza de aparcamiento." },
     },
   },
   {
     content: {
-      nl: { category: "Praktisch", title: "Geld en betalen", text: "Bijna overal kun je pinnen en met creditcard betalen. Voor lokale snackjes is wat contant geld (NAf of USD) handig." },
-      en: { category: "Practical", title: "Money and payment", text: "You can use card almost everywhere. A bit of cash (NAf or USD) is handy for local snacks." },
-      de: { category: "Praktisch", title: "Geld und Bezahlen", text: "Fast überall könnt ihr mit Karte bezahlen. Etwas Bargeld (NAf oder USD) ist für lokale Snacks nützlich." },
-      es: { category: "Práctico", title: "Dinero y pagos", text: "Se paga con tarjeta casi en todas partes. Algo de efectivo (NAf o USD) viene bien para los snacks locales." },
+      nl: { category: "Betalen", title: "Geld en betalen", text: "Bijna overal kun je pinnen en met creditcard betalen. Voor lokale snackjes is wat contant geld (NAf of USD) handig." },
+      en: { category: "Payment", title: "Money and payment", text: "You can use card almost everywhere. A bit of cash (NAf or USD) is handy for local snacks." },
+      de: { category: "Bezahlen", title: "Geld und Bezahlen", text: "Fast überall könnt ihr mit Karte bezahlen. Etwas Bargeld (NAf oder USD) ist für lokale Snacks nützlich." },
+      es: { category: "Pagos", title: "Dinero y pagos", text: "Se paga con tarjeta casi en todas partes. Algo de efectivo (NAf o USD) viene bien para los snacks locales." },
     },
   },
   {
     content: {
-      nl: { category: "Praktisch", title: "Wanneer te gaan", text: "Curaçao is jaarrond warm en droog. December tot april is hoogseizoen, mei en juni zijn heerlijk rustig." },
-      en: { category: "Practical", title: "When to go", text: "Curaçao is warm and dry year-round. December to April is high season; May and June are wonderfully quiet." },
-      de: { category: "Praktisch", title: "Wann es geht", text: "Curaçao ist ganzjährig warm und trocken. Dezember bis April ist Hochsaison, Mai und Juni sind herrlich ruhig." },
-      es: { category: "Práctico", title: "Cuándo ir", text: "Curazao es cálido y seco todo el año. De diciembre a abril es temporada alta; mayo y junio son maravillosamente tranquilos." },
+      nl: { category: "Beste reistijd", title: "Wanneer te gaan", text: "Curaçao is jaarrond warm en droog. December tot april is hoogseizoen, mei en juni zijn heerlijk rustig." },
+      en: { category: "Best season", title: "When to go", text: "Curaçao is warm and dry year-round. December to April is high season; May and June are wonderfully quiet." },
+      de: { category: "Beste Reisezeit", title: "Wann es geht", text: "Curaçao ist ganzjährig warm und trocken. Dezember bis April ist Hochsaison, Mai und Juni sind herrlich ruhig." },
+      es: { category: "Mejor época", title: "Cuándo ir", text: "Curazao es cálido y seco todo el año. De diciembre a abril es temporada alta; mayo y junio son maravillosamente tranquilos." },
     },
   },
   {
     content: {
-      nl: { category: "Veilig", title: "Zwemmen en stroming", text: "Het meeste water is rustig, maar bij Boka's en de noordkust kan stroming staan. Vraag het ons gewoon." },
-      en: { category: "Safe", title: "Swimming and currents", text: "Most water is calm, but at the Boka's and along the north coast there can be current. Just ask us." },
-      de: { category: "Sicher", title: "Schwimmen und Strömung", text: "Das meiste Wasser ist ruhig, aber bei den Bokas und an der Nordküste kann es Strömung geben. Fragt uns einfach." },
-      es: { category: "Seguro", title: "Nadar y corrientes", text: "La mayor parte del agua está tranquila, pero en las Bokas y en la costa norte puede haber corriente. Preguntadnos sin problema." },
+      nl: { category: "Veilig zwemmen", title: "Zwemmen en stroming", text: "Het meeste water is rustig, maar bij Boka's en de noordkust kan stroming staan. Vraag het ons gewoon." },
+      en: { category: "Safe swimming", title: "Swimming and currents", text: "Most water is calm, but at the Boka's and along the north coast there can be current. Just ask us." },
+      de: { category: "Sicher schwimmen", title: "Schwimmen und Strömung", text: "Das meiste Wasser ist ruhig, aber bei den Bokas und an der Nordküste kann es Strömung geben. Fragt uns einfach." },
+      es: { category: "Baño seguro", title: "Nadar y corrientes", text: "La mayor parte del agua está tranquila, pero en las Bokas y en la costa norte puede haber corriente. Preguntadnos sin problema." },
     },
   },
 ];

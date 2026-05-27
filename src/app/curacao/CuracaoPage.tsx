@@ -15,11 +15,11 @@ import {
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { cn } from "@/lib/utils";
 
-const PRACTICAL_TITLE: Record<string, string> = {
-  nl: "Goed om te weten",
-  en: "Good to know",
-  de: "Gut zu wissen",
-  es: "Bueno saberlo",
+const PRACTICAL_TITLE: Record<string, { pre: string; highlight: string }> = {
+  nl: { pre: "Alles wat je", highlight: "nodig hebt" },
+  en: { pre: "Everything you", highlight: "need" },
+  de: { pre: "Alles, was ihr", highlight: "braucht" },
+  es: { pre: "Todo lo que", highlight: "necesitas" },
 };
 
 const FROM_VILLA_TITLE: Record<string, string> = {
@@ -30,7 +30,7 @@ const FROM_VILLA_TITLE: Record<string, string> = {
 };
 
 const FROM_VILLA_BODY: Record<string, string> = {
-  nl: "Cas Grandi ligt vlak bij Jan Thiel en het Spaanse Water. Eigen parkeerplek, auto aanbevolen.",
+  nl: "Cas Grandi ligt vlakbij Jan Thiel en het Spaanse Water. Eigen parkeerplek, auto aanbevolen.",
   en: "Cas Grandi sits right next to Jan Thiel and Spanish Water. Own parking spot, car recommended.",
   de: "Cas Grandi liegt direkt neben Jan Thiel und dem Spanischen Wasser. Eigener Parkplatz, Auto empfohlen.",
   es: "Cas Grandi está al lado de Jan Thiel y de Aguas Españolas. Aparcamiento propio, recomendamos coche.",
@@ -38,10 +38,11 @@ const FROM_VILLA_BODY: Record<string, string> = {
 
 export function CuracaoPage() {
   const { t, locale } = useLocale();
+  const practicalTitle = PRACTICAL_TITLE[locale] ?? PRACTICAL_TITLE.en;
   return (
     <>
       <Section className="bg-paper pt-[calc(env(safe-area-inset-top,0px)+5rem)] pb-12 sm:pt-32 sm:pb-20 lg:pt-40">
-        <Reveal immediate className="max-w-3xl">
+        <Reveal className="max-w-3xl">
           <Eyebrow>{t.curacao.eyebrow}</Eyebrow>
           <Display as="h1" className="mt-4">
             {t.curacao.titlePre}{" "}
@@ -72,10 +73,10 @@ export function CuracaoPage() {
             "/media/curacao/strand-cas-abao-overhangende-takken.webp",
             "/media/curacao/duiken-freedive-silhouet.webp",
             "/media/curacao/willemstad-parasols-punda.webp",
-          ].map((src) => (
+          ].map((src, i) => (
             <Reveal
               key={src}
-              immediate
+              delay={120 + i * 90}
               className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-soft"
             >
               <RevealImage
@@ -83,7 +84,6 @@ export function CuracaoPage() {
                 alt="Curaçao"
                 fill
                 priority
-                immediate
                 sizes="(max-width: 1024px) 100vw, 33vw"
                 className="object-cover"
               />
@@ -164,7 +164,10 @@ export function CuracaoPage() {
         <Reveal className="max-w-xl">
           <Eyebrow>{t.curacao.quickTipsHeading}</Eyebrow>
           <Display as="h2" className="mt-4 text-3xl sm:text-4xl">
-            {PRACTICAL_TITLE[locale] ?? PRACTICAL_TITLE.en}
+            {practicalTitle.pre}{" "}
+            <span className="text-warm font-medium">
+              {practicalTitle.highlight}
+            </span>
           </Display>
         </Reveal>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

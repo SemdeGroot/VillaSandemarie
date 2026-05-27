@@ -31,7 +31,7 @@ export const villa = {
     "2 badkamers",
     "Privézwembad",
     "180° uitzicht over het Spaanse Water",
-    "Cas Grandi, vlak bij Jan Thiel",
+    "Cas Grandi, vlakbij Jan Thiel",
   ],
   amenities: [
     { id: "guests" as AmenityId, icon: "Users", label: "Tot 11 personen" },
@@ -40,7 +40,7 @@ export const villa = {
     { id: "pool" as AmenityId, icon: "Waves", label: "Privézwembad" },
     { id: "view" as AmenityId, icon: "Mountain", label: "180° uitzicht" },
     { id: "balcony" as AmenityId, icon: "Wind", label: "Balkon op de wind" },
-    { id: "location" as AmenityId, icon: "MapPin", label: "Cas Grandi, vlak bij Jan Thiel" },
+    { id: "location" as AmenityId, icon: "MapPin", label: "Cas Grandi, vlakbij Jan Thiel" },
     { id: "parking" as AmenityId, icon: "Car", label: "Eigen parkeerplek" },
     { id: "wifi" as AmenityId, icon: "Wifi", label: "Snelle wifi" },
     { id: "kitchen" as AmenityId, icon: "ChefHat", label: "Volledig uitgeruste keuken" },

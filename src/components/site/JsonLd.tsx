@@ -8,7 +8,7 @@ const faqs = [
   },
   {
     q: "Waar ligt de villa op Curaçao?",
-    a: "De villa ligt aan Kaya Strauss 25 in de wijk Cas Grandi, vlak bij Jan Thiel en het Spaanse Water, aan de zuidoostkant van Curaçao.",
+    a: "De villa ligt aan Kaya Strauss 25 in de wijk Cas Grandi, vlakbij Jan Thiel en het Spaanse Water, aan de zuidoostkant van Curaçao.",
   },
   {
     q: "Wat kost een verblijf in Villa Sandemarie?",

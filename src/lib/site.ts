@@ -2,7 +2,7 @@ export const site = {
   name: "Villa Sandemarie",
   tagline: "Een ruime familievilla op Curaçao, gemaakt voor samen zijn.",
   description:
-    "Vakantievilla op Curaçao tot 11 personen, met privézwembad en uitzicht over het Spaanse Water. Rustig gelegen in Cas Grandi, vlak bij Jan Thiel.",
+    "Vakantievilla op Curaçao tot 11 personen, met privézwembad en uitzicht over het Spaanse Water. Rustig gelegen in Cas Grandi, vlakbij Jan Thiel.",
   url: "https://villasandemarie.com",
   locale: "nl-NL",
   address: {
