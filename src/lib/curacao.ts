@@ -13,6 +13,8 @@ export type CuracaoStoryContent = {
 export type CuracaoStory = {
   id: string;
   image: string;
+  imageFrameClassName?: string;
+  imageClassName?: string;
   imageAlt: Localized<string>;
   by?: string;
   content: Localized<CuracaoStoryContent>;
@@ -31,12 +33,13 @@ export type CuracaoTip = {
 export const curacaoStories: CuracaoStory[] = [
   {
     id: "duiken",
-    image: "/media/curacao/duiken-boot-onderwater-seanatives.webp",
+    image: "/media/curacao/duiken-diver-blauw.webp",
+    imageFrameClassName: "aspect-[4/5]",
     imageAlt: {
-      nl: "Duikers stappen het water in vanaf de Sea Natives boot op Curaçao",
-      en: "Divers entering the water from the Sea Natives boat on Curaçao",
-      de: "Taucher steigen vom Sea Natives Boot ins Wasser bei Curaçao",
-      es: "Buceadores entrando al agua desde el barco de Sea Natives en Curazao",
+      nl: "Duiker in helder blauw water bij Curaçao",
+      en: "Diver in clear blue water near Curaçao",
+      de: "Taucher in klarem blauem Wasser bei Curaçao",
+      es: "Buceador en agua azul clara cerca de Curazao",
     },
     by: "Lisa-Marie",
     content: {
@@ -97,6 +100,7 @@ export const curacaoStories: CuracaoStory[] = [
   {
     id: "stranden",
     image: "/media/curacao/playa-kenepa-panorama.webp",
+    imageFrameClassName: "aspect-[3/4]",
     imageAlt: {
       nl: "Panorama van Playa Kenepa op Curaçao met turquoise zee",
       en: "Panorama of Playa Kenepa on Curaçao with turquoise sea",
@@ -149,6 +153,7 @@ export const curacaoStories: CuracaoStory[] = [
   {
     id: "willemstad",
     image: "/media/curacao/willemstad-handelskade-gekleurde-gevels.webp",
+    imageFrameClassName: "aspect-[1/1]",
     imageAlt: {
       nl: "Gekleurde gevels van Willemstad aan de Handelskade",
       en: "Coloured façades of Willemstad along the Handelskade",
@@ -204,12 +209,13 @@ export const curacaoStories: CuracaoStory[] = [
   },
   {
     id: "natuur",
-    image: "/media/curacao/klein-curacao-vuurtoren-pad.webp",
+    image: "/media/curacao/klein-curacao-strand-vuurtoren.webp",
+    imageFrameClassName: "aspect-[4/5]",
     imageAlt: {
-      nl: "Vuurtoren van Klein Curaçao met pad",
-      en: "Klein Curaçao lighthouse with path",
-      de: "Leuchtturm von Klein Curaçao mit Pfad",
-      es: "Faro de Klein Curazao con sendero",
+      nl: "Klein Curaçao met helderblauw water, wit strand en de oude vuurtoren",
+      en: "Klein Curaçao with clear blue water, white beach and the old lighthouse",
+      de: "Klein Curaçao mit klarem blauem Wasser, weißem Strand und altem Leuchtturm",
+      es: "Klein Curazao con agua azul clara, playa blanca y el antiguo faro",
     },
     content: {
       nl: {
@@ -264,12 +270,13 @@ export const curacaoStories: CuracaoStory[] = [
   },
   {
     id: "eten",
-    image: "/media/curacao/muurschildering-smoothies-playa-kanoa.webp",
+    image: "/media/curacao/zonsondergang-golven-roze.webp",
+    imageFrameClassName: "aspect-[4/5]",
     imageAlt: {
-      nl: "Kleurrijke muurschildering 'Curaçao Playa Kanoa Smoothies'",
-      en: "Colourful 'Curaçao Playa Kanoa Smoothies' wall mural",
-      de: "Buntes Wandbild 'Curaçao Playa Kanoa Smoothies'",
-      es: "Mural colorido 'Curaçao Playa Kanoa Smoothies'",
+      nl: "Roze zonsondergang boven zee op Curaçao",
+      en: "Pink sunset over the sea on Curaçao",
+      de: "Rosa Sonnenuntergang über dem Meer auf Curaçao",
+      es: "Atardecer rosa sobre el mar en Curazao",
     },
     content: {
       nl: {

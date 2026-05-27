@@ -13,6 +13,7 @@ import {
   getTip,
 } from "@/lib/curacao";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
+import { cn } from "@/lib/utils";
 
 const PRACTICAL_TITLE: Record<string, string> = {
   nl: "Goed om te weten",
@@ -109,13 +110,18 @@ export function CuracaoPage() {
                 className="grid scroll-mt-24 gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16"
               >
                 <Reveal className={i % 2 === 1 ? "lg:order-2" : ""}>
-                  <div className="relative aspect-[5/4] w-full overflow-hidden rounded-3xl shadow-soft">
+                  <div
+                    className={cn(
+                      "relative aspect-[5/4] w-full overflow-hidden rounded-3xl shadow-soft",
+                      story.imageFrameClassName
+                    )}
+                  >
                     <RevealImage
                       src={story.image}
                       alt={alt}
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-cover"
+                      className={cn("object-cover", story.imageClassName)}
                     />
                   </div>
                 </Reveal>
