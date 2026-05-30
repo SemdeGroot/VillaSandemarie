@@ -42,7 +42,8 @@ export type Dict = {
   };
   amenities: {
     eyebrow: string;
-    title: string;
+    titlePre: string;
+    titleHighlight: string;
     body: string;
   };
   rooms: {
@@ -210,7 +211,8 @@ const nl: Dict = {
   },
   amenities: {
     eyebrow: "Voorzieningen",
-    title: "Alles wat je nodig hebt",
+    titlePre: "Alles wat je",
+    titleHighlight: "nodig hebt",
     body: "We hebben de villa ingericht zoals we zelf graag op vakantie zijn: comfortabel, ontspannen en gewoon goed voor elkaar. Een fijne keuken, airco in elke slaapkamer, snelle wifi en een ligstoel waar je niet vanaf wilt komen.",
   },
   rooms: {
@@ -486,7 +488,8 @@ const en: Dict = {
   },
   amenities: {
     eyebrow: "Amenities",
-    title: "Everything you need",
+    titlePre: "Everything you",
+    titleHighlight: "need",
     body: "We've set up the villa the way we like to be on holiday ourselves: comfortable, relaxed and just right. A proper kitchen, AC in every bedroom, fast wifi and loungers you won't want to leave.",
   },
   rooms: {
@@ -762,8 +765,9 @@ const de: Dict = {
   },
   amenities: {
     eyebrow: "Ausstattung",
-    title: "Alles, was ihr braucht",
-    body: "Wir haben die Villa so eingerichtet, wie wir selbst gerne Urlaub machen: bequem, entspannt und einfach gut. Eine richtige Küche, Klimaanlage in jedem Schlafzimmer, schnelles WLAN und Liegen, von denen ihr nicht mehr aufstehen wollt.",
+    titlePre: "Alles, was ihr",
+    titleHighlight: "braucht",
+    body: "Wir haben die villa so eingerichtet, wie wir selbst gerne Urlaub machen: bequem, entspannt und einfach gut. Eine richtige Küche, Klimaanlage in jedem Schlafzimmer, schnelles WLAN und Liegen, von denen ihr nicht mehr aufstehen wollt.",
   },
   rooms: {
     eyebrow: "Aufteilung und Zimmer",
@@ -1038,7 +1042,8 @@ const es: Dict = {
   },
   amenities: {
     eyebrow: "Servicios",
-    title: "Todo lo que necesitas",
+    titlePre: "Todo lo que",
+    titleHighlight: "necesitas",
     body: "Hemos preparado la villa como nos gusta estar a nosotros de vacaciones: cómoda, relajada y bien pensada. Una buena cocina, aire acondicionado en cada habitación, wifi rápido y tumbonas que no querrás dejar.",
   },
   rooms: {

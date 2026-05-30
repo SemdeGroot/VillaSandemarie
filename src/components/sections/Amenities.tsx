@@ -50,7 +50,10 @@ export function Amenities() {
         <Reveal className="max-w-md lg:sticky lg:top-32 lg:self-start">
           <Eyebrow>{t.amenities.eyebrow}</Eyebrow>
           <Display as="h2" className="mt-4">
-            {t.amenities.title}
+            {t.amenities.titlePre}{" "}
+            <span className="text-warm font-medium italic">
+              {t.amenities.titleHighlight}
+            </span>
           </Display>
           <p className="mt-5 text-base leading-7 text-primary/72">
             {t.amenities.body}
